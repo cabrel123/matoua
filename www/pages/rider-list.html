@@ -1,0 +1,1306 @@
+<template>
+  <div class="page rider-list">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back">
+            <i class="icon icon-back"></i>
+          </a>
+        </div>
+        <div class="title">Rechercher un chauffeur</div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="card">
+        <div class="card-header">Récapitulatif de la réservation</div>
+        <div class="card-content">
+          <div class="data-table">
+            <table>
+              <tbody>
+                <tr>
+                  <td class="label-cell">Départ</td>
+                  <td class="numeric-cell">Yaoundé, Emana</td>
+                </tr>
+                <tr>
+                  <td class="label-cell">Destination</td>
+                  <td class="numeric-cell">Douala, Ndokoti</td>
+                </tr>
+                <tr>
+                  <td class="label-cell">Date & Heure</td>
+                  <td class="numeric-cell">22 Dec. 2023</td>
+                </tr>
+                <tr>
+                  <td class="label-cell">Nb. passagers</td>
+                  <td class="numeric-cell">1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div
+        class="list cards-list margin-vertical-half no-chevron no-hairlines no-hairlines-between"
+      >
+        <ul class="row align-items-stretch">
+          <li class="col-100 medium-50 large-100 xlarge-50 overflow-hidden">
+            <div class="item-content height-100 no-padding">
+              <div class="item-inner item-cell height-100 no-padding">
+                <div class="item-row">
+                  <div class="item-cell flex-shrink-0 width-auto padding-left">
+                    <img
+                      src="assets/img/driver-m.png"
+                      loading="lazy"
+                      height="50"
+                      width="50"
+                      class="shape-circle"
+                      alt=""
+                    />
+                    <p>
+                      <i class="icon material-icons font-size-12 color-yellow"
+                        >star</i
+                      >
+                      <i class="icon material-icons font-size-12 color-yellow"
+                        >star</i
+                      >
+                      <i class="icon material-icons font-size-12 color-yellow"
+                        >star</i
+                      >
+                    </p>
+                  </div>
+
+                  <div
+                    class="item-cell display-flex flex-direction-column align-self-stretch margin-horizontal-half padding-vertical-half"
+                  >
+                    <div class="single-line-text">
+                      <a
+                        href="#"
+                        class="badge color-amber font-weight-bold link text-color-black"
+                        >2 sièges disponibles</a
+                      >
+                      <a
+                        href="#"
+                        class="color-green font-size-16 font-weight-bold link"
+                        >4 000 FCFA</a
+                      >
+                    </div>
+                    <a
+                      href="/articles-single/"
+                      class="display-flex flex-direction-column height-100 text-color-gray"
+                    >
+                      <div
+                        class="font-size-16 font-weight-bold multi-line-text lines-2 text-color-body padding-left-half"
+                      >
+                        <span class="rider-name"> Takam Olivier </span>
+                        <span class="color-green"
+                          ><i
+                            class="icon material-icons font-size-12 color-green"
+                            >check_box</i
+                          ></span
+                        >
+                      </div>
+
+                      <div
+                        class="font-size-12 margin-top-auto padding-top-half"
+                      >
+                        <span class="margin-horizontal-half"
+                          >Départ : 05h00</span
+                        >
+                        <span>•</span>
+                        <span class="margin-horizontal-half">Ford Focus</span>
+
+                        <a
+                          href="#"
+                          class="margin-horizontal-half request-btn popup-open"
+                          data-popup=".demo-popup"
+                          >Reserver
+                          <i class="icon material-icons font-size-18"
+                            >trending_flat</i
+                          ></a
+                        >
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="col-100 medium-50 large-100 xlarge-50 overflow-hidden">
+            <div class="item-content height-100 no-padding">
+              <div class="item-inner item-cell height-100 no-padding">
+                <div class="item-row">
+                  <div class="item-cell flex-shrink-0 width-auto padding-left">
+                    <img
+                      src="assets/img/driver-m.png"
+                      loading="lazy"
+                      height="50"
+                      width="50"
+                      class="shape-circle"
+                      alt=""
+                    />
+                  </div>
+
+                  <div
+                    class="item-cell display-flex flex-direction-column align-self-stretch margin-horizontal-half padding-vertical-half"
+                  >
+                    <div class="single-line-text">
+                      <a
+                        href="#"
+                        class="badge color-amber font-weight-bold link text-color-black"
+                        >2 sièges disponibles</a
+                      >
+                      <a
+                        href="#"
+                        class="color-green font-size-16 font-weight-bold link"
+                        >4 000 FCFA</a
+                      >
+                    </div>
+                    <a
+                      href="/articles-single/"
+                      class="display-flex flex-direction-column height-100 text-color-gray"
+                    >
+                      <div
+                        class="font-size-16 font-weight-bold multi-line-text lines-2 text-color-body padding-left-half"
+                      >
+                        <span class="rider-name"> Arnaud Olivier </span>
+                      </div>
+
+                      <div
+                        class="font-size-12 margin-top-auto padding-top-half"
+                      >
+                        <span class="margin-horizontal-half"
+                          >Toyota Carina II</span
+                        >
+                        <span>•</span>
+                        <span class="margin-horizontal-half"
+                          >Départ : 20h00</span
+                        >
+
+                        <a
+                          href="#"
+                          class="margin-horizontal-half request-btn popup-open"
+                          data-popup=".demo-popup"
+                          >Reserver
+                          <i class="icon material-icons font-size-18"
+                            >trending_flat</i
+                          ></a
+                        >
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="col-100 medium-50 large-100 xlarge-50 overflow-hidden">
+            <div class="item-content height-100 no-padding">
+              <div class="item-inner item-cell height-100 no-padding">
+                <div class="item-row">
+                  <div class="item-cell flex-shrink-0 width-auto padding-left">
+                    <img
+                      src="assets/img/driver-m.png"
+                      loading="lazy"
+                      height="50"
+                      width="50"
+                      class="shape-circle"
+                      alt=""
+                    />
+                  </div>
+
+                  <div
+                    class="item-cell display-flex flex-direction-column align-self-stretch margin-horizontal-half padding-vertical-half"
+                  >
+                    <div class="single-line-text">
+                      <a
+                        href="#"
+                        class="badge color-amber font-weight-bold link text-color-black"
+                        >2 sièges disponibles</a
+                      >
+                      <a
+                        href="#"
+                        class="color-green font-size-16 font-weight-bold link"
+                        >4 000 FCFA</a
+                      >
+                    </div>
+                    <a
+                      href="/articles-single/"
+                      class="display-flex flex-direction-column height-100 text-color-gray"
+                    >
+                      <div
+                        class="font-size-16 font-weight-bold multi-line-text lines-2 text-color-body padding-left-half"
+                      >
+                        <span class="rider-name"> Donald </span>
+                      </div>
+
+                      <div
+                        class="font-size-12 margin-top-auto padding-top-half"
+                      >
+                        <span class="margin-horizontal-half"
+                          >Départ : 17h30</span
+                        >
+                        <span>•</span>
+                        <span class="margin-horizontal-half">Hyndai</span>
+
+                        <a
+                          href="#"
+                          class="margin-horizontal-half request-btn popup-open"
+                          data-popup=".demo-popup"
+                          >Reserver
+                          <i class="icon material-icons font-size-18"
+                            >trending_flat</i
+                          ></a
+                        >
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="col-100 medium-50 large-100 xlarge-50 overflow-hidden">
+            <div class="item-content height-100 no-padding">
+              <div class="item-inner item-cell height-100 no-padding">
+                <div class="item-row">
+                  <div class="item-cell flex-shrink-0 width-auto padding-left">
+                    <img
+                      src="assets/img/driver-m.png"
+                      loading="lazy"
+                      height="50"
+                      width="50"
+                      class="shape-circle"
+                      class="shape-circle"
+                      alt=""
+                    />
+                    <p>
+                      <i class="icon material-icons font-size-12 color-yellow"
+                        >star</i
+                      >
+                      <i class="icon material-icons font-size-12 color-yellow"
+                        >star</i
+                      >
+                      <i class="icon material-icons font-size-12 color-yellow"
+                        >star</i
+                      >
+                      <i class="icon material-icons font-size-12 color-yellow"
+                        >star</i
+                      >
+                    </p>
+                  </div>
+
+                  <div
+                    class="item-cell display-flex flex-direction-column align-self-stretch margin-horizontal-half padding-vertical-half"
+                  >
+                    <div class="single-line-text">
+                      <a
+                        href="#"
+                        class="badge color-amber font-weight-bold link text-color-black"
+                        >2 sièges disponibles</a
+                      >
+                      <a
+                        href="#"
+                        class="color-green font-size-16 font-weight-bold link"
+                        >4 000 FCFA</a
+                      >
+                    </div>
+                    <a
+                      href="/articles-single/"
+                      class="display-flex flex-direction-column height-100 text-color-gray"
+                    >
+                      <div
+                        class="font-size-16 font-weight-bold multi-line-text lines-2 text-color-body padding-left-half"
+                      >
+                        <span class="rider-name"> Antagana </span>
+                        <span class="color-green"
+                          ><i
+                            class="icon material-icons font-size-12 color-green"
+                            >check_box</i
+                          ></span
+                        >
+                      </div>
+                      <div
+                        class="font-size-12 margin-top-auto padding-top-half"
+                      >
+                        <span class="margin-horizontal-half"
+                          >Départ : 10h00</span
+                        >
+                        <span>•</span>
+                        <span class="margin-horizontal-half">Kia</span>
+
+                        <a
+                          href="#"
+                          class="margin-horizontal-half request-btn popup-open"
+                          data-popup=".demo-popup"
+                          >Reserver
+                          <i class="icon material-icons font-size-18"
+                            >trending_flat</i
+                          ></a
+                        >
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="popup demo-popup">
+      <div class="page">
+        <div class="navbar">
+          <div class="navbar-bg"></div>
+          <div class="navbar-inner">
+            <div class="title">Finaliser votre réservation</div>
+            <div class="right">
+              <a class="link popup-close" href="#"
+                ><i class="icon material-icons font-size-18">close</i></a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="page-content">
+          <div class="block">
+            <form
+              name="requestBooking"
+              action="#"
+              method="POST"
+              id="requestBooking"
+              enctype="multipart/form-data"
+            >
+              <div class="title">
+                Vos informations sont précieuses, veuillez remplir le formulaire
+                ci-dessous pour valider votre réservation
+              </div>
+              <div class="list list-strong-ios list-dividers-ios inset-ios">
+                <ul>
+                  <li class="item-content item-input">
+                    <div class="item-inner">
+                      <div class="item-input-wrap">
+                        <input
+                          type="text"
+                          placeholder="Votre nom"
+                          name="fullname"
+                          id="fullname"
+                          required
+                          validate
+                        />
+                        <span class="input-clear-button"></span>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li class="item-content item-input">
+                    <div class="item-inner">
+                      <div class="item-input-wrap">
+                        <input
+                          type="tel"
+                          placeholder="Votre numéro de téléphone"
+                          name="phone"
+                          id="phone"
+                          required
+                          validate
+                        />
+                        <span class="input-clear-button"></span>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li class="item-content item-input">
+                    <div class="item-inner">
+                      <div class="item-title label">Téléchargez votre CNI</div>
+                      <div class="item-input-wrap">
+                        <div class="fincarimage">
+                          <img
+                            id="smallImage"
+                            src="assets/img/camera.png"
+                            class="img-responsive"
+                            alt=""
+                            style="margin: 0 auto; width: 64px; display: block"
+                          />
+                        </div>
+                        <p class="buttons-row">
+                          <a
+                            href="#"
+                            class="button button-block button-big button-raised button-round color-gray getImageALBUM"
+                          >
+                            <i class="fa fa-image"></i>
+                            <span tkey="PHOTO_GALERY">Galerie photo</span>
+                          </a>
+                          <a
+                            href="#"
+                            class="button button-block button-big button-raised button-round color-gray getImageCAMERA"
+                          >
+                            <i class="fa fa-camera-retro"></i>
+                            <span tkey="CAMERA">Appareil photo</span>
+                          </a>
+                        </p>
+                        <span class="input-clear-button"></span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="content-block">
+                <a
+                  class="button button-big button-block button-fill button-round color-black"
+                  @click="${paymentMethod}"
+                  tkey="POST"
+                  >Suivant</a
+                >
+              </div>
+            </form>
+
+            <form
+              name="requestPayment"
+              action="#"
+              method="POST"
+              id="requestPayment"
+              enctype="multipart/form-data"
+              style="display: none"
+            >
+              <p style="display: none">
+                <input
+                  type="text"
+                  placeholder="Montant"
+                  name="amount"
+                  id="amount"
+                  value="4000"
+                />
+              </p>
+              <h3 class="title">Finalisez votre réservation : 4 000 FCFA</h3>
+              <div class="block block-strong-ios block-outline-ios">
+                <p>Choisissez le moyen de paiement</p>
+                <p class="grid grid-cols-2 grid-gap">
+                  <a href="#tab-1" class="tab-link tab-link-active"
+                    ><img
+                      src="assets/img/om.png"
+                      alt="om"
+                      width="80"
+                      height="80"
+                  /></a>
+                  <a href="#tab-2" class="tab-link"
+                    ><img
+                      src="assets/img/momo.png"
+                      alt="om"
+                      width="80"
+                      height="80"
+                  /></a>
+                </p>
+                <div class="tabs">
+                  <div id="tab-1" class="page-content tab tab-active">
+                    <div
+                      class="list list-strong-ios list-dividers-ios inset-ios"
+                    >
+                      <ul>
+                        <li class="item-content item-input">
+                          <div class="item-inner">
+                            <div class="item-input-wrap">
+                              <input
+                                type="text"
+                                placeholder=" Votre compte Orange Money"
+                                name="omphone"
+                                id="omphone"
+                                required
+                                validate
+                              />
+                              <span class="input-clear-button"></span>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div id="tab-2" class="page-content tab">
+                    <div
+                      class="list list-strong-ios list-dividers-ios inset-ios"
+                    >
+                      <ul>
+                        <li class="item-content item-input">
+                          <div class="item-inner">
+                            <div class="item-input-wrap">
+                              <input
+                                type="text"
+                                placeholder="Votre compte MTN Mobile Money"
+                                name="momophone"
+                                id="momophone"
+                                required
+                                validate
+                              />
+                              <span class="input-clear-button"></span>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="content-block">
+                <a
+                  class="button button-big button-block button-fill button-round color-black"
+                  @click="${requestPayment}"
+                  tkey="POST"
+                  >Valider</a
+                >
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<style>
+  /*! CSS Used from: https://nectar.website/demo/assets/vendor/framework7/framework7-bundle.min.css */
+  .color-red {
+    --f7-theme-color: #ff3b30;
+    --f7-theme-color-rgb: 255, 59, 48;
+    --f7-theme-color-shade: #ff1407;
+    --f7-theme-color-tint: #ff6259;
+  }
+  .color-pink {
+    --f7-theme-color: #ff2d55;
+    --f7-theme-color-rgb: 255, 45, 85;
+    --f7-theme-color-shade: #ff0434;
+    --f7-theme-color-tint: #ff5676;
+  }
+  .color-gray {
+    --f7-theme-color: #8e8e93;
+    --f7-theme-color-rgb: 142, 142, 147;
+    --f7-theme-color-shade: #79797f;
+    --f7-theme-color-tint: #a3a3a7;
+  }
+  .text-color-gray {
+    --f7-theme-color-text-color: #8e8e93;
+  }
+  .color-white {
+    --f7-theme-color: #ffffff;
+    --f7-theme-color-rgb: 255, 255, 255;
+    --f7-theme-color-shade: #ebebeb;
+    --f7-theme-color-tint: #ffffff;
+  }
+  .color-green {
+    --f7-theme-color: #0fc874;
+    --f7-theme-color-rgb: 200, 250, 2227;
+    --f7-theme-color-shade: #7af5be;
+    --f7-theme-color-tint: rgb(200, 250, 227);
+  }
+  .color-yellow {
+    color: #efb943 !important;
+  }
+  .md .color-green,
+  .md.color-green,
+  .md .dark .color-green,
+  .md .dark.color-green {
+    --f7-theme-color: #0fc874;
+    --f7-theme-color-rgb: var(--f7-md-primary-rgb);
+    --f7-theme-color-shade: var(--f7-md-primary-shade);
+    --f7-theme-color-tint: var(--f7-md-primary-tint);
+  }
+
+  .text-color-black {
+    --f7-theme-color-text-color: #000000;
+  }
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+  a {
+    outline: 0;
+  }
+  a {
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--f7-theme-color);
+  }
+  .link {
+    cursor: pointer;
+  }
+  .link {
+    display: inline-flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    z-index: 1;
+    --f7-touch-ripple-color: var(
+      --f7-link-touch-ripple-color,
+      rgba(var(--f7-theme-color-rgb), 0.25)
+    );
+  }
+  .card {
+    background: #d3fbe9;
+  }
+  .aurora .link {
+    transition: opacity 0.3s;
+  }
+  .aurora.device-desktop .link:not(.active-state):not(.no-hover):hover {
+    opacity: var(--f7-link-hover-opacity);
+    transition-duration: 0s;
+  }
+  .list {
+    --menu-list-offset: 0px;
+    position: relative;
+    z-index: 1;
+    font-size: var(--f7-list-font-size);
+    margin: var(--f7-list-margin-vertical) 0;
+  }
+  .list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    background: var(--f7-list-bg-color);
+  }
+  .list ul:before {
+    content: "";
+    position: absolute;
+    background-color: var(--f7-list-border-color);
+    display: block;
+    z-index: 15;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    transform-origin: 50% 0%;
+    transform: scaleY(calc(1 / var(--f7-device-pixel-ratio)));
+  }
+  .list ul:after {
+    content: "";
+    position: absolute;
+    background-color: var(--f7-list-border-color);
+    display: block;
+    z-index: 15;
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    transform-origin: 50% 100%;
+    transform: scaleY(calc(1 / var(--f7-device-pixel-ratio)));
+  }
+  .list li {
+    position: relative;
+    box-sizing: border-box;
+  }
+  .list .item-inner {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: center;
+    align-self: stretch;
+    padding-top: var(--f7-list-item-padding-vertical);
+    padding-bottom: var(--f7-list-item-padding-vertical);
+    min-height: calc(var(--f7-list-item-min-height) - var(--menu-list-offset));
+    padding-right: calc(
+      var(--f7-list-item-padding-horizontal) + var(--f7-safe-area-right) -
+        var(--menu-list-offset)
+    );
+  }
+  .list .item-content {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: center;
+    min-height: calc(var(--f7-list-item-min-height) - var(--menu-list-offset));
+    padding-left: calc(
+      var(--f7-list-item-padding-horizontal) + var(--f7-safe-area-left) -
+        var(--menu-list-offset)
+    );
+  }
+  .buttons-row {
+    display: flex;
+  }
+  .list .item-row {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+  .list .item-cell {
+    display: block;
+    align-self: center;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    margin-left: var(--f7-list-item-cell-margin);
+    flex-shrink: 1;
+  }
+  .list .item-cell:first-child {
+    margin-left: 0;
+  }
+  .list li:last-child > .item-content > .item-inner:after {
+    display: none !important;
+  }
+  .list.no-hairlines ul:after,
+  .list.no-hairlines ul:before,
+  .list.no-hairlines:after,
+  .list.no-hairlines:before {
+    display: none !important;
+  }
+  .list.no-hairlines-between .item-inner:after {
+    display: none !important;
+  }
+  .list .item-inner:after {
+    content: "";
+    position: absolute;
+    background-color: var(--f7-list-item-border-color);
+    display: block;
+    z-index: 15;
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    transform-origin: 50% 100%;
+    transform: scaleY(calc(1 / var(--f7-device-pixel-ratio)));
+  }
+  .tabs .tab-active {
+    padding-top: 10px;
+  }
+  .list.inset {
+    margin-left: calc(
+      var(--f7-list-inset-side-margin) + var(--f7-safe-area-outer-left)
+    );
+    margin-right: calc(
+      var(--f7-list-inset-side-margin) + var(--f7-safe-area-outer-right)
+    );
+    border-radius: var(--f7-list-inset-border-radius);
+    --f7-safe-area-left: 0px;
+    --f7-safe-area-right: 0px;
+  }
+  .list.inset ul {
+    border-radius: var(--f7-list-inset-border-radius);
+  }
+  .list.inset ul:after,
+  .list.inset ul:before {
+    display: none !important;
+  }
+  .list.no-chevron {
+    --f7-list-chevron-icon-color: transparent;
+    --f7-list-chevron-icon-area: 0px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    color: var(--f7-badge-text-color);
+    background: var(--f7-badge-bg-color);
+    position: relative;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: var(--f7-badge-font-weight);
+    font-size: var(--f7-badge-font-size);
+    border-radius: var(--f7-badge-size);
+    padding: var(--f7-badge-padding);
+    height: var(--f7-badge-size);
+    min-width: var(--f7-badge-size);
+  }
+
+  button {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+  }
+  .button {
+    --f7-touch-ripple-color: rgba(var(--f7-theme-color-rgb), 0.25);
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    -webkit-appearance: none;
+    appearance: none;
+    background: 0 0;
+    margin: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: relative;
+    overflow: hidden;
+    font-family: inherit;
+    cursor: pointer;
+    outline: 0;
+    box-sizing: border-box;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    border: var(--f7-button-border-width, 0px) solid
+      var(--f7-button-border-color, var(--f7-theme-color));
+    font-size: var(--f7-button-font-size);
+    color: var(--f7-button-text-color, var(--f7-theme-color));
+    height: var(--f7-button-height);
+    line-height: calc(
+      var(--f7-button-height) - var(--f7-button-border-width, 0) * 2
+    );
+    padding: var(--f7-button-padding-vertical, 0px)
+      var(--f7-button-padding-horizontal);
+    border-radius: var(--f7-button-border-radius);
+    min-width: var(--f7-button-min-width);
+    font-weight: var(--f7-button-font-weight);
+    letter-spacing: var(--f7-button-letter-spacing);
+    text-transform: var(--f7-button-text-transform);
+    background-color: var(--f7-button-bg-color);
+    box-shadow: var(--f7-button-box-shadow);
+  }
+  .button > i + i {
+    margin-left: 4px;
+  }
+  .button-round {
+    --f7-button-border-radius: var(--f7-button-height);
+  }
+  .button-fill {
+    --f7-button-bg-color: var(--f7-button-fill-bg-color, var(--f7-theme-color));
+    --f7-button-text-color: var(--f7-button-fill-text-color, #fff);
+    --f7-touch-ripple-color: var(--f7-touch-ripple-white);
+  }
+  .button-fill {
+    --f7-button-pressed-bg-color: var(--f7-button-fill-pressed-bg-color);
+  }
+  .aurora .button {
+    transition-duration: 0.1s;
+    transform: translate3d(0, 0, 0);
+  }
+  .aurora.device-desktop .button:not(.active-state):not(.no-hover):hover {
+    background-color: var(
+      --f7-button-hover-bg-color,
+      rgba(var(--f7-theme-color-rgb), 0.07)
+    );
+  }
+  .aurora .button-fill {
+    --f7-button-pressed-bg-color: var(
+      --f7-button-fill-pressed-bg-color,
+      var(--f7-theme-color-shade)
+    );
+  }
+  .aurora .button-fill {
+    --f7-button-hover-bg-color: var(
+      --f7-button-fill-hover-bg-color,
+      var(--f7-theme-color-tint)
+    );
+  }
+  .button,
+  .link {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .material-icons {
+    width: 1em;
+    height: 1em;
+  }
+  i.icon {
+    display: inline-block;
+    vertical-align: middle;
+    background-size: 100% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-style: normal;
+    position: relative;
+  }
+  .icon[class*="color-"] {
+    color: var(--f7-theme-color);
+  }
+  .aurora .material-icons {
+    font-size: 24px;
+  }
+  .cards-list > ul:after,
+  .cards-list > ul:before {
+    display: none !important;
+  }
+  .cards-list ul {
+    background: 0 0;
+  }
+  .font-size-8 {
+    font-size: 8px !important;
+  }
+  .cards-list .multi-line-text .badge {
+    border-radius: 100%;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    --f7-cols-per-row: 1;
+  }
+  .row > [class*="col-"] {
+    box-sizing: border-box;
+    width: calc(
+      (100% - var(--f7-grid-gap) * (var(--f7-cols-per-row) - 1)) /
+        var(--f7-cols-per-row)
+    );
+  }
+  .row .col-100 {
+    --f7-cols-per-row: 1;
+  }
+  @media (min-width: 768px) {
+    .row .medium-50 {
+      --f7-cols-per-row: 2;
+    }
+  }
+  @media (min-width: 1024px) {
+    .row .large-100 {
+      --f7-cols-per-row: 1;
+    }
+  }
+  @media (min-width: 1200px) {
+    .row .xlarge-50 {
+      --f7-cols-per-row: 2;
+    }
+  }
+  .color-red {
+    --swiper-theme-color: #ff3b30;
+  }
+  .color-pink {
+    --swiper-theme-color: #ff2d55;
+  }
+  .color-gray {
+    --swiper-theme-color: #8e8e93;
+  }
+  .color-white {
+    --swiper-theme-color: #ffffff;
+  }
+  .display-flex {
+    display: flex !important;
+  }
+  .flex-shrink-0 {
+    flex-shrink: 0 !important;
+  }
+  .flex-direction-column {
+    flex-direction: column !important;
+  }
+  .align-items-stretch {
+    align-items: stretch !important;
+  }
+  .align-self-stretch {
+    align-self: stretch !important;
+  }
+  .vertical-align-middle {
+    vertical-align: middle !important;
+  }
+  .no-padding {
+    padding: 0 !important;
+  }
+  .width-auto {
+    width: auto !important;
+  }
+  .padding-top-half {
+    padding-top: calc(var(--f7-typography-padding) / 2) !important;
+  }
+  .padding-bottom {
+    padding-bottom: var(--f7-typography-padding) !important;
+  }
+  .padding-vertical-half {
+    padding-top: calc(var(--f7-typography-padding) / 2) !important;
+    padding-bottom: calc(var(--f7-typography-padding) / 2) !important;
+  }
+  .margin-half {
+    margin: calc(var(--f7-typography-margin) / 2) !important;
+  }
+  .margin-vertical-half {
+    margin-top: calc(var(--f7-typography-margin) / 2) !important;
+    margin-bottom: calc(var(--f7-typography-margin) / 2) !important;
+  }
+  .margin-horizontal-half {
+    margin-left: calc(var(--f7-typography-margin) / 2) !important;
+    margin-right: calc(var(--f7-typography-margin) / 2) !important;
+  }
+  [class*="text-color-"] {
+    color: var(--f7-theme-color-text-color) !important;
+  }
+  /*! CSS Used from: https://nectar.website/demo/assets/vendor/material-icons/material-icons.css */
+  .material-icons {
+    font-family: "Material Icons";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+  }
+  /*! CSS Used from: https://nectar.website/demo/assets/vendor/nectar/nectar.css */
+  .badge {
+    border-radius: 4px;
+    height: auto;
+    line-height: 1;
+    margin: 3px;
+    min-height: var(--f7-badge-size);
+    overflow: hidden;
+    --f7-touch-ripple-color: rgba(var(--f7-color-gray-rgb), 0.25);
+  }
+  .badge[class*="color-"] {
+    --f7-touch-ripple-color: rgba(var(--f7-theme-color-rgb), 0.25);
+  }
+  .text-color-body {
+    color: var(--f7-text-color) !important;
+  }
+  .button-icon {
+    height: var(--f7-button-height);
+    width: var(--f7-button-height);
+  }
+  .button > :not(.ripple-wave) + * {
+    margin-left: 4px;
+    margin-right: 0;
+  }
+  .aurora .material-icons {
+    font-size: 24px;
+  }
+  img {
+    max-width: 100%;
+    object-fit: cover;
+    object-position: center;
+    vertical-align: bottom;
+  }
+  ul {
+    padding-inline-start: 32px;
+  }
+  .cards-list li {
+    background-color: var(--f7-list-bg-color);
+    border-radius: inherit;
+    margin: calc(var(--f7-typography-margin) / 2) 0;
+  }
+  .cards-list li:first-child {
+    margin-top: 0;
+  }
+  .cards-list li:last-child {
+    margin-bottom: 0;
+  }
+  .cards-list li {
+    box-shadow: 0px 10px 5px -5px rgba(133, 133, 133, 0.32);
+    -webkit-box-shadow: 0px 10px 5px -5px rgba(133, 133, 133, 0.32);
+    -moz-box-shadow: 0px 10px 5px -5px rgba(133, 133, 133, 0.32);
+  }
+  .cards-list .request-btn {
+    border: 1px solid #0cf834;
+    background: #0fc874;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    float: right;
+  }
+  .cards-list > ul.row > li {
+    margin: calc(var(--f7-typography-margin) / 2) 0;
+  }
+  .cards-list .item-inner:after {
+    display: none !important;
+  }
+  .tabbar .tab-link-active,
+  .tabbar-icons .tab-link-active {
+    color: var(--f7-tabbar-link-active-color, var(--f7-theme-color));
+    background-color: var(
+      --f7-tabbar-link-active-bg-color,
+      var(--f7-theme-color)
+    );
+    border: 1px solid #0cf834;
+  }
+  .margin-top-auto {
+    margin-top: auto !important;
+  }
+  .position-absolute {
+    position: absolute;
+    z-index: 9999;
+  }
+  .position-left-top {
+    left: 0;
+  }
+  .position-left-top {
+    top: 0;
+  }
+  .device-desktop * {
+    scrollbar-color: var(--color-gray-500) var(--color-gray-300);
+    scrollbar-width: auto;
+  }
+  .device-desktop *::-webkit-scrollbar {
+    height: 4px;
+    width: 8px;
+  }
+  .device-desktop *::-webkit-scrollbar-track {
+    background-color: var(--color-gray-300);
+  }
+  .device-desktop *::-webkit-scrollbar-thumb {
+    background-color: var(--color-gray-500);
+    border-color: var(--color-gray-500);
+    border-radius: 0;
+    border-style: none;
+    border-width: 0;
+  }
+  .shape-circle {
+    border-radius: 50%;
+  }
+  .size-24 {
+    height: 24px;
+    width: 24px;
+  }
+  .size-50 {
+    height: 50px;
+    width: 50px;
+  }
+  .state-toggle .state-active,
+  .state-toggle .state-inactive {
+    margin: 0 !important;
+  }
+  .state-toggle:not(.state-toggle-active) .state-active {
+    display: none;
+  }
+  .state-toggle.state-toggle-active .state-inactive {
+    display: none;
+  }
+  .font-size-12 {
+    font-size: 12px !important;
+  }
+  .font-size-16 {
+    font-size: 16px !important;
+  }
+  .font-size-18 {
+    font-size: 18px !important;
+  }
+  .font-weight-bold {
+    font-weight: bold !important;
+  }
+  .single-line-text {
+    display: block !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+  .multi-line-text {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+    overflow: hidden !important;
+    word-break: break-word !important;
+  }
+  .lines-2 {
+    -webkit-line-clamp: 2 !important;
+  }
+  .overflow-hidden {
+    overflow: hidden !important;
+  }
+  .height-100 {
+    height: 100% !important;
+  }
+  .vertical-align-middle {
+    vertical-align: middle !important;
+  }
+  /*! CSS Used from: https://nectar.website/demo/assets/vendor/nectar/colors.css */
+  .color-red {
+    --f7-theme-color: var(--color-red-500);
+    --f7-theme-color-rgb: var(--color-red-rgb-500);
+    --f7-theme-color-shade: var(--color-red-600);
+    --f7-theme-color-tint: var(--color-red-400);
+    --swiper-theme-color: var(--color-red-500);
+  }
+  .color-pink {
+    --f7-theme-color: var(--color-pink-500);
+    --f7-theme-color-rgb: var(--color-pink-rgb-500);
+    --f7-theme-color-shade: var(--color-pink-600);
+    --f7-theme-color-tint: var(--color-pink-400);
+    --swiper-theme-color: var(--color-pink-500);
+  }
+  .color-amber {
+    --f7-theme-color: var(--color-amber-500);
+    --f7-theme-color-rgb: var(--color-amber-rgb-500);
+    --f7-theme-color-shade: var(--color-amber-600);
+    --f7-theme-color-tint: var(--color-amber-400);
+    --swiper-theme-color: var(--color-amber-500);
+  }
+  .color-gray {
+    --f7-theme-color: var(--color-gray-500);
+    --f7-theme-color-rgb: var(--color-gray-rgb-500);
+    --f7-theme-color-shade: var(--color-gray-600);
+    --f7-theme-color-tint: var(--color-gray-400);
+    --swiper-theme-color: var(--color-gray-500);
+  }
+  .text-color-gray {
+    --f7-theme-color-text-color: var(--color-gray-500);
+  }
+  .card-header {
+    font-size: 14px;
+  }
+  /*! CSS Used fontfaces */
+  @font-face {
+    font-family: "Material Icons";
+    font-style: normal;
+    font-weight: 400;
+    font-display: fallback;
+    src: url("https://nectar.website/demo/assets/vendor/material-icons/Material-Icons.woff2")
+      format("woff2");
+  }
+</style>
+<script>
+  export default (props, { $f7, $f7router, $onMounted, $onBeforeUnmount }) => {
+    let popup;
+    let popupSwipe;
+    let notificationFull;
+
+    const paymentMethod = () => {
+      let fullname = $("input#fullname").val();
+      let phone = $("input#phone").val();
+
+      $f7.dialog.alert(
+        "Votre nom est: " + fullname + "<br />Votre téléphone est: " + phone,
+        function () {
+          $("#requestBooking").hide();
+          $("#requestPayment").show();
+        }
+      );
+    };
+
+    const requestPayment = () => {
+      let amount = $("input#amount").val();
+      $f7.dialog.alert(
+        "Votre paiement de " + amount + " FCFA a bien été effectué !",
+        function () {
+          $f7.popup.close();
+          var mainView = app.view.main;
+          mainView.router.navigate("/ride-history/");
+          showNotificationFull();
+        }
+      );
+    };
+
+    function showNotificationFull() {
+      // Create notification
+      if (!notificationFull) {
+        notificationFull = $f7.notification.create({
+          icon: '<i class="icon icon-f7"></i>',
+          title: "CAR-DI-GO",
+          titleRightText: "now",
+          subtitle: "Notification de paiement",
+          text: "Votre réservation a bien été pris en compte ! Vous serez contacter par le chauffeur.",
+          closeTimeout: 5000,
+        });
+      }
+      // Open it
+      notificationFull.open();
+    }
+
+    $onMounted(() => {
+      popupSwipe = $f7.popup.create({
+        el: ".demo-popup",
+        swipeToClose: true,
+      });
+    });
+
+    $onBeforeUnmount(() => {
+      // Destroy popup when page removed
+      if (popup) popup.destroy();
+    });
+
+    return $render;
+  };
+</script>

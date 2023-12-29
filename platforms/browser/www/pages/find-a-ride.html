@@ -1,0 +1,166 @@
+<template>
+  <div class="page find-a-ride">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back">
+            <i class="icon icon-back"></i>
+          </a>
+        </div>
+        <div class="title">Réservez un trajet</div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div
+        class="list list-strong-ios list-outline-ios list-dividers-ios form-store-data"
+        id="demo-form"
+      >
+        <ul class="findrideList">
+          <div class="card">
+            <div class="card-content">
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-item-divider"></div>
+                  <div class="timeline-item-content">
+                    <div class="timeline-item-inner">
+                      <li class="item-content item-input">
+                        <div class="item-inner">
+                          <div class="item-input-wrap">
+                            <input
+                              name="departure"
+                              type="text"
+                              placeholder="Départ"
+                              id="departure"
+                              required
+                              validate
+                            />
+                            <span class="input-clear-button"></span>
+                          </div>
+                        </div>
+                      </li>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-item-divider"></div>
+                  <div class="timeline-item-content">
+                    <div class="timeline-item-inner">
+                      <li class="item-content item-input">
+                        <div class="item-inner">
+                          <div class="item-input-wrap">
+                            <input
+                              name="destination"
+                              type="text"
+                              placeholder="Destination"
+                              id="destination"
+                              required
+                              validate
+                            />
+                            <span class="input-clear-button"></span>
+                          </div>
+                        </div>
+                      </li>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Date de départ</div>
+                  <div class="item-input-wrap">
+                    <input
+                      type="text"
+                      placeholder=""
+                      readonly="readonly"
+                      id="demo-calendar-modal"
+                      name="departureDate"
+                      required
+                      validate
+                    />
+                  </div>
+                </div>
+              </li>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Nb. de passagers</div>
+                  <div class="item-input-wrap input-dropdown-wrap">
+                    <select
+                      name="passenger"
+                      placeholder="Please choose..."
+                      id="passenger"
+                      required
+                      validate
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                    </select>
+                  </div>
+                </div>
+              </li>
+            </div>
+          </div>
+        </ul>
+        <div class="block">
+          <a
+            class="button button-raised button-large button-fill findrideBtn"
+            href="/rider-list/"
+          >
+            Rechercher</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="fab fab-extended fab-center-bottom">
+      <a href="/publish-ride/">
+        <i class="icon f7-icons if-not-md">plus</i>
+        <i class="icon material-icons md-only">add</i>
+        <div class="fab-text">Publier un trajet</div>
+      </a>
+    </div>
+  </div>
+</template>
+<style>
+  .fab > a {
+    background-color: #29855c;
+    color: #ffffff;
+  }
+</style>
+<script>
+  export default (props, { $f7, $, $on }) => {
+    let calendarModal;
+
+    $on("pageInit", () => {
+      // Custom modal
+      calendarModal = $f7.calendar.create({
+        inputEl: "#demo-calendar-modal",
+        openIn: "customModal",
+        timePicker: true,
+        dateFormat: {
+          month: "numeric",
+          day: "numeric",
+          year: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+        },
+        header: true,
+        footer: true,
+      });
+    });
+    $on("pageBeforeRemove", () => {
+      calendarModal.destroy();
+    });
+
+    return $render;
+  };
+</script>

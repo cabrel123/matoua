@@ -1,0 +1,17 @@
+{
+  "cwd": "C:\\cardigo",
+  "type": [
+    "web"
+  ],
+  "name": "cardigos",
+  "framework": "core",
+  "template": "single-view",
+  "bundler": false,
+  "theming": {
+    "customColor": false,
+    "color": "#007aff",
+    "darkMode": false,
+    "iconFonts": true
+  },
+  "customBuild": false
+}

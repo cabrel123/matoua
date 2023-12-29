@@ -1,0 +1,219 @@
+<template>
+  <div class="page find-a-ride">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back">
+            <i class="icon icon-back"></i>
+          </a>
+        </div>
+        <div class="title">Publier un trajet</div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div
+        class="list list-strong-ios list-outline-ios list-dividers-ios form-store-data"
+        id="demo-form"
+      >
+        <ul class="findrideList">
+          <div class="card">
+            <div class="card-content">
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-item-divider"></div>
+                  <div class="timeline-item-content">
+                    <div class="timeline-item-inner">
+                      <li class="item-content item-input">
+                        <div class="item-inner">
+                          <div class="item-input-wrap input-dropdown-wrap">
+                            <select
+                              name="departure"
+                              id="departure"
+                              type="text"
+                              class="townList"
+                              required
+                            >
+                              <option value="">Départ</option>
+                            </select>
+
+                            <span class="input-clear-button"></span>
+                          </div>
+                        </div>
+                      </li>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-item-divider"></div>
+                  <div class="timeline-item-content">
+                    <div class="timeline-item-inner">
+                      <li class="item-content item-input">
+                        <div class="item-inner">
+                          <div class="item-input-wrap input-dropdown-wrap">
+                            <select
+                              name="destination"
+                              id="destination"
+                              type="text"
+                              class="townList"
+                              required
+                            >
+                              <option value="">Destination</option>
+                            </select>
+
+                            <span class="input-clear-button"></span>
+                          </div>
+                        </div>
+                      </li>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">
+                    Date et Heure de départ
+                  </div>
+                  <div class="item-input-wrap">
+                    <input
+                      type="text"
+                      placeholder=""
+                      name="departureDate"
+                      readonly="readonly"
+                      id="departureDate"
+                      required
+                    />
+                  </div>
+                </div>
+              </li>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Nb. de passagers</div>
+                  <div class="item-input-wrap input-dropdown-wrap">
+                    <select
+                      name="passenger"
+                      placeholder="Please choose..."
+                      id="passenger"
+                      required
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                    </select>
+                  </div>
+                </div>
+              </li>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Montant</div>
+                  <div class="item-input-wrap">
+                    <input
+                      type="text"
+                      placeholder=""
+                      id="amount"
+                      name="amount"
+                      required
+                    />
+                  </div>
+                </div>
+              </li>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Lieu de départ</div>
+                  <div class="item-input-wrap">
+                    <input
+                      type="text"
+                      placeholder=""
+                      id="departureLocation"
+                      name="departureLocation"
+                    />
+                  </div>
+                </div>
+              </li>
+            </div>
+          </div>
+        </ul>
+        <div class="block">
+          <a
+            class="button button-raised button-large button-fill findrideBtn"
+            @click="${publishRide}"
+          >
+            Rechercher</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<style>
+  .timeline-item-content {
+    width: 100%;
+  }
+</style>
+<script>
+  export default (props, { $f7, $, $on }) => {
+    let calendarModal;
+
+    $on("pageInit", () => {
+      // Custom modal
+      calendarModal = $f7.calendar.create({
+        inputEl: "#departureDate",
+        openIn: "customModal",
+        timePicker: true,
+        dateFormat: {
+          month: "numeric",
+          day: "numeric",
+          year: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+        },
+        header: true,
+        footer: true,
+      });
+    });
+
+    const publishRide = () => {
+      let departure = $("input#departure").val();
+      let destination = $("input#destination").val();
+      let departureDate = $("input#departureDate").val();
+      let passenger = $("select#passenger").val();
+      let amount = $("input#amount").val();
+      let departureLocation = $("input#departureLocation").val();
+      $f7.dialog.alert(
+        "Votre publication du trajet " +
+          departure +
+          " à destination de " +
+          destination +
+          " a été validé !",
+        function () {
+          $f7.popup.close();
+          var mainView = app.view.main;
+          mainView.router.navigate("/passenger-history/");
+        }
+      );
+    };
+
+    $on("pageBeforeRemove", () => {
+      calendarModal.destroy();
+    });
+
+    return $render;
+  };
+</script>
