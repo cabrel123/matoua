@@ -1,0 +1,113 @@
+<template>
+  <div class="page no-toolbar no-navbar no-swipeback login-screen-page">
+    <div class="page-content login-screen-content">
+      <div class="login-screen-title"><img
+            class="logo img-responsive"
+            src="assets/img/logo.png"
+            alt="logo"
+          /></div>
+      <form>
+        <div class="list">
+          <ul>
+            <li class="item-content item-input item-input-with-value">
+              <div class="item-inner">
+                <div class="item-title item-label">Nom(s)</div>
+                <div class="item-input-wrap">
+                  <input type="text" placeholder="Votre nom" id="fullname" class="input-with-value" />
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </li>
+			<li class="item-content item-input item-input-with-value">
+              <div class="item-inner">
+                <div class="item-title item-label">Téléphone</div>
+                <div class="item-input-wrap">
+                  <input type="text" placeholder="Votre numéro de téléphone" id="phone" class="input-with-value" />
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </li>
+			<li class="item-content item-input item-input-with-value">
+              <div class="item-inner">
+                <div class="item-title item-label">E-mail</div>
+                <div class="item-input-wrap">
+                  <input type="email" placeholder="Votre adresse mail" id="email" class="input-with-value" />
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </li>
+            <li class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-title item-label">Mot de passe</div>
+                <div class="item-input-wrap">
+                  <input type="password" placeholder="Votre mot de passe" id="password" class="" />
+                </div>
+              </div>
+            </li>
+			<li class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-title item-label">Téléchargez votre CNI</div>
+                <div class="item-input-wrap">
+                  <input type="file" placeholder="Téléchargez votre CNI" id="idcard" accept="image/*" capture="camera" class="" />
+                </div>
+              </div>
+            </li>
+			
+          </ul>
+        </div>
+        <div class="block list inset">
+          <ul>
+            <li><a class="button button-fill button-round color-black list-button" @click=${signUp}>S'inscrire</a></li>
+          </ul>
+          <div class="block-footer">Vous avez déjà un compte ?<br /><a class="link" href="/signin/">Se connecter</a></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+<style>
+.img-responsive{
+margin: 0 auto;
+    display: block;
+    max-width: 200px;
+}
+</style>
+<script>
+  export default (props, { $, $f7, $f7router }) => {
+    const signUp = () => {
+      let fullname = $('input#fullname').val();
+	  let email = $('input#email').val();
+	  let phone = $('input#phone').val();
+      let password = $('input#password').val();
+	  
+      if(fullname == "" || password == "" || phone == "") {
+			app.dialog.alert('Veuillez renseigner tous les champs SVP !')
+		}else {
+				
+			app.request.postJSON('http://matoua/api/register', {fullname: fullname,email:email,phone:phone, password: password}, function (data, status, xhr) {
+				var status = JSON.parse(status);
+				console.log(status);
+				if(status == 200) {
+					if (!self.notificationFull) {
+						self.notificationFull = self.$app.notification.create({
+							icon: '<i class="icon icon-f7"></i>',
+							title: 'CRUD',
+							titleRightText: '',
+							subtitle: 'Notification',
+							text: 'Connexion réussie !',
+							closeTimeout: 3000,
+						});
+					}
+					self.notificationFull.open();
+					app.views.main.router.navigate('/home/');
+				}else {
+					app.dialog.alert('Ooups! Une erreur s\'est produite ressayez plus tard svp !');
+				}
+			});
+		}
+    }
+
+    return $render;
+  };
+
+</script>

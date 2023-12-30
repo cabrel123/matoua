@@ -1,0 +1,108 @@
+<template>
+  <div class="page no-toolbar no-navbar no-swipeback login-screen-page">
+    <div class="page-content login-screen-content">
+      <div class="login-screen-title"><img
+            class="logo img-responsive"
+            src="assets/img/logo.png"
+            alt="logo"
+          /></div>
+      <form>
+        <div class="list">
+          <ul>
+            <li class="item-content item-input item-input-with-value">
+              <div class="item-inner">
+                <div class="item-title item-label">Nom(s)</div>
+                <div class="item-input-wrap">
+                  <input type="text" placeholder="Votre nom" id="fullname" class="input-with-value" />
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </li>
+			<li class="item-content item-input item-input-with-value">
+              <div class="item-inner">
+                <div class="item-title item-label">Téléphone</div>
+                <div class="item-input-wrap">
+                  <input type="text" placeholder="Votre numéro de téléphone" id="phone" class="input-with-value" />
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </li>
+			<li class="item-content item-input item-input-with-value">
+              <div class="item-inner">
+                <div class="item-title item-label">E-mail</div>
+                <div class="item-input-wrap">
+                  <input type="email" placeholder="Votre adresse mail" id="email" class="input-with-value" />
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </li>
+            <li class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-title item-label">Mot de passe</div>
+                <div class="item-input-wrap">
+                  <input type="password" placeholder="Votre mot de passe" id="password" class="" />
+                </div>
+              </div>
+            </li>
+			<li class="item-content item-input">
+                    <div class="item-inner">
+                      <div class="item-title label">Téléchargez votre CNI</div>
+                      <div class="item-input-wrap">
+                        <div class="fincarimage">
+                          <img
+                            id="smallImage"
+                            src="assets/img/camera.png"
+                            class="img-responsive"
+                            alt=""
+                            style="margin: 0 auto; width: 64px; display: block"
+                          />
+                        </div>
+                        <p class="buttons-row">
+                          <a
+                            href="#"
+                            class="button button-block button-big button-raised button-round color-gray getImageALBUM"
+                          >
+                            <i class="fa fa-image"></i>
+                            <span tkey="PHOTO_GALERY">Galerie photo</span>
+                          </a>
+                          <a
+                            href="#"
+                            class="button button-block button-big button-raised button-round color-gray getImageCAMERA"
+                          >
+                            <i class="fa fa-camera-retro"></i>
+                            <span tkey="CAMERA">Appareil photo</span>
+                          </a>
+                        </p>
+                        <span class="input-clear-button"></span>
+                      </div>
+                    </div>
+                  </li>
+          </ul>
+        </div>
+        <div class="list inset">
+          <ul>
+            <li><a class="list-button" @click=${signUp}>S'inscrire</a></li>
+          </ul>
+          <div class="block-footer">Vous avez déjà un compte ?<br /><a class="link" href="/signin/">Se connecter</a></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+<script>
+  export default (props, { $, $f7, $f7router }) => {
+    const signUp = () => {
+      let fullname = $('input#fullname').val();
+	  let email = $('input#email').val();
+	  let phone = $('input#phone').val();
+      let password = $('input#password').val();
+      $f7.dialog.alert('Username: ' + phone + '<br />Password: ' + password, function () {
+        $f7.loginScreen.close();
+        $f7router.back();
+      })
+    }
+
+    return $render;
+  };
+
+</script>

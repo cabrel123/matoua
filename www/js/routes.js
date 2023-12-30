@@ -41,6 +41,14 @@ var routes = [
     componentUrl: "./pages/home.html",
   },
   {
+    path: "/signin/",
+    componentUrl: "./pages/signin.html",
+  },
+  {
+    path: "/signup/",
+    componentUrl: "./pages/signup.html",
+  },
+  {
     path: "/dynamic-route/blog/:blogId/post/:postId/",
     componentUrl: "./pages/dynamic-route.html",
   },

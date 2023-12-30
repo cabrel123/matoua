@@ -1,0 +1,55 @@
+<template>
+  <div class="page no-toolbar no-navbar no-swipeback login-screen-page">
+    <div class="page-content login-screen-content">
+      <div class="login-screen-title"><img
+            class="logo img-responsive"
+            src="assets/img/logo.png"
+            alt="logo"
+          /></div>
+      <form>
+        <div class="list">
+          <ul>
+            <li class="item-content item-input item-input-with-value">
+              <div class="item-inner">
+                <div class="item-title item-label">Téléphone</div>
+                <div class="item-input-wrap">
+                  <input type="text" placeholder="Votre numéro de téléphone" id="username" class="input-with-value" />
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </li>
+            <li class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-title item-label">Mot de passe</div>
+                <div class="item-input-wrap">
+                  <input type="password" placeholder="Votre mot de passe" id="password" class="" />
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="list inset">
+          <ul>
+            <li><a class="list-button" @click=${signIn}>Se connecter</a></li>
+          </ul>
+          <div class="block-footer">Vous n'avez pas encore de compte ?<br /><a class="link" href="/signup/">Créer mon compte</a></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+<script>
+  export default (props, { $, $f7, $f7router }) => {
+    const signIn = () => {
+      let username = $('input#username').val();
+      let password = $('input#password').val();
+      $f7.dialog.alert('Username: ' + username + '<br />Password: ' + password, function () {
+        $f7.loginScreen.close();
+        $f7router.back();
+      })
+    }
+
+    return $render;
+  };
+
+</script>
