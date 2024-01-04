@@ -1,48 +1,46 @@
-'use strict';
+"use strict";
 var $ = Dom7;
 
-
 var app = new Framework7({
-  name: 'cardigos', // App name
-  theme: 'auto', // Automatic theme detection
+  name: "cardigos", // App name
+  theme: "auto", // Automatic theme detection
 
-
-  el: '#app', // App root element
+  el: "#app", // App root element
 
   // App store
   store: store,
   // App routes
   routes: routes,
-    on: {
+  on: {
     init: function () {
-      console.log('App initialized');
-	  
+      console.log("App initialized");
     },
     pageInit: function () {
-      console.log('Page initialized');
-	  
+      const token = localStorage.getItem("token");
+      if (token == null || token == undefined || token == "") {
+        $(".without-login").show();
+        $(".with-login").hide();
+      } else {
+        $(".without-login").hide();
+        $(".with-login").show();
+      }
+      console.log("Page initialized");
     },
-  }
+  },
 });
-// Login Screen Demo
-$('#my-login-screen .login-button').on('click', function () {
-  var username = $('#my-login-screen [name="username"]').val();
-  var password = $('#my-login-screen [name="password"]').val();
-
-  // Close login screen
-  app.loginScreen.close('#my-login-screen');
-
-  // Alert username and password
-  app.dialog.alert('Username: ' + username + '<br/>Password: ' + password);
-});
+// Device ready
 document.addEventListener("deviceready", onDeviceReady, false);
-	  
+
 function onDeviceReady() {
-	console.log("device ready");
-	
+  console.log("device ready");
 }
 
-var view = app.views.create('.view-main');
-setTimeout(function(){
-	app.views.main.router.navigate('/walkthrough/');
+var view = app.views.create(".view-main");
+const token = localStorage.getItem("token");
+setTimeout(function () {
+  if (token == null || token == undefined || token == "") {
+    app.views.main.router.navigate("/walkthrough/");
+  } else {
+    app.views.main.router.navigate("/home/");
+  }
 }, 2000);

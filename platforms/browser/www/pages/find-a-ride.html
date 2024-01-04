@@ -26,15 +26,16 @@
                     <div class="timeline-item-inner">
                       <li class="item-content item-input">
                         <div class="item-inner">
-                          <div class="item-input-wrap">
-                            <input
+                          <div class="item-input-wrap input-dropdown-wrap">
+                            <select
                               name="departure"
-                              type="text"
-                              placeholder="Départ"
                               id="departure"
+                              type="text"
+                              class="townList"
                               required
-                              validate
-                            />
+                            >
+                              <option value="">Départ</option>
+                            </select>
                             <span class="input-clear-button"></span>
                           </div>
                         </div>
@@ -48,15 +49,16 @@
                     <div class="timeline-item-inner">
                       <li class="item-content item-input">
                         <div class="item-inner">
-                          <div class="item-input-wrap">
-                            <input
+                          <div class="item-input-wrap input-dropdown-wrap">
+                            <select
                               name="destination"
-                              type="text"
-                              placeholder="Destination"
                               id="destination"
+                              type="text"
+                              class="townList2"
                               required
-                              validate
-                            />
+                            >
+                              <option value="">Destination</option>
+                            </select>
                             <span class="input-clear-button"></span>
                           </div>
                         </div>
@@ -80,7 +82,6 @@
                       id="demo-calendar-modal"
                       name="departureDate"
                       required
-                      validate
                     />
                   </div>
                 </div>
@@ -94,11 +95,10 @@
                   <div class="item-title item-label">Nb. de passagers</div>
                   <div class="item-input-wrap input-dropdown-wrap">
                     <select
-                      name="passenger"
+                      name="numberofSeats"
                       placeholder="Please choose..."
-                      id="passenger"
+                      id="numberofSeats"
                       required
-                      validate
                     >
                       <option value="1">1</option>
                       <option value="2">2</option>
@@ -114,7 +114,7 @@
         <div class="block">
           <a
             class="button button-raised button-large button-fill findrideBtn"
-            href="/rider-list/"
+            @click="${findRide}"
           >
             Rechercher</a
           >
@@ -135,6 +135,12 @@
     background-color: #29855c;
     color: #ffffff;
   }
+  .navbar-inner .link .icon {
+    color: #fff;
+  }
+  .timeline-item-content {
+    width: 100%;
+  }
 </style>
 <script>
   export default (props, { $f7, $, $on }) => {
@@ -145,18 +151,80 @@
       calendarModal = $f7.calendar.create({
         inputEl: "#demo-calendar-modal",
         openIn: "customModal",
-        timePicker: true,
-        dateFormat: {
-          month: "numeric",
-          day: "numeric",
-          year: "numeric",
-          hour: "numeric",
-          minute: "numeric",
-        },
         header: true,
         footer: true,
       });
     });
+
+    // Specify the API endpoint for user data
+    const apiUrl = "https://matoua.com/api/town";
+    let content = "";
+    let content2 = "";
+    let data = [];
+
+    // Make a GET request using the Fetch API
+    fetch(apiUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((town) => {
+        // Process the retrieved user data
+        //console.log("town Data:", town);
+        var content = "";
+        var content2 = "";
+        var maxRow = town.length;
+
+        var i = "";
+        content += '<option value="">';
+        content += "Départ";
+        content += "</option>";
+        content2 += '<option value="">';
+        content2 += "Destination";
+        content2 += "</option>";
+        for (i = 0; i < maxRow; i++) {
+          content += '<option value="' + town[i]["town_id"] + '">';
+          content += "" + town[i]["town_name"] + "";
+          content += "</option>";
+          content += "<br/>";
+        }
+
+        $(".townList").append(content);
+        $(".townList2").append(content2 + content);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+    const findRide = () => {
+      let departure = $("select#departure").val();
+      let destination = $("select#destination").val();
+      let departureDate = $("input#demo-calendar-modal").val();
+      let passenger = $("select#passenger").val();
+
+      if (
+        departure == "" ||
+        destination == "" ||
+        departureDate == "" ||
+        numberofSeats == ""
+      ) {
+        app.dialog.alert("Veuillez renseigner tous les champs SVP !");
+      } else {
+        $f7.dialog.preloader("Un instant svp...");
+        localStorage.setItem("departure", departure);
+        localStorage.setItem("destination", destination);
+        localStorage.setItem("departureDate", departureDate);
+        localStorage.setItem("numberofSeats", numberofSeats);
+        setTimeout(function () {
+          $f7.dialog.close();
+          var mainView = app.view.main;
+          mainView.router.navigate("/rider-list/");
+        }, 2000);
+      }
+    };
+
     $on("pageBeforeRemove", () => {
       calendarModal.destroy();
     });

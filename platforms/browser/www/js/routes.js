@@ -33,7 +33,7 @@ var routes = [
     componentUrl: "./pages/publish-ride.html",
   },
   {
-    path: "/passenger-history/",
+    path: "/passenger-history/:bookrideId/",
     componentUrl: "./pages/passenger-history.html",
   },
   {
@@ -51,6 +51,10 @@ var routes = [
   {
     path: "/user-profile/",
     componentUrl: "./pages/user-profile.html",
+  },
+  {
+    path: "/my-ride/",
+    componentUrl: "./pages/my-ride.html",
   },
   {
     path: "/dynamic-route/blog/:blogId/post/:postId/",

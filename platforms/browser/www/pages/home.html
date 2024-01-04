@@ -10,11 +10,7 @@
           </a>
         </div>
         <div class="center">
-          <img
-            class="logo img-responsive"
-            src="assets/img/logo.png"
-            alt="logo"
-          />
+          <span class="title">MAT<span class="green">OUA</span></span>
         </div>
         <div class="right">
           <a class="link icon-only searchbar-enable" href="/find-a-ride/">
@@ -196,20 +192,38 @@
     display: block;
     max-width: 200px;
   }
-  .navbar-inner .link .icon {
+  .page-home .navbar-inner .link .icon {
     color: var(
       --f7-navbar-link-color,
       var(--f7-bars-link-color, var(--f7-theme-color))
     );
   }
-  .navbar.navbar-large-collapsed .icon {
+  .page-home .navbar.navbar-large-collapsed .icon {
     color: #ffffff !important;
   }
-  .page-content {
+  .page-home .page-content {
     padding-top: 80px;
   }
   .text-center {
     text-align: center;
+  }
+
+  .page-home .title {
+    font-size: 30px !important;
+    font-weight: 600 !important;
+    color: black !important;
+  }
+  .page-home .navbar-large-collapsed .title {
+    color: #fff !important;
+  }
+  .page-home .navbar-large .title {
+    opacity: 1;
+  }
+  .page-home .title .green {
+    color: #0fc874;
+  }
+  .page-home .navbar-large-collapsed .title .green {
+    color: #044025;
   }
   .block.block-image {
     background-image: url("assets/img/home-illustration.png");
@@ -222,7 +236,7 @@
     white-space: normal;
     text-align: justify;
   }
-  .card {
+  .page-home .card {
     box-shadow: none !important;
   }
 </style>

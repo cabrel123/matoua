@@ -55,7 +55,7 @@
                               name="destination"
                               id="destination"
                               type="text"
-                              class="townList"
+                              class="townList2"
                               required
                             >
                               <option value="">Destination</option>
@@ -149,13 +149,42 @@
               </li>
             </div>
           </div>
+          <div class="card">
+            <div class="card-content">
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Lieu d'arrivée</div>
+                  <div class="item-input-wrap">
+                    <input
+                      type="text"
+                      placeholder=""
+                      id="destinationLocation"
+                      name="destinationLocation"
+                    />
+                  </div>
+                </div>
+              </li>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Modèle de voiture</div>
+                  <div class="item-input-wrap">
+                    <input type="text" placeholder="" id="car" name="car" />
+                  </div>
+                </div>
+              </li>
+            </div>
+          </div>
         </ul>
         <div class="block">
           <a
             class="button button-raised button-large button-fill findrideBtn"
             @click="${publishRide}"
           >
-            Rechercher</a
+            Publier</a
           >
         </div>
       </div>
@@ -171,7 +200,7 @@
   }
 </style>
 <script>
-  export default (props, { $f7, $, $on }) => {
+  export default (props, { $f7, $, $on, $setState }) => {
     let calendarModal;
 
     $on("pageInit", () => {
@@ -192,25 +221,120 @@
       });
     });
 
+    // Specify the API endpoint for user data
+    const apiUrl = "https://matoua.com/api/town";
+    let content = "";
+    let content2 = "";
+    let data = [];
+
+    // Make a GET request using the Fetch API
+    fetch(apiUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((town) => {
+        // Process the retrieved user data
+        //console.log("town Data:", town);
+        var content = "";
+        var content2 = "";
+        var maxRow = town.length;
+
+        var i = "";
+        content += '<option value="">';
+        content += "Départ";
+        content += "</option>";
+        content2 += '<option value="">';
+        content2 += "Destination";
+        content2 += "</option>";
+        for (i = 0; i < maxRow; i++) {
+          content += '<option value="' + town[i]["town_id"] + '">';
+          content += "" + town[i]["town_name"] + "";
+          content += "</option>";
+          content += "<br/>";
+        }
+
+        $(".townList").append(content);
+        $(".townList2").append(content2 + content);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
     const publishRide = () => {
-      let departure = $("input#departure").val();
-      let destination = $("input#destination").val();
+      let departure = $("select#departure").val();
+      let destination = $("select#destination").val();
       let departureDate = $("input#departureDate").val();
       let passenger = $("select#passenger").val();
       let amount = $("input#amount").val();
       let departureLocation = $("input#departureLocation").val();
-      $f7.dialog.alert(
-        "Votre publication du trajet " +
-          departure +
-          " à destination de " +
-          destination +
-          " a été validé !",
-        function () {
-          $f7.popup.close();
-          var mainView = app.view.main;
-          mainView.router.navigate("/passenger-history/");
-        }
-      );
+      let destinationLocation = $("input#destinationLocation").val();
+      let car = $("input#car").val();
+
+      if (
+        departure == "" ||
+        destination == "" ||
+        departureDate == "" ||
+        amount == "" ||
+        passenger == "" ||
+        departureLocation == "" ||
+        destinationLocation == ""
+      ) {
+        app.dialog.alert("Veuillez renseigner tous les champs SVP !");
+      } else {
+        // API endpoint for creating a new user
+        const apiUrl2 = "http://matoua.com/api/bookride";
+        const userId = localStorage.getItem("userId");
+
+        // Form data to be sent in the request body
+        const formData = {
+          departure: departure,
+          destination: destination,
+          departureDate: departureDate,
+          passenger: passenger,
+          amount: amount,
+          departureLocation: departureLocation,
+          destinationLocation: destinationLocation,
+          driver: userId,
+          car: car,
+        };
+
+        // Make a POST request using the Fetch API
+        fetch(apiUrl2, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+              app.dialog.alert(
+                "Ooups! Une erreur s'est produite ressayez svp !"
+              );
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // Process the newly created user data
+            //console.log("New Data:", data);
+
+            $f7.dialog.alert(
+              "Votre publication du trajet a été enregistrée avec succès !",
+              function () {
+                $f7.popup.close();
+                var mainView = app.view.main;
+                mainView.router.navigate("/my-ride/");
+              }
+            );
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
     };
 
     $on("pageBeforeRemove", () => {

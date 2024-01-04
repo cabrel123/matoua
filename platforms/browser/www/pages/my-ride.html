@@ -1,0 +1,225 @@
+<template>
+  <div class="page">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link" href="/home/">
+            <i class="icon icon-back"></i>
+          </a>
+        </div>
+        <div class="title">Historique</div>
+      </div>
+    </div>
+    <div class="page-content myRide"></div>
+    <div class="popup demo-popup">
+      <div class="page">
+        <div class="navbar">
+          <div class="navbar-bg"></div>
+          <div class="navbar-inner">
+            <div class="title">Confirmation</div>
+            <div class="right">
+              <a class="link popup-close" href="#"
+                ><i class="icon material-icons font-size-18">close</i></a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="page-content">
+          <div class="block">
+            <form
+              name="confirmPayment"
+              action="#"
+              method="POST"
+              id="confirmPayment"
+              enctype="multipart/form-data"
+            >
+              <p style="display: none">
+                <input
+                  type="text"
+                  placeholder="Montant"
+                  name="bookingId"
+                  id="boookingId"
+                  value="1"
+                />
+              </p>
+              <h3 class="title">
+                Vous confirmez accepter le trajet du passager et ses conditions.
+                Voulez-vous continuer ?
+              </h3>
+
+              <div class="content-block">
+                <a
+                  class="button button-big button-block button-fill button-round color-black"
+                  @click="${confirmPayment}"
+                  tkey="POST"
+                  >Je confirme</a
+                >
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<style>
+  .color-green {
+    --f7-theme-color: #0fc874;
+    --f7-theme-color-rgb: 200, 250, 2227;
+    --f7-theme-color-shade: #7af5be;
+    --f7-theme-color-tint: rgb(200, 250, 227);
+  }
+  .color-yellow {
+    color: #efb943 !important;
+  }
+  .block-title-medium {
+    color: #0fc874;
+  }
+  .md .color-green,
+  .md.color-green,
+  .md .dark .color-green,
+  .md .dark.color-green {
+    --f7-theme-color: #0fc874;
+    --f7-theme-color-rgb: var(--f7-md-primary-rgb);
+    --f7-theme-color-shade: var(--f7-md-primary-shade);
+    --f7-theme-color-tint: var(--f7-md-primary-tint);
+  }
+
+  .text-color-black {
+    --f7-theme-color-text-color: #000000;
+  }
+
+  .block .chip {
+    margin: 2px 4px 2px 0;
+  }
+  .card {
+    background: #fff;
+    margin: 0;
+    -webkit-box-shadow: 0px 1px 7px -1px rgba(0, 0, 0, 0.62);
+    -moz-box-shadow: 0px 1px 7px -1px rgba(0, 0, 0, 0.62);
+    box-shadow: 0px 1px 7px -1px rgba(0, 0, 0, 0.62);
+    border-radius: 0%;
+  }
+  .card-footer {
+    padding: 5px 5px 5px 82px;
+  }
+  .shape-circle {
+    border-radius: 50%;
+  }
+  h4,
+  h5,
+  h6 {
+    margin: 5px 0 5px 0;
+  }
+  .font-size-14 {
+    font-size: 14px;
+  }
+</style>
+<script>
+  export default (props, { $f7, $f7router, $onMounted, $onBeforeUnmount }) => {
+    let popup;
+    let popupSwipe;
+    let notificationFull;
+    const userId = localStorage.getItem("userId");
+
+    // Specify the API endpoint for user data
+    const apiUrl = "https://matoua.com/api/driver/" + userId;
+    let content = "";
+
+    // Make a GET request using the Fetch API
+    fetch(apiUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((bookride) => {
+        // Process the retrieved user data
+        console.log("bookride", bookride);
+        var content = "";
+
+        var maxRow = bookride.length;
+
+        var i = "";
+
+        for (i = 0; i < maxRow; i++) {
+          content += '<div class="card">';
+          content += '<div class="card-content">';
+          content += '<div class="list media-list no-safe-areas">';
+          content += "<ul>";
+          content += '<li class="item-content">';
+          content += '<div class="item-inner">';
+          content += '<div class="item-title-row">';
+          content += '<div class="item-title">';
+          content +=
+            '<h4 class="block-title-medium">Réservation #00' +
+            bookride[i]["id"] +
+            "</h4>";
+          content +=
+            "<h5>" +
+            bookride[i]["departureName"] +
+            "," +
+            bookride[i]["departureLocation"] +
+            " - " +
+            bookride[i]["destinationName"] +
+            "," +
+            bookride[i]["destinationLocation"] +
+            "</h5>";
+          content += "<h5>Montant : " + bookride[i]["amount"] + " FCFA</h5>";
+          content +=
+            "<h6>Nb. passagers : " + bookride[i]["passenger"] + "</h6>";
+          content +=
+            "<h6>Date de départ : " + bookride[i]["departureDate"] + "</h6>";
+          content += "</div>";
+          content += "</div>";
+          content += "</div>";
+          content += "</li>";
+          content += "</ul>";
+          content += "</div>";
+          content += "</div>";
+          content += '<div class="card-footer">';
+          content += '<span class="display-flex">';
+          content +=
+            '<a class="button button-fill color-green" href="/passenger-history/' +
+            bookride[i]["id"] +
+            '/"> Voir les réservations</a>';
+          content += "</span>";
+          content += "</div>";
+          content += " </div>";
+        }
+
+        $(".myRide").append(content);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+    const confirmPayment = () => {
+      let amount = $("input#bookingId").val();
+      $f7.dialog.alert(
+        "Merci pour votre réservation et bonne route ! à très bientot sur cardigo !",
+        function () {
+          $f7.popup.close();
+          var mainView = app.view.main;
+          mainView.router.navigate("/home/");
+        }
+      );
+    };
+
+    $onMounted(() => {
+      popupSwipe = $f7.popup.create({
+        el: ".demo-popup",
+        swipeToClose: true,
+      });
+    });
+
+    $onBeforeUnmount(() => {
+      // Destroy popup when page removed
+      if (popup) popup.destroy();
+    });
+
+    return $render;
+  };
+</script>
