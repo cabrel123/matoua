@@ -241,7 +241,10 @@
   }
 </style>
 <script>
-  export default function (props, ctx) {
+  export default (props, { $f7, $on }) => {
+    $on("pageInit", (e, page) => {
+      $f7.dialog.close();
+    });
     return $render;
-  }
+  };
 </script>

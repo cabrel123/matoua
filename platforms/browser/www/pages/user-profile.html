@@ -1,10 +1,10 @@
 <template>
-  <div class="page">
+  <div class="page page-profile">
     <div class="navbar">
       <div class="navbar-bg"></div>
       <div class="navbar-inner sliding">
         <div class="left">
-          <a class="link back">
+          <a class="link" href="/home/">
             <i class="icon icon-back"></i>
           </a>
         </div>
@@ -19,7 +19,7 @@
           src="assets/img/driver-m.png"
           alt="Avatar"
         />
-        <div class="user-name" id="fullname"></div>
+        <div class="user-name fullname"></div>
         <div class="buttons-row user-actions">
           <button
             type="button"
@@ -34,7 +34,6 @@
       <div class="toolbar tabbar tabbar-scrollable tabbar-inline">
         <div class="toolbar-inner">
           <a href="#tab-overview" class="tab-link active">Vue d'ensemble</a>
-          <a href="#tab-skills" class="tab-link">Historique</a>
           <a href="#tab-experience" class="tab-link">Parrainage</a>
         </div>
       </div>
@@ -44,269 +43,67 @@
           <div class="card">
             <div class="card-content">
               <div class="card-content-inner">
-                <p>
-                  Neque porro quisquam est qui dolorem ipsum quia dolor sit
-                  amet, consectetur, adipisci velit.
-                </p>
-                <p>
-                  At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                  blanditiis praesentium voluptatum deleniti atque corrupti quos
-                  dolores et quas molestias excepturi sint occaecati cupiditate
-                  non provident, similique sunt in culpa qui officia deserunt
-                  mollitia animi, id est laborum et dolorum fuga.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-content">
-              <div class="card-content-inner">
                 <div class="list-block no-hairlines no-hairlines-between">
                   <ul>
-                    <li>
+                    <li class="padding-bottom-half">
                       <div class="item-content">
-                        <div class="item-inner">
+                        <div class="item-inner display-flex">
                           <div class="item-title">
-                            <i class="material-icons">person_outline</i>
+                            <i class="material-icons">person_outline</i> Nom(s)
+                            :
                           </div>
-                          <div class="item-after">Praveen Mujawdiya</div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="item-content">
-                        <div class="item-inner">
-                          <div class="item-title">
-                            <i class="material-icons">cake</i>
-                          </div>
-                          <div class="item-after">December 22, 1991</div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="item-content">
-                        <div class="item-inner">
-                          <div class="item-title">
-                            <i class="material-icons">place</i>
-                          </div>
-                          <div class="item-after">Indore, India</div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="item-content">
-                        <div class="item-inner">
-                          <div class="item-title">
-                            <i class="material-icons">call</i>
-                          </div>
-                          <div class="item-after">+91-9876543210</div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="item-content">
-                        <div class="item-inner">
-                          <div class="item-title">
-                            <i class="material-icons">mail_outline</i>
-                          </div>
-                          <div class="item-after">
-                            praveen.mujawdiya@gmail.com
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-content">
-              <div class="card-content-inner">
-                <div class="list-block no-hairlines no-hairlines-between">
-                  <ul>
-                    <li>
-                      <div class="item-content">
-                        <div class="item-inner">
-                          <div class="item-title">
-                            <i class="fa fa-fw fa-lg fa-briefcase"></i>
-                          </div>
-                          <div class="item-after">
-                            Founder, The Code Brewery
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="item-content">
-                        <div class="item-inner">
-                          <div class="item-title">
-                            <i class="fa fa-fw fa-lg fa-graduation-cap"></i>
-                          </div>
-                          <div class="item-after">
-                            Masters in Computer Science
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="item-content">
-                        <div class="item-inner">
-                          <div class="item-title">
-                            <i class="material-icons">language</i>
-                          </div>
-                          <div class="item-after">English and Hindi</div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-content">
-              <div class="card-content-inner text-center">
-                <a
-                  target="_blank"
-                  href="https://twitter.com"
-                  class="external"
-                  title="Twitter"
-                >
-                  <i class="fa-stack fa-lg">
-                    <span class="fa fa-circle fa-stack-2x color-twitter"></span>
-                    <span class="fa fa-twitter fa-stack-1x fa-inverse"></span>
-                  </i>
-                </a>
-                <a
-                  target="_blank"
-                  href="https://linkedin.com"
-                  class="external"
-                  title="LinkedIn"
-                >
-                  <i class="fa-stack fa-lg">
-                    <span
-                      class="fa fa-circle fa-stack-2x color-linkedin"
-                    ></span>
-                    <span class="fa fa-linkedin fa-stack-1x fa-inverse"></span>
-                  </i>
-                </a>
-                <a
-                  target="_blank"
-                  href="https://pinterest.com"
-                  class="external"
-                  title="Pinterest"
-                >
-                  <i class="fa-stack fa-lg">
-                    <span
-                      class="fa fa-circle fa-stack-2x color-pinterest"
-                    ></span>
-                    <span class="fa fa-pinterest fa-stack-1x fa-inverse"></span>
-                  </i>
-                </a>
-                <a
-                  target="_blank"
-                  href="https://dribbble.com"
-                  class="external"
-                  title="Dribbble"
-                >
-                  <i class="fa-stack fa-lg">
-                    <span
-                      class="fa fa-circle fa-stack-2x color-dribbble"
-                    ></span>
-                    <span class="fa fa-dribbble fa-stack-1x fa-inverse"></span>
-                  </i>
-                </a>
-                <a
-                  target="_blank"
-                  href="https://behance.com"
-                  class="external"
-                  title="Behance"
-                >
-                  <i class="fa-stack fa-lg">
-                    <span class="fa fa-circle fa-stack-2x color-behance"></span>
-                    <span class="fa fa-behance fa-stack-1x fa-inverse"></span>
-                  </i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="tab-skills" class="tab">
-          <div class="card">
-            <div class="card-content">
-              <div class="card-content-inner">
-                <div class="list-block no-hairlines no-hairlines-between">
-                  <ul class="skills-list">
-                    <li>
-                      <div class="item-content">
-                        <div class="item-inner">
-                          <div class="skill-title">HTML</div>
                           <div
-                            data-progress="95"
-                            class="progressbar color-deeporange"
+                            class="item-after padding-top-half padding-left-half fullname"
                           ></div>
-                          <div class="skill-proficiency">95</div>
                         </div>
                       </div>
                     </li>
-                    <li>
+                    <li class="padding-bottom-half">
                       <div class="item-content">
-                        <div class="item-inner">
-                          <div class="skill-title">CSS</div>
+                        <div class="item-inner display-flex">
+                          <div class="item-title">
+                            <i class="material-icons">cake</i> Date
+                            d'anniverssaire :
+                          </div>
                           <div
-                            data-progress="85"
-                            class="progressbar color-blue"
+                            class="item-after padding-top-half padding-left-half dateofbirth"
                           ></div>
-                          <div class="skill-proficiency">85</div>
                         </div>
                       </div>
                     </li>
-                    <li>
+                    <li class="padding-bottom-half">
                       <div class="item-content">
-                        <div class="item-inner">
-                          <div class="skill-title">JavaScript</div>
+                        <div class="item-inner display-flex">
+                          <div class="item-title">
+                            <i class="material-icons">place</i> Adresse :
+                          </div>
                           <div
-                            data-progress="80"
-                            class="progressbar color-amber"
+                            class="item-after padding-top-half padding-left-half address"
                           ></div>
-                          <div class="skill-proficiency">80</div>
                         </div>
                       </div>
                     </li>
-                    <li>
+                    <li class="padding-bottom-half">
                       <div class="item-content">
-                        <div class="item-inner">
-                          <div class="skill-title">PhoneGap</div>
+                        <div class="item-inner display-flex">
+                          <div class="item-title">
+                            <i class="material-icons">call</i> Téléphone :
+                          </div>
                           <div
-                            data-progress="85"
-                            class="progressbar color-bluegray"
+                            class="item-after padding-top-half padding-left-half phone"
                           ></div>
-                          <div class="skill-proficiency">85</div>
                         </div>
                       </div>
                     </li>
-                    <li>
+                    <li class="padding-bottom-half">
                       <div class="item-content">
-                        <div class="item-inner">
-                          <div class="skill-title">PHP</div>
+                        <div class="item-inner display-flex">
+                          <div class="item-title">
+                            <i class="material-icons">mail_outline</i> E-mail :
+                          </div>
                           <div
-                            data-progress="90"
-                            class="progressbar color-purple"
+                            class="item-after padding-top-half padding-left-half email"
                           ></div>
-                          <div class="skill-proficiency">90</div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="item-content">
-                        <div class="item-inner">
-                          <div class="skill-title">MySQL</div>
-                          <div
-                            data-progress="95"
-                            class="progressbar color-teal"
-                          ></div>
-                          <div class="skill-proficiency">95</div>
                         </div>
                       </div>
                     </li>
@@ -316,6 +113,7 @@
             </div>
           </div>
         </div>
+
         <div id="tab-experience" class="tab">
           <div class="card">
             <div class="card-content">
@@ -391,9 +189,11 @@
   </div>
 </template>
 <style>
-  .tabs .tab.active {
-    display: block;
+  .page-profile ul {
+    list-style: none;
+    padding-left: 0;
   }
+
   .profile-header {
     align-items: center;
     background-color: #2e2b33;
@@ -489,7 +289,8 @@
 <script>
   export default (props, { $f7, $on }) => {
     $on("pageInit", (e, page) => {
-      console.log("pageInit", page);
+      $(".active").show();
+
       const fullname = localStorage.getItem("fullname");
       const email = localStorage.getItem("email");
       const phone = localStorage.getItem("phone");
@@ -498,14 +299,19 @@
       const address = localStorage.getItem("address");
       const cni = localStorage.getItem("cni");
 
-      $("#fullname").html(fullname);
+      $(".fullname").html(fullname);
+      $(".email").html(email);
+      $(".phone").html(phone);
+      $(".dateofbirth").html(dateofbirth);
+      $(".gender").html(gender);
+      $(".address").html(address);
     });
 
     const signOut = () => {
       const token = localStorage.getItem("token");
 
       // API endpoint for creating a new user
-      const apiUrl = "http://matoua.com/api/logout";
+      const apiUrl = "https://matoua.com/api/logout";
 
       // Make a POST request using the Fetch API
       fetch(apiUrl, {

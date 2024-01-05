@@ -18,7 +18,7 @@
                   <input
                     type="text"
                     placeholder="Votre adresse mail"
-                    id="email"
+                    id="username"
                     name="email"
                     class="input-with-value"
                   />
@@ -33,7 +33,7 @@
                   <input
                     type="password"
                     placeholder="Votre mot de passe"
-                    id="password"
+                    id="userpassword"
                     name="password"
                     class=""
                   />
@@ -78,14 +78,15 @@
 <script>
   export default (props, { $, $f7, $f7router }) => {
     const signIn = () => {
-      let email = $("input#email").val();
-      let password = $("input#password").val();
+      $f7.dialog.preloader("Un instant svp...");
+      let email = $("#username").val();
+      let password = $("#userpassword").val();
 
       if (email == "" || password == "") {
         app.dialog.alert("Veuillez renseigner tous les champs SVP !");
       } else {
         // API endpoint for creating a new user
-        const apiUrl = "http://matoua.com/api/login";
+        const apiUrl = "https://matoua.com/api/login";
 
         // Form data to be sent in the request body
         const formData = {

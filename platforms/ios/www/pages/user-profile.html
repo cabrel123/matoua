@@ -1,0 +1,323 @@
+<template>
+  <div class="page">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back">
+            <i class="icon icon-back"></i>
+          </a>
+        </div>
+        <div class="title">Mon compte</div>
+      </div>
+    </div>
+    <!-- Begin: Page Content -->
+    <div class="page-content">
+      <div class="profile-header">
+        <img
+          class="user-avatar img-circle"
+          src="assets/img/driver-m.png"
+          alt="Avatar"
+        />
+        <div class="user-name fullname"></div>
+        <div class="buttons-row user-actions">
+          <button
+            type="button"
+            class="button button-fill color-pink"
+            @click="${signOut}"
+          >
+            <i class="icon material-icons">logout</i> Déconnexion
+          </button>
+        </div>
+      </div>
+
+      <div class="toolbar tabbar tabbar-scrollable tabbar-inline">
+        <div class="toolbar-inner">
+          <a href="#tab-overview" class="tab-link active">Vue d'ensemble</a>
+          <a href="#tab-experience" class="tab-link">Parrainage</a>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <div id="tab-overview" class="tab active">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-content-inner">
+                <div class="list-block no-hairlines no-hairlines-between">
+                  <ul>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">
+                            <i class="material-icons">person_outline</i>
+                          </div>
+                          <div class="item-after fullname"></div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">
+                            <i class="material-icons">cake</i>
+                          </div>
+                          <div class="item-after dateofbirth"></div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">
+                            <i class="material-icons">place</i>
+                          </div>
+                          <div class="item-after address"></div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">
+                            <i class="material-icons">call</i>
+                          </div>
+                          <div class="item-after phone"></div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-inner">
+                          <div class="item-title">
+                            <i class="material-icons">mail_outline</i>
+                          </div>
+                          <div class="item-after email"></div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab-experience" class="tab">
+          <div class="card">
+            <div class="card-content">
+              <div class="card-content-inner">
+                <div
+                  class="list-block media-list no-hairlines no-hairlines-between"
+                >
+                  <ul>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-media">
+                          <img
+                            src="https://logo.clearbit.com/airbnb.co.in?s=48"
+                            alt="Airbnb"
+                          />
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title-row">
+                            <div class="item-title">Creative Lead</div>
+                          </div>
+                          <div class="item-subtitle">Airbnb, Inc.</div>
+                          <div class="item-text">March 2016 - Present</div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-media">
+                          <img
+                            src="https://logo.clearbit.com/snapchat.com?s=48"
+                            alt="Snapchat"
+                          />
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title-row">
+                            <div class="item-title">Product Designer</div>
+                          </div>
+                          <div class="item-subtitle">Snapchat, Inc.</div>
+                          <div class="item-text">
+                            January 2014 - February 2016
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="item-content">
+                        <div class="item-media">
+                          <img
+                            src="https://logo.clearbit.com/instagram.com?s=48"
+                            alt="Instagram"
+                          />
+                        </div>
+                        <div class="item-inner">
+                          <div class="item-title-row">
+                            <div class="item-title">UI/UX Specialist</div>
+                          </div>
+                          <div class="item-subtitle">Instagram</div>
+                          <div class="item-text">
+                            March 2012 - December 2013
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End: Page Content -->
+  </div>
+</template>
+<style>
+  .tabs .tab.active {
+    display: block;
+  }
+  .profile-header {
+    align-items: center;
+    background-color: #2e2b33;
+    background-image: url("../assets/img/bg-user-profile.svg");
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px 16px;
+    text-align: center;
+  }
+
+  .profile-header .user-avatar {
+    border: 3px solid #ffffff;
+    height: 80px;
+    width: 80px;
+  }
+
+  .profile-header .user-name {
+    color: rgba(255, 255, 255, 0.87);
+    margin-bottom: 8px;
+    margin-top: 8px;
+  }
+
+  .profile-header .user-actions {
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  .skills-list .skill-title {
+    font-size: 12px;
+    margin-right: 8px;
+    text-align: left;
+    width: 96px;
+  }
+
+  .skills-list .skill-proficiency {
+    font-size: 12px;
+    margin-left: 8px;
+    text-align: right;
+    width: 16px;
+  }
+
+  #tab-experience .list-block .item-title {
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-height: 20px;
+    margin-bottom: 6px;
+    white-space: normal;
+  }
+
+  #tab-experience .list-block .item-subtitle {
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-height: 18px;
+    margin-bottom: 6px;
+    white-space: normal;
+  }
+
+  #tab-portfolio .card .card-content-inner {
+    padding-bottom: 8px;
+    padding-top: 8px;
+  }
+
+  #tab-portfolio .image-gallery .image-wrapper {
+    margin-bottom: 3px;
+    margin-top: 8px;
+    position: relative;
+  }
+
+  #tab-portfolio .image-gallery img {
+    width: 100%;
+  }
+
+  #tab-portfolio .image-gallery .image-caption {
+    background-color: rgba(0, 0, 0, 0.7);
+    bottom: 6px;
+    box-sizing: border-box;
+    color: rgba(255, 255, 255, 0.87);
+    font-size: 11px;
+    padding: 4px 8px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+  }
+  .md .tabbar:not(.tabbar-icons) .tab-link-highlight {
+    height: 4px;
+    top: 0px;
+  }
+</style>
+<script>
+  export default (props, { $f7, $on }) => {
+    $on("pageInit", (e, page) => {
+      console.log("pageInit", page);
+      const fullname = localStorage.getItem("fullname");
+      const email = localStorage.getItem("email");
+      const phone = localStorage.getItem("phone");
+      const dateofbirth = localStorage.getItem("dateofbirth");
+      const gender = localStorage.getItem("gender");
+      const address = localStorage.getItem("address");
+      const cni = localStorage.getItem("cni");
+
+      $("#fullname").html(fullname);
+    });
+
+    const signOut = () => {
+      const token = localStorage.getItem("token");
+
+      // API endpoint for creating a new user
+      const apiUrl = "http://matoua.com/api/logout";
+
+      // Make a POST request using the Fetch API
+      fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((newUserData) => {
+          localStorage.clear();
+          app.dialog.alert("Déconnexion effectuée avec succès !");
+
+          app.views.main.router.navigate("/walkthrough/");
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    };
+
+    return $render;
+  };
+</script>

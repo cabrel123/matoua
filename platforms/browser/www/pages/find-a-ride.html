@@ -29,7 +29,7 @@
                           <div class="item-input-wrap input-dropdown-wrap">
                             <select
                               name="departure"
-                              id="departure"
+                              id="find-departure"
                               type="text"
                               class="townList"
                               required
@@ -52,7 +52,7 @@
                           <div class="item-input-wrap input-dropdown-wrap">
                             <select
                               name="destination"
-                              id="destination"
+                              id="find-destination"
                               type="text"
                               class="townList2"
                               required
@@ -79,7 +79,7 @@
                       type="text"
                       placeholder=""
                       readonly="readonly"
-                      id="demo-calendar-modal"
+                      id="find-departureDate"
                       name="departureDate"
                       required
                     />
@@ -149,7 +149,7 @@
     $on("pageInit", () => {
       // Custom modal
       calendarModal = $f7.calendar.create({
-        inputEl: "#demo-calendar-modal",
+        inputEl: "#find-departureDate",
         openIn: "customModal",
         header: true,
         footer: true,
@@ -199,10 +199,10 @@
       });
 
     const findRide = () => {
-      let departure = $("select#departure").val();
-      let destination = $("select#destination").val();
-      let departureDate = $("input#demo-calendar-modal").val();
-      let passenger = $("select#passenger").val();
+      let departure = $("#find-departure").val();
+      let destination = $("#find-destination").val();
+      let departureDate = $("#find-departureDate").val();
+      let numberofSeats = $("#numberofSeats").val();
 
       if (
         departure == "" ||

@@ -18,7 +18,7 @@
                   <input
                     type="text"
                     placeholder="Votre nom"
-                    id="fullname"
+                    id="user-fullname"
                     class="input-with-value"
                   />
                   <span class="input-clear-button"></span>
@@ -32,7 +32,7 @@
                   <input
                     type="text"
                     placeholder="Votre numéro de téléphone"
-                    id="phone"
+                    id="user-phone"
                     class="input-with-value"
                   />
                   <span class="input-clear-button"></span>
@@ -46,7 +46,7 @@
                   <input
                     type="email"
                     placeholder="Votre adresse mail"
-                    id="email"
+                    id="user-email"
                     class="input-with-value"
                   />
                   <span class="input-clear-button"></span>
@@ -60,7 +60,7 @@
                   <input
                     type="password"
                     placeholder="Votre mot de passe"
-                    id="password"
+                    id="user-password2"
                     class=""
                   />
                 </div>
@@ -116,16 +116,17 @@
 <script>
   export default (props, { $, $f7, $f7router }) => {
     const signUp = () => {
-      let fullname = $("input#fullname").val();
-      let email = $("input#email").val();
-      let phone = $("input#phone").val();
-      let password = $("input#password").val();
+      $f7.dialog.preloader("Un instant svp...");
+      let fullname = $("#user-fullname").val();
+      let email = $("#user-email").val();
+      let phone = $("#user-phone").val();
+      let password = $("#user-password2").val();
 
       if (fullname == "" || password == "" || phone == "") {
         app.dialog.alert("Veuillez renseigner tous les champs SVP !");
       } else {
         // API endpoint for creating a new user
-        const apiUrl = "http://matoua.com/api/register";
+        const apiUrl = "https://matoua.com/api/register";
 
         // Form data to be sent in the request body
         const formData = {
@@ -133,6 +134,7 @@
           email: email,
           phone: phone,
           password: password,
+          password_confirmation: password,
         };
 
         // Make a POST request using the Fetch API
