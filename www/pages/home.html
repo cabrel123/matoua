@@ -25,98 +25,119 @@
         <h1 class="text-center searchbar-found padding">
           Un vaste choix de trajets à petits prix
         </h1>
-        <div class="block block-image"></div>
-        <div class="card">
-          <div class="card-content">
-            <div class="list media-list no-safe-areas">
-              <ul>
-                <li class="item-content">
-                  <div class="item-media">
-                    <img
-                      src="assets/img/undraw_savings_re_eq4w.svg"
-                      width="44"
-                    />
-                  </div>
-                  <div class="item-inner">
-                    <div class="item-title-row">
-                      <div class="item-title">
-                        Vos trajets préférés à petits prix
-                      </div>
-                    </div>
-                    <div class="item-subtitle">
-                      Où que vous alliez, en bus ou en covoiturage, trouvez le
-                      trajet idéal parmi notre large choix de destinations à
-                      petits prix.
-                    </div>
-                  </div>
-                </li>
-                <li class="item-content">
-                  <div class="item-media">
-                    <img
-                      src="assets/img/undraw_verified_re_4io7.svg"
-                      width="44"
-                    />
-                  </div>
-                  <div class="item-inner">
-                    <div class="item-title-row">
-                      <div class="item-title">Voyagez en toute confiance</div>
-                    </div>
-                    <div class="item-subtitle">
-                      Nous prenons le temps qu’il faut pour connaître nos
-                      membres et nos compagnies de bus partenaires. Nous
-                      vérifions les avis, les profils et les pièces d’identité.
-                      Vous savez donc avec qui vous allez voyager pour réserver
-                      en toute confiance sur notre plateforme sécurisée.
+        <div
+        class="list list-strong-ios list-outline-ios list-dividers-ios form-store-data"
+        id="demo-form"
+      >
+        <ul class="findrideList">
+          <div class="card">
+            <div class="card-content">
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-item-divider"></div>
+                  <div class="timeline-item-content">
+                    <div class="timeline-item-inner">
+                      <li class="item-content item-input">
+                        <div class="item-inner">
+                          <div class="item-input-wrap input-dropdown-wrap">
+                            <select
+                              name="departure"
+                              id="find-departure"
+                              type="text"
+                              class="townList"
+                              required
+                            >
+                              <option value="">Départ <span class="color-red">*</span></option>
+                            </select>
+                            <span class="input-clear-button"></span>
+                          </div>
+                        </div>
+                      </li>
                     </div>
                   </div>
-                </li>
-                <li class="item-content">
-                  <div class="item-media">
-                    <img
-                      src="assets/img/undraw_mobile_search_jxq5.svg"
-                      width="44"
-                    />
-                  </div>
-                  <div class="item-inner">
-                    <div class="item-title-row">
-                      <div class="item-title">
-                        Recherchez, cliquez et réservez !
-                      </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-item-divider"></div>
+                  <div class="timeline-item-content">
+                    <div class="timeline-item-inner">
+                      <li class="item-content item-input">
+                        <div class="item-inner">
+                          <div class="item-input-wrap input-dropdown-wrap">
+                            <select
+                              name="destination"
+                              id="find-destination"
+                              type="text"
+                              class="townList2"
+                              required
+                            >
+                              <option value="">Destination <span class="color-red">*</span></option>
+                            </select>
+                            <span class="input-clear-button"></span>
+                          </div>
+                        </div>
+                      </li>
                     </div>
-                    <div class="item-subtitle">
-                      Réserver un trajet devient encore plus simple ! Facile
-                      d'utilisation et dotée de technologies avancées, notre
-                      appli vous permet de réserver un trajet à proximité en un
-                      rien de temps.
-                    </div>
                   </div>
-                </li>
-              </ul>
+                </div>
+              </div>
             </div>
           </div>
+          <div class="card">
+            <div class="card-content">
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Date de départ <span class="color-red">*</span></div>
+                  <div class="item-input-wrap">
+                    <input
+                      type="text"
+                      placeholder=""
+                      readonly="readonly"
+                      id="find-departureDate"
+                      name="departureDate"
+                      required
+                    />
+                  </div>
+                </div>
+              </li>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Nb. de passagers <span class="color-red">*</span></div>
+                  <div class="item-input-wrap input-dropdown-wrap">
+                    <select
+                      name="numberofSeats"
+                      placeholder="Please choose..."
+                      id="numberofSeats"
+                      required
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                    </select>
+                  </div>
+                </div>
+              </li>
+            </div>
+          </div>
+        </ul>
+        <div class="block">
+          <a
+            class="button button-raised button-large button-fill findrideBtn "
+            
+          >
+            Rechercher</a
+          >
         </div>
-
-        <h1 class="text-center searchbar-found">N'attendez plus !</h1>
-        <div class="bg-color-green block-outline-ios block-strong padding">
-          <p class="grid grid-cols-2 grid-gap">
-            <a
-              href="/find-a-ride/"
-              class="button button-large button-round button-fill color-black"
-              >Trouver un trajet</a
-            >
-            <a
-              href="/publish-ride/"
-              class="button button-active button-large button-raised button-round color-white"
-              >Publier un trajet</a
-            >
-          </p>
-        </div>
-
-        <div
+      </div>
+		<div
           class="bg-green list list-strong list-outline-ios list-dividers-ios inset-md accordion-list"
         >
           <h1 class="text-center searchbar-found">
-            Comment fonctionne CAR-DI-GO ?
+            Comment fonctionne MATOUA ?
           </h1>
           <ul>
             <li class="accordion-item">
@@ -182,6 +203,23 @@
             </li>
           </ul>
         </div>
+        <h1 class="text-center searchbar-found">N'attendez plus !</h1>
+        <div class="bg-color-green block-outline-ios block-strong padding">
+          <p class="grid grid-cols-2 grid-gap">
+            <a
+              href="/find-a-ride/"
+              class="button button-large button-round button-fill color-black"
+              >Trouver un trajet</a
+            >
+            <a
+              href="/publish-ride/"
+              class="button button-active button-large button-raised button-round color-white"
+              >Publier un trajet</a
+            >
+          </p>
+        </div>
+
+        
       </div>
     </div>
   </div>
@@ -191,6 +229,11 @@
     margin: 0 auto;
     display: block;
     max-width: 200px;
+  }
+  .page-home .timeline{
+    margin-bottom: 5px;
+    margin-top: 5px;
+
   }
   .page-home .navbar-inner .link .icon {
     color: var(
@@ -225,13 +268,7 @@
   .page-home .navbar-large-collapsed .title .green {
     color: #044025;
   }
-  .block.block-image {
-    background-image: url("assets/img/home-illustration.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 300px;
-    background-position: 50% 87%;
-  }
+  
   .list .item-subtitle {
     white-space: normal;
     text-align: justify;
@@ -239,6 +276,14 @@
   .page-home .card {
     box-shadow: none !important;
   }
+    .timeline-item-content {
+    width: 100%;
+  }
+    .color-red{color:#c0000a}
+.color-gray{color:#dbe2f9}
+.page-home .list ul {
+    border-radius:20px
+}
 </style>
 <script>
   export default (props, { $f7, $on }) => {

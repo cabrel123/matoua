@@ -34,7 +34,7 @@
                               class="townList"
                               required
                             >
-                              <option value="">Départ</option>
+                              <option value="">Départ <span class="color-red">*</span></option>
                             </select>
                             <span class="input-clear-button"></span>
                           </div>
@@ -57,7 +57,7 @@
                               class="townList2"
                               required
                             >
-                              <option value="">Destination</option>
+                              <option value="">Destination <span class="color-red">*</span></option>
                             </select>
                             <span class="input-clear-button"></span>
                           </div>
@@ -73,7 +73,7 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Date de départ</div>
+                  <div class="item-title item-label">Date de départ <span class="color-red">*</span></div>
                   <div class="item-input-wrap">
                     <input
                       type="text"
@@ -92,7 +92,7 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Nb. de passagers</div>
+                  <div class="item-title item-label">Nb. de passagers <span class="color-red">*</span></div>
                   <div class="item-input-wrap input-dropdown-wrap">
                     <select
                       name="numberofSeats"
@@ -141,6 +141,8 @@
   .timeline-item-content {
     width: 100%;
   }
+    .color-red{color:#c0000a}
+.color-gray{color:#dbe2f9}
 </style>
 <script>
   export default (props, { $f7, $, $on }) => {

@@ -1,5 +1,17 @@
 <template>
-  <div class="page no-toolbar no-navbar no-swipeback login-screen-page">
+    <div class="page no-toolbar login-screen-page">
+    <div class="navbar">
+    <div class="navbar-bg"></div>
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="if-not-md">Back</span>
+        </a>
+      </div>
+      <div class="title">Inscription</div>
+    </div>
+  </div>
     <div class="page-content login-screen-content">
       <div class="login-screen-title">
         <img
@@ -13,7 +25,7 @@
           <ul>
             <li class="item-content item-input item-input-with-value">
               <div class="item-inner">
-                <div class="item-title item-label">Nom(s)</div>
+                <div class="item-title item-label">Nom(s) <span class="color-red">*</span></div>
                 <div class="item-input-wrap">
                   <input
                     type="text"
@@ -27,7 +39,7 @@
             </li>
             <li class="item-content item-input item-input-with-value">
               <div class="item-inner">
-                <div class="item-title item-label">Téléphone</div>
+                <div class="item-title item-label">Téléphone <span class="color-red">*</span></div>
                 <div class="item-input-wrap">
                   <input
                     type="text"
@@ -41,7 +53,7 @@
             </li>
             <li class="item-content item-input item-input-with-value">
               <div class="item-inner">
-                <div class="item-title item-label">E-mail</div>
+                <div class="item-title item-label">E-mail <span class="color-red">*</span></div>
                 <div class="item-input-wrap">
                   <input
                     type="email"
@@ -55,7 +67,7 @@
             </li>
             <li class="item-content item-input">
               <div class="item-inner">
-                <div class="item-title item-label">Mot de passe</div>
+                <div class="item-title item-label">Mot de passe <span class="color-red">*</span></div>
                 <div class="item-input-wrap">
                   <input
                     type="password"
@@ -68,7 +80,7 @@
             </li>
             <li class="item-content item-input">
               <div class="item-inner">
-                <div class="item-title item-label">Téléchargez votre CNI</div>
+                <div class="item-title item-label">Téléchargez votre CNI  <span class="color-gray">(optionnel)</span></div>
                 <div class="item-input-wrap">
                   <input
                     type="file"
@@ -112,6 +124,11 @@
   .login-screen-page .page-content {
     padding-top: 10px;
   }
+    .login-screen-page .navbar-inner .title, .login-screen-page .navbar-inner .link .icon, .login-screen-page .title {
+    color: black;
+}
+.color-red{color:#c0000a}
+.color-gray{color:#dbe2f9}
 </style>
 <script>
   export default (props, { $, $f7, $f7router }) => {

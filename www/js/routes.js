@@ -5,7 +5,7 @@ var routes = [
   },
   {
     path: "/about/",
-    url: "./pages/about.html",
+    componentUrl: "./pages/about.html",
   },
   {
     path: "/form/",

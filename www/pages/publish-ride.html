@@ -34,7 +34,7 @@
                               class="townList"
                               required
                             >
-                              <option value="">Départ</option>
+                              <option value="">Départ <span class="color-red">*</span></option>
                             </select>
 
                             <span class="input-clear-button"></span>
@@ -58,7 +58,7 @@
                               class="townList2"
                               required
                             >
-                              <option value="">Destination</option>
+                              <option value="">Destination <span class="color-red">*</span></option>
                             </select>
 
                             <span class="input-clear-button"></span>
@@ -76,7 +76,7 @@
               <li class="item-content item-input">
                 <div class="item-inner">
                   <div class="item-title item-label">
-                    Date et Heure de départ
+                    Date et Heure de départ <span class="color-red">*</span>
                   </div>
                   <div class="item-input-wrap">
                     <input
@@ -96,7 +96,7 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Nb. de passagers</div>
+                  <div class="item-title item-label">Nb. de passagers <span class="color-red">*</span></div>
                   <div class="item-input-wrap input-dropdown-wrap">
                     <select
                       name="passenger"
@@ -118,7 +118,7 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Montant</div>
+                  <div class="item-title item-label">Montant <span class="color-red">*</span></div>
                   <div class="item-input-wrap">
                     <input
                       type="text"
@@ -136,7 +136,7 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Lieu de départ</div>
+                  <div class="item-title item-label">Lieu de départ <span class="color-red">*</span></div>
                   <div class="item-input-wrap">
                     <input
                       type="text"
@@ -153,7 +153,7 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Lieu d'arrivée</div>
+                  <div class="item-title item-label">Lieu d'arrivée  <span class="color-gray">(optionnel)</span></div>
                   <div class="item-input-wrap">
                     <input
                       type="text"
@@ -170,7 +170,7 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Modèle de voiture</div>
+                  <div class="item-title item-label">Modèle de voiture  <span class="color-gray">(optionnel)</span></div>
                   <div class="item-input-wrap">
                     <input type="text" placeholder="" id="car" name="car" />
                   </div>
@@ -198,6 +198,8 @@
   .navbar-inner .link .icon {
     color: #fff;
   }
+  .color-red{color:#c0000a}
+.color-gray{color:#dbe2f9}
 </style>
 <script>
   export default (props, { $f7, $, $on, $setState }) => {
@@ -279,8 +281,7 @@
         departureDate == "" ||
         amount == "" ||
         passenger == "" ||
-        departureLocation == "" ||
-        destinationLocation == ""
+        departureLocation == ""
       ) {
         app.dialog.alert("Veuillez renseigner tous les champs SVP !");
       } else {
