@@ -57,6 +57,18 @@ var routes = [
     componentUrl: "./pages/my-ride.html",
   },
   {
+    path: "/finalize-publish-ride/",
+    componentUrl: "./pages/finalize-publish-ride.html",
+  },
+  {
+    path: "/rider-payment/:bookrideId/",
+    componentUrl: "./pages/rider-payment.html",
+  },
+  {
+    path: "/confirm-booking/:bookrideId/:passenger/:status",
+    componentUrl: "./pages/confirm-booking.html",
+  },
+  {
     path: "/dynamic-route/blog/:blogId/post/:postId/",
     componentUrl: "./pages/dynamic-route.html",
   },

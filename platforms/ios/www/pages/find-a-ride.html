@@ -29,12 +29,14 @@
                           <div class="item-input-wrap input-dropdown-wrap">
                             <select
                               name="departure"
-                              id="departure"
+                              id="find-departure"
                               type="text"
                               class="townList"
                               required
                             >
-                              <option value="">Départ</option>
+                              <option value="">
+                                Départ <span class="color-red">*</span>
+                              </option>
                             </select>
                             <span class="input-clear-button"></span>
                           </div>
@@ -52,12 +54,14 @@
                           <div class="item-input-wrap input-dropdown-wrap">
                             <select
                               name="destination"
-                              id="destination"
+                              id="find-destination"
                               type="text"
                               class="townList2"
                               required
                             >
-                              <option value="">Destination</option>
+                              <option value="">
+                                Destination <span class="color-red">*</span>
+                              </option>
                             </select>
                             <span class="input-clear-button"></span>
                           </div>
@@ -73,13 +77,15 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Date de départ</div>
+                  <div class="item-title item-label">
+                    Date de départ <span class="color-red">*</span>
+                  </div>
                   <div class="item-input-wrap">
                     <input
                       type="text"
                       placeholder=""
                       readonly="readonly"
-                      id="demo-calendar-modal"
+                      id="find-departureDate"
                       name="departureDate"
                       required
                     />
@@ -92,7 +98,9 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Nb. de passagers</div>
+                  <div class="item-title item-label">
+                    Nb. de passagers <span class="color-red">*</span>
+                  </div>
                   <div class="item-input-wrap input-dropdown-wrap">
                     <select
                       name="numberofSeats"
@@ -141,6 +149,12 @@
   .timeline-item-content {
     width: 100%;
   }
+  .color-red {
+    color: #c0000a;
+  }
+  .color-gray {
+    color: #dbe2f9;
+  }
 </style>
 <script>
   export default (props, { $f7, $, $on }) => {
@@ -149,7 +163,7 @@
     $on("pageInit", () => {
       // Custom modal
       calendarModal = $f7.calendar.create({
-        inputEl: "#demo-calendar-modal",
+        inputEl: "#find-departureDate",
         openIn: "customModal",
         header: true,
         footer: true,
@@ -185,7 +199,12 @@
         content2 += "Destination";
         content2 += "</option>";
         for (i = 0; i < maxRow; i++) {
-          content += '<option value="' + town[i]["town_id"] + '">';
+          content +=
+            '<option value="' +
+            town[i]["town_id"] +
+            "-" +
+            town[i]["town_name"] +
+            '">';
           content += "" + town[i]["town_name"] + "";
           content += "</option>";
           content += "<br/>";
@@ -199,10 +218,12 @@
       });
 
     const findRide = () => {
-      let departure = $("select#departure").val();
-      let destination = $("select#destination").val();
-      let departureDate = $("input#demo-calendar-modal").val();
-      let numberofSeats = $("select#numberofSeats").val();
+      let departure = $("#find-departure").val().split("-")[0];
+      let departureName = $("#find-departure").val().split("-")[1];
+      let destination = $("#find-destination").val().split("-")[0];
+      let destinationName = $("#find-destination").val().split("-")[1];
+      let departureDate = $("#find-departureDate").val();
+      let numberofSeats = $("#numberofSeats").val();
 
       if (
         departure == "" ||
@@ -214,7 +235,9 @@
       } else {
         $f7.dialog.preloader("Un instant svp...");
         localStorage.setItem("departure", departure);
+        localStorage.setItem("departureName", departureName);
         localStorage.setItem("destination", destination);
+        localStorage.setItem("destinationName", destinationName);
         localStorage.setItem("departureDate", departureDate);
         localStorage.setItem("numberofSeats", numberofSeats);
         setTimeout(function () {

@@ -25,98 +25,115 @@
         <h1 class="text-center searchbar-found padding">
           Un vaste choix de trajets à petits prix
         </h1>
-        <div class="block block-image"></div>
-        <div class="card">
-          <div class="card-content">
-            <div class="list media-list no-safe-areas">
-              <ul>
-                <li class="item-content">
-                  <div class="item-media">
-                    <img
-                      src="assets/img/undraw_savings_re_eq4w.svg"
-                      width="44"
-                    />
-                  </div>
+        <div
+          class="list list-strong-ios list-outline-ios list-dividers-ios form-store-data"
+          id="demo-form"
+        >
+          <ul class="findrideList">
+            <div class="card">
+              <div class="card-content">
+                <li class="item-content item-input">
                   <div class="item-inner">
-                    <div class="item-title-row">
-                      <div class="item-title">
-                        Vos trajets préférés à petits prix
-                      </div>
+                    <div class="item-title item-label">
+                      Départ <span class="color-red">*</span>
                     </div>
-                    <div class="item-subtitle">
-                      Où que vous alliez, en bus ou en covoiturage, trouvez le
-                      trajet idéal parmi notre large choix de destinations à
-                      petits prix.
+                    <div class="item-input-wrap input-dropdown-wrap">
+                      <select
+                        name="departure"
+                        id="find-departure-2"
+                        type="text"
+                        class="townList"
+                        required
+                      >
+                        <option value="">Choisir</option>
+                      </select>
                     </div>
                   </div>
                 </li>
-                <li class="item-content">
-                  <div class="item-media">
-                    <img
-                      src="assets/img/undraw_verified_re_4io7.svg"
-                      width="44"
-                    />
-                  </div>
-                  <div class="item-inner">
-                    <div class="item-title-row">
-                      <div class="item-title">Voyagez en toute confiance</div>
-                    </div>
-                    <div class="item-subtitle">
-                      Nous prenons le temps qu’il faut pour connaître nos
-                      membres et nos compagnies de bus partenaires. Nous
-                      vérifions les avis, les profils et les pièces d’identité.
-                      Vous savez donc avec qui vous allez voyager pour réserver
-                      en toute confiance sur notre plateforme sécurisée.
-                    </div>
-                  </div>
-                </li>
-                <li class="item-content">
-                  <div class="item-media">
-                    <img
-                      src="assets/img/undraw_mobile_search_jxq5.svg"
-                      width="44"
-                    />
-                  </div>
-                  <div class="item-inner">
-                    <div class="item-title-row">
-                      <div class="item-title">
-                        Recherchez, cliquez et réservez !
-                      </div>
-                    </div>
-                    <div class="item-subtitle">
-                      Réserver un trajet devient encore plus simple ! Facile
-                      d'utilisation et dotée de technologies avancées, notre
-                      appli vous permet de réserver un trajet à proximité en un
-                      rien de temps.
-                    </div>
-                  </div>
-                </li>
-              </ul>
+              </div>
             </div>
+            <div class="card">
+              <div class="card-content">
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">
+                      Destination <span class="color-red">*</span>
+                    </div>
+                    <div class="item-input-wrap input-dropdown-wrap">
+                      <select
+                        name="destination"
+                        id="find-destination-2"
+                        type="text"
+                        class="townList2"
+                        required
+                      >
+                        <option value="">Choisir</option>
+                      </select>
+                    </div>
+                  </div>
+                </li>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-content">
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">
+                      Date de départ <span class="color-red">*</span>
+                    </div>
+                    <div class="item-input-wrap">
+                      <input
+                        type="text"
+                        placeholder=""
+                        readonly="readonly"
+                        id="find-departureDate-2"
+                        name="departureDate"
+                        required
+                      />
+                    </div>
+                  </div>
+                </li>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-content">
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">
+                      Nb. de passagers <span class="color-red">*</span>
+                    </div>
+                    <div class="item-input-wrap input-dropdown-wrap">
+                      <select
+                        name="numberofSeats"
+                        placeholder="Please choose..."
+                        id="numberofSeats-2"
+                        required
+                      >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                      </select>
+                    </div>
+                  </div>
+                </li>
+              </div>
+            </div>
+          </ul>
+          <div class="block">
+            <a
+              class="button button-raised button-large button-fill findrideBtn button-round color-black"
+              @click="${findRide}"
+            >
+              Rechercher</a
+            >
           </div>
         </div>
-
-        <h1 class="text-center searchbar-found">N'attendez plus !</h1>
-        <div class="bg-color-green block-outline-ios block-strong padding">
-          <p class="grid grid-cols-2 grid-gap">
-            <a
-              href="/find-a-ride/"
-              class="button button-large button-round button-fill color-black"
-              >Trouver un trajet</a
-            >
-            <a
-              href="/publish-ride/"
-              class="button button-active button-large button-raised button-round color-white"
-              >Publier un trajet</a
-            >
-          </p>
-        </div>
-
         <div
           class="bg-green list list-strong list-outline-ios list-dividers-ios inset-md accordion-list"
         >
           <h1 class="text-center searchbar-found">
-            Comment fonctionne CAR-DI-GO ?
+            Comment fonctionne MATOUA ?
           </h1>
           <ul>
             <li class="accordion-item">
@@ -182,6 +199,21 @@
             </li>
           </ul>
         </div>
+        <h1 class="text-center searchbar-found">N'attendez plus !</h1>
+        <div class="bg-color-green block-outline-ios block-strong padding">
+          <p class="grid grid-cols-2 grid-gap">
+            <a
+              href="/find-a-ride/"
+              class="button button-large button-round button-fill color-black"
+              >Trouver un trajet</a
+            >
+            <a
+              href="/publish-ride/"
+              class="button button-active button-large button-raised button-round color-white"
+              >Publier un trajet</a
+            >
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -192,6 +224,7 @@
     display: block;
     max-width: 200px;
   }
+
   .page-home .navbar-inner .link .icon {
     color: var(
       --f7-navbar-link-color,
@@ -202,7 +235,7 @@
     color: #ffffff !important;
   }
   .page-home .page-content {
-    padding-top: 80px;
+    padding-top: 34px;
   }
   .text-center {
     text-align: center;
@@ -225,13 +258,7 @@
   .page-home .navbar-large-collapsed .title .green {
     color: #044025;
   }
-  .block.block-image {
-    background-image: url("assets/img/home-illustration.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 300px;
-    background-position: 50% 87%;
-  }
+
   .list .item-subtitle {
     white-space: normal;
     text-align: justify;
@@ -239,9 +266,114 @@
   .page-home .card {
     box-shadow: none !important;
   }
+
+  .color-red {
+    color: #c0000a;
+  }
+  .color-gray {
+    color: #dbe2f9;
+  }
+  .page-home .list ul {
+    border-radius: 20px;
+  }
 </style>
 <script>
-  export default function (props, ctx) {
+  export default (props, { $f7, $, $on }) => {
+    let calendarModal;
+
+    $on("pageInit", () => {
+      $f7.dialog.close();
+      // Custom modal
+      calendarModal = $f7.calendar.create({
+        inputEl: "#find-departureDate-2",
+        openIn: "customModal",
+        header: true,
+        footer: true,
+      });
+    });
+
+    // Specify the API endpoint for user data
+    const apiUrl = "https://matoua.com/api/town";
+    let content = "";
+    let content2 = "";
+    let data = [];
+
+    // Make a GET request using the Fetch API
+    fetch(apiUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((town) => {
+        // Process the retrieved user data
+        //console.log("town Data:", town);
+        var content = "";
+        var content2 = "";
+        var maxRow = town.length;
+
+        var i = "";
+        content += '<option value="">';
+        content += "Départ";
+        content += "</option>";
+        content2 += '<option value="">';
+        content2 += "Destination";
+        content2 += "</option>";
+        for (i = 0; i < maxRow; i++) {
+          content +=
+            '<option value="' +
+            town[i]["town_id"] +
+            "-" +
+            town[i]["town_name"] +
+            '">';
+          content += "" + town[i]["town_name"] + "";
+          content += "</option>";
+          content += "<br/>";
+        }
+
+        $(".townList").append(content);
+        $(".townList2").append(content2 + content);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+    const findRide = () => {
+      let departure = $("#find-departure-2").val().split("-")[0];
+      let departureName = $("#find-departure-2").val().split("-")[1];
+      let destination = $("#find-destination-2").val().split("-")[0];
+      let destinationName = $("#find-destination-2").val().split("-")[1];
+      let departureDate = $("#find-departureDate-2").val();
+      let numberofSeats = $("#numberofSeats-2").val();
+
+      if (
+        departure == "" ||
+        destination == "" ||
+        departureDate == "" ||
+        numberofSeats == ""
+      ) {
+        app.dialog.alert("Veuillez renseigner tous les champs SVP !");
+      } else {
+        $f7.dialog.preloader("Un instant svp...");
+        localStorage.setItem("departure", departure);
+        localStorage.setItem("departureName", departureName);
+        localStorage.setItem("destination", destination);
+        localStorage.setItem("destinationName", destinationName);
+        localStorage.setItem("departureDate", departureDate);
+        localStorage.setItem("numberofSeats", numberofSeats);
+        setTimeout(function () {
+          $f7.dialog.close();
+          var mainView = app.view.main;
+          mainView.router.navigate("/rider-list/");
+        }, 2000);
+      }
+    };
+
+    $on("pageBeforeRemove", () => {
+      calendarModal.destroy();
+    });
+
     return $render;
-  }
+  };
 </script>

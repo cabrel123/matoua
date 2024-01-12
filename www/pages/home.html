@@ -26,114 +26,110 @@
           Un vaste choix de trajets à petits prix
         </h1>
         <div
-        class="list list-strong-ios list-outline-ios list-dividers-ios form-store-data"
-        id="demo-form"
-      >
-        <ul class="findrideList">
-          <div class="card">
-            <div class="card-content">
-              <div class="timeline">
-                <div class="timeline-item">
-                  <div class="timeline-item-divider"></div>
-                  <div class="timeline-item-content">
-                    <div class="timeline-item-inner">
-                      <li class="item-content item-input">
-                        <div class="item-inner">
-                          <div class="item-input-wrap input-dropdown-wrap">
-                            <select
-                              name="departure"
-                              id="find-departure"
-                              type="text"
-                              class="townList"
-                              required
-                            >
-                              <option value="">Départ <span class="color-red">*</span></option>
-                            </select>
-                            <span class="input-clear-button"></span>
-                          </div>
-                        </div>
-                      </li>
+          class="list list-strong-ios list-outline-ios list-dividers-ios form-store-data"
+          id="demo-form"
+        >
+          <ul class="findrideList">
+            <div class="card">
+              <div class="card-content">
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">
+                      Départ <span class="color-red">*</span>
+                    </div>
+                    <div class="item-input-wrap input-dropdown-wrap">
+                      <select
+                        name="departure"
+                        id="find-departure-2"
+                        type="text"
+                        class="townList"
+                        required
+                      >
+                        <option value="">Choisir</option>
+                      </select>
                     </div>
                   </div>
-                </div>
-                <div class="timeline-item">
-                  <div class="timeline-item-divider"></div>
-                  <div class="timeline-item-content">
-                    <div class="timeline-item-inner">
-                      <li class="item-content item-input">
-                        <div class="item-inner">
-                          <div class="item-input-wrap input-dropdown-wrap">
-                            <select
-                              name="destination"
-                              id="find-destination"
-                              type="text"
-                              class="townList2"
-                              required
-                            >
-                              <option value="">Destination <span class="color-red">*</span></option>
-                            </select>
-                            <span class="input-clear-button"></span>
-                          </div>
-                        </div>
-                      </li>
-                    </div>
-                  </div>
-                </div>
+                </li>
               </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card-content">
-              <li class="item-content item-input">
-                <div class="item-inner">
-                  <div class="item-title item-label">Date de départ <span class="color-red">*</span></div>
-                  <div class="item-input-wrap">
-                    <input
-                      type="text"
-                      placeholder=""
-                      readonly="readonly"
-                      id="find-departureDate"
-                      name="departureDate"
-                      required
-                    />
+            <div class="card">
+              <div class="card-content">
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">
+                      Destination <span class="color-red">*</span>
+                    </div>
+                    <div class="item-input-wrap input-dropdown-wrap">
+                      <select
+                        name="destination"
+                        id="find-destination-2"
+                        type="text"
+                        class="townList2"
+                        required
+                      >
+                        <option value="">Choisir</option>
+                      </select>
+                    </div>
                   </div>
-                </div>
-              </li>
+                </li>
+              </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card-content">
-              <li class="item-content item-input">
-                <div class="item-inner">
-                  <div class="item-title item-label">Nb. de passagers <span class="color-red">*</span></div>
-                  <div class="item-input-wrap input-dropdown-wrap">
-                    <select
-                      name="numberofSeats"
-                      placeholder="Please choose..."
-                      id="numberofSeats"
-                      required
-                    >
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                    </select>
+            <div class="card">
+              <div class="card-content">
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">
+                      Date de départ <span class="color-red">*</span>
+                    </div>
+                    <div class="item-input-wrap">
+                      <input
+                        type="text"
+                        placeholder=""
+                        readonly="readonly"
+                        id="find-departureDate-2"
+                        name="departureDate"
+                        required
+                      />
+                    </div>
                   </div>
-                </div>
-              </li>
+                </li>
+              </div>
             </div>
+            <div class="card">
+              <div class="card-content">
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">
+                      Nb. de passagers <span class="color-red">*</span>
+                    </div>
+                    <div class="item-input-wrap input-dropdown-wrap">
+                      <select
+                        name="numberofSeats"
+                        placeholder="Please choose..."
+                        id="numberofSeats-2"
+                        required
+                      >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                      </select>
+                    </div>
+                  </div>
+                </li>
+              </div>
+            </div>
+          </ul>
+          <div class="block">
+            <a
+              class="button button-raised button-large button-fill findrideBtn button-round color-black"
+              @click="${findRide}"
+            >
+              Rechercher</a
+            >
           </div>
-        </ul>
-        <div class="block">
-          <a
-            class="button button-raised button-large button-fill findrideBtn "
-            
-          >
-            Rechercher</a
-          >
         </div>
-      </div>
-		<div
+        <div
           class="bg-green list list-strong list-outline-ios list-dividers-ios inset-md accordion-list"
         >
           <h1 class="text-center searchbar-found">
@@ -218,8 +214,6 @@
             >
           </p>
         </div>
-
-        
       </div>
     </div>
   </div>
@@ -230,11 +224,7 @@
     display: block;
     max-width: 200px;
   }
-  .page-home .timeline{
-    margin-bottom: 5px;
-    margin-top: 5px;
 
-  }
   .page-home .navbar-inner .link .icon {
     color: var(
       --f7-navbar-link-color,
@@ -245,7 +235,7 @@
     color: #ffffff !important;
   }
   .page-home .page-content {
-    padding-top: 80px;
+    padding-top: 34px;
   }
   .text-center {
     text-align: center;
@@ -268,7 +258,7 @@
   .page-home .navbar-large-collapsed .title .green {
     color: #044025;
   }
-  
+
   .list .item-subtitle {
     white-space: normal;
     text-align: justify;
@@ -276,20 +266,114 @@
   .page-home .card {
     box-shadow: none !important;
   }
-    .timeline-item-content {
-    width: 100%;
+
+  .color-red {
+    color: #c0000a;
   }
-    .color-red{color:#c0000a}
-.color-gray{color:#dbe2f9}
-.page-home .list ul {
-    border-radius:20px
-}
+  .color-gray {
+    color: #dbe2f9;
+  }
+  .page-home .list ul {
+    border-radius: 20px;
+  }
 </style>
 <script>
-  export default (props, { $f7, $on }) => {
-    $on("pageInit", (e, page) => {
+  export default (props, { $f7, $, $on }) => {
+    let calendarModal;
+
+    $on("pageInit", () => {
       $f7.dialog.close();
+      // Custom modal
+      calendarModal = $f7.calendar.create({
+        inputEl: "#find-departureDate-2",
+        openIn: "customModal",
+        header: true,
+        footer: true,
+      });
     });
+
+    // Specify the API endpoint for user data
+    const apiUrl = "https://matoua.com/api/town";
+    let content = "";
+    let content2 = "";
+    let data = [];
+
+    // Make a GET request using the Fetch API
+    fetch(apiUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((town) => {
+        // Process the retrieved user data
+        //console.log("town Data:", town);
+        var content = "";
+        var content2 = "";
+        var maxRow = town.length;
+
+        var i = "";
+        content += '<option value="">';
+        content += "Départ";
+        content += "</option>";
+        content2 += '<option value="">';
+        content2 += "Destination";
+        content2 += "</option>";
+        for (i = 0; i < maxRow; i++) {
+          content +=
+            '<option value="' +
+            town[i]["town_id"] +
+            "-" +
+            town[i]["town_name"] +
+            '">';
+          content += "" + town[i]["town_name"] + "";
+          content += "</option>";
+          content += "<br/>";
+        }
+
+        $(".townList").append(content);
+        $(".townList2").append(content2 + content);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+    const findRide = () => {
+      let departure = $("#find-departure-2").val().split("-")[0];
+      let departureName = $("#find-departure-2").val().split("-")[1];
+      let destination = $("#find-destination-2").val().split("-")[0];
+      let destinationName = $("#find-destination-2").val().split("-")[1];
+      let departureDate = $("#find-departureDate-2").val();
+      let numberofSeats = $("#numberofSeats-2").val();
+
+      if (
+        departure == "" ||
+        destination == "" ||
+        departureDate == "" ||
+        numberofSeats == ""
+      ) {
+        app.dialog.alert("Veuillez renseigner tous les champs SVP !");
+      } else {
+        $f7.dialog.preloader("Un instant svp...");
+        localStorage.setItem("departure", departure);
+        localStorage.setItem("departureName", departureName);
+        localStorage.setItem("destination", destination);
+        localStorage.setItem("destinationName", destinationName);
+        localStorage.setItem("departureDate", departureDate);
+        localStorage.setItem("numberofSeats", numberofSeats);
+        setTimeout(function () {
+          $f7.dialog.close();
+          var mainView = app.view.main;
+          mainView.router.navigate("/rider-list/");
+        }, 2000);
+      }
+    };
+
+    $on("pageBeforeRemove", () => {
+      calendarModal.destroy();
+    });
+
     return $render;
   };
 </script>

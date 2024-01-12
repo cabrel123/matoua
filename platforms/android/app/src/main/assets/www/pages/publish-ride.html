@@ -34,7 +34,9 @@
                               class="townList"
                               required
                             >
-                              <option value="">Départ</option>
+                              <option value="">
+                                Départ <span class="color-red">*</span>
+                              </option>
                             </select>
 
                             <span class="input-clear-button"></span>
@@ -58,7 +60,9 @@
                               class="townList2"
                               required
                             >
-                              <option value="">Destination</option>
+                              <option value="">
+                                Destination <span class="color-red">*</span>
+                              </option>
                             </select>
 
                             <span class="input-clear-button"></span>
@@ -76,7 +80,7 @@
               <li class="item-content item-input">
                 <div class="item-inner">
                   <div class="item-title item-label">
-                    Date et Heure de départ
+                    Date et Heure de départ <span class="color-red">*</span>
                   </div>
                   <div class="item-input-wrap">
                     <input
@@ -96,7 +100,9 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Nb. de passagers</div>
+                  <div class="item-title item-label">
+                    Nb. de passagers <span class="color-red">*</span>
+                  </div>
                   <div class="item-input-wrap input-dropdown-wrap">
                     <select
                       name="passenger"
@@ -118,7 +124,9 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Montant</div>
+                  <div class="item-title item-label">
+                    Montant <span class="color-red">*</span>
+                  </div>
                   <div class="item-input-wrap">
                     <input
                       type="text"
@@ -136,7 +144,9 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Lieu de départ</div>
+                  <div class="item-title item-label">
+                    Lieu de départ <span class="color-red">*</span>
+                  </div>
                   <div class="item-input-wrap">
                     <input
                       type="text"
@@ -153,7 +163,9 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Lieu d'arrivée</div>
+                  <div class="item-title item-label">
+                    Lieu d'arrivée <span class="color-gray">(optionnel)</span>
+                  </div>
                   <div class="item-input-wrap">
                     <input
                       type="text"
@@ -170,7 +182,10 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Modèle de voiture</div>
+                  <div class="item-title item-label">
+                    Modèle de voiture
+                    <span class="color-gray">(optionnel)</span>
+                  </div>
                   <div class="item-input-wrap">
                     <input type="text" placeholder="" id="car" name="car" />
                   </div>
@@ -197,6 +212,12 @@
   }
   .navbar-inner .link .icon {
     color: #fff;
+  }
+  .color-red {
+    color: #c0000a;
+  }
+  .color-gray {
+    color: #dbe2f9;
   }
 </style>
 <script>
@@ -250,7 +271,12 @@
         content2 += "Destination";
         content2 += "</option>";
         for (i = 0; i < maxRow; i++) {
-          content += '<option value="' + town[i]["town_id"] + '">';
+          content +=
+            '<option value="' +
+            town[i]["town_id"] +
+            "-" +
+            town[i]["town_name"] +
+            '">';
           content += "" + town[i]["town_name"] + "";
           content += "</option>";
           content += "<br/>";
@@ -264,14 +290,18 @@
       });
 
     const publishRide = () => {
-      let departure = $("select#departure").val();
-      let destination = $("select#destination").val();
+      $f7.dialog.preloader("Un instant svp...");
+      let departure = $("select#departure").val().split("-")[0];
+      let departureName = $("select#departure").val().split("-")[1];
+      let destination = $("select#destination").val().split("-")[0];
+      let destinationName = $("select#destination").val().split("-")[1];
       let departureDate = $("input#departureDate").val();
       let passenger = $("select#passenger").val();
       let amount = $("input#amount").val();
       let departureLocation = $("input#departureLocation").val();
       let destinationLocation = $("input#destinationLocation").val();
       let car = $("input#car").val();
+      const userId = localStorage.getItem("userId");
 
       if (
         departure == "" ||
@@ -279,61 +309,81 @@
         departureDate == "" ||
         amount == "" ||
         passenger == "" ||
-        departureLocation == "" ||
-        destinationLocation == ""
+        departureLocation == ""
       ) {
+        $f7.dialog.close();
         app.dialog.alert("Veuillez renseigner tous les champs SVP !");
       } else {
-        // API endpoint for creating a new user
-        const apiUrl2 = "https://matoua.com/api/bookride";
-        const userId = localStorage.getItem("userId");
+        if (userId == "" || userId == null || userId == undefined) {
+          localStorage.setItem("departure", departure);
+          localStorage.setItem("departureName", departureName);
+          localStorage.setItem("destination", destination);
+          localStorage.setItem("destinationName", destinationName);
+          localStorage.setItem("departureDate", departureDate);
+          localStorage.setItem("amount", amount);
+          localStorage.setItem("passenger", passenger);
+          localStorage.setItem("departureLocation", departureLocation);
+          localStorage.setItem("destinationLocation", destinationLocation);
+          localStorage.setItem("car", car);
 
-        // Form data to be sent in the request body
-        const formData = {
-          departure: departure,
-          destination: destination,
-          departureDate: departureDate,
-          passenger: passenger,
-          amount: amount,
-          departureLocation: departureLocation,
-          destinationLocation: destinationLocation,
-          driver: userId,
-          car: car,
-        };
+          var mainView = app.view.main;
+          mainView.router.navigate("/finalize-publish-ride/");
+        } else {
+          // API endpoint for creating a new user
+          const apiUrl2 = "https://matoua.com/api/bookride";
 
-        // Make a POST request using the Fetch API
-        fetch(apiUrl2, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Network response was not ok");
-              app.dialog.alert(
-                "Ooups! Une erreur s'est produite ressayez svp !"
-              );
-            }
-            return response.json();
+          // Form data to be sent in the request body
+          const formData = {
+            departure: departure,
+            destination: destination,
+            departureDate: departureDate,
+            passenger: passenger,
+            amount: amount,
+            departureLocation: departureLocation,
+            destinationLocation: destinationLocation,
+            driver: userId,
+            car: car,
+          };
+
+          // Make a POST request using the Fetch API
+          fetch(apiUrl2, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
           })
-          .then((data) => {
-            // Process the newly created user data
-            //console.log("New Data:", data);
-
-            $f7.dialog.alert(
-              "Votre publication du trajet a été enregistrée avec succès !",
-              function () {
-                $f7.popup.close();
-                var mainView = app.view.main;
-                mainView.router.navigate("/my-ride/");
+            .then((response) => {
+              if (!response.ok) {
+                if (response.status == 401) {
+                  app.dialog.alert(
+                    "Cette annonce existe déjà ! Veuillez essayer à nouveau SVP !"
+                  );
+                } else {
+                  throw new Error("Network response was not ok22");
+                  app.dialog.alert(
+                    "Ooups! Une erreur s'est produite ressayez svp !"
+                  );
+                }
               }
-            );
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
+              return response.json();
+            })
+            .then((data) => {
+              // Process the newly created user data
+              //console.log("New Data:", data);
+              $f7.dialog.close();
+              $f7.dialog.alert(
+                "Votre publication du trajet a été enregistrée avec succès !",
+                function () {
+                  var mainView = app.view.main;
+                  mainView.router.navigate("/my-ride/");
+                }
+              );
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        }
       }
     };
 

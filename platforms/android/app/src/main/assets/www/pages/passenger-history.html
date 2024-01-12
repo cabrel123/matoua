@@ -11,149 +11,7 @@
         <div class="title">Historique des réservations</div>
       </div>
     </div>
-    <div class="page-content">
-      <div class="card">
-        <div class="card-content">
-          <div class="list media-list no-safe-areas">
-            <ul>
-              <li class="item-content">
-                <div class="item-media">
-                  <img
-                    src="assets/img/driver-m.png"
-                    loading="lazy"
-                    height="50"
-                    width="50"
-                    class="shape-circle"
-                    alt=""
-                  />
-                </div>
-                <div class="item-inner">
-                  <div class="item-title-row">
-                    <div class="item-title">
-                      <h4 class="block-title-medium">
-                        Réservation #001: Wakama Alain
-                      </h4>
-                      <h5>Bonaberi,Douala - Mvan,Yaoundé</h5>
-                      <h5>Montant : 4 000 FCFA</h5>
-                      <h6>Nb. passagers : 1</h6>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-footer">
-          <span>January 20, 2015 05h00</span
-          ><span class="display-flex"
-            ><button
-              class="button button-fill color-red margin-right-half popup-open"
-              data-popup=".demo-popup"
-            >
-              Rejeter</button
-            ><button
-              class="button button-fill color-green popup-open"
-              data-popup=".demo-popup"
-            >
-              Accepter
-            </button></span
-          >
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-content">
-          <div class="list media-list no-safe-areas">
-            <ul>
-              <li class="item-content">
-                <div class="item-media">
-                  <img
-                    src="assets/img/driver-m.png"
-                    loading="lazy"
-                    height="50"
-                    width="50"
-                    class="shape-circle"
-                    alt=""
-                  />
-                  <span class="color-green"
-                    ><i class="icon material-icons font-size-14 color-green"
-                      >check_box</i
-                    ></span
-                  >
-                </div>
-                <div class="item-inner">
-                  <div class="item-title-row">
-                    <div class="item-title">
-                      <h4 class="block-title-medium">
-                        Réservation #001: Wakama Alain
-                      </h4>
-                      <div class="chip color-green">
-                        <div class="chip-label">validé</div>
-                      </div>
-                      <h5>Bonaberi,Douala - Mvan,Yaoundé</h5>
-                      <h5>Montant : 4 000 FCFA</h5>
-                      <h6>Nb. passagers : 2</h6>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-footer">
-          <span>January 20, 2015 05h00</span><span class="display-flex"></span>
-        </div>
-      </div>
-    </div>
-    <div class="popup demo-popup">
-      <div class="page">
-        <div class="navbar">
-          <div class="navbar-bg"></div>
-          <div class="navbar-inner">
-            <div class="title">Confirmation</div>
-            <div class="right">
-              <a class="link popup-close" href="#"
-                ><i class="icon material-icons font-size-18">close</i></a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="page-content">
-          <div class="block">
-            <form
-              name="confirmPayment"
-              action="#"
-              method="POST"
-              id="confirmPayment"
-              enctype="multipart/form-data"
-            >
-              <p style="display: none">
-                <input
-                  type="text"
-                  placeholder="Montant"
-                  name="bookingId"
-                  id="boookingId"
-                  value="1"
-                />
-              </p>
-              <h3 class="title">
-                Vous confirmez accepter le trajet du passager et ses conditions.
-                Voulez-vous continuer ?
-              </h3>
-
-              <div class="content-block">
-                <a
-                  class="button button-big button-block button-fill button-round color-black"
-                  @click="${confirmPayment}"
-                  tkey="POST"
-                  >Je confirme</a
-                >
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="page-content bookinglist"></div>
   </div>
 </template>
 <style>
@@ -210,21 +68,123 @@
   }
 </style>
 <script>
-  export default (props, { $f7, $f7router, $onMounted, $onBeforeUnmount }) => {
+  export default (
+    props,
+    { $f7, $f7router, $onMounted, $onBeforeUnmount, $on }
+  ) => {
     let popup;
     let popupSwipe;
     let notificationFull;
 
-    const confirmPayment = () => {
-      let amount = $("input#bookingId").val();
-      $f7.dialog.alert(
-        "Merci pour votre réservation et bonne route ! à très bientot sur cardigo !",
-        function () {
-          $f7.popup.close();
-          var mainView = app.view.main;
-          mainView.router.navigate("/home/");
-        }
-      );
+    $on("pageInit", () => {
+      getPassengerBooking();
+    });
+
+    const getPassengerBooking = () => {
+      const bookrideId = props.bookrideId;
+      // Specify the API endpoint for user data
+      const apiUrl = "https://matoua.com/api/bookride/" + bookrideId;
+      let content = "";
+
+      // Make a GET request using the Fetch API
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((booking) => {
+          // Process the retrieved user data
+          console.log("booking", booking);
+          var content = "";
+
+          var maxRow = booking.length;
+
+          var i = "";
+
+          if (maxRow == 0) {
+            content += '<div class="card card-outline margin-top">';
+            content +=
+              '<div class="card-content card-content-padding">Vous n\'avez aucune réservation pour ce trajet</div>';
+            content += "</div>";
+          } else {
+            for (i = 0; i < maxRow; i++) {
+              content += '<div class="card">';
+              content += '<div class="card-content">';
+              content += '<div class="list media-list no-safe-areas">';
+              content += "<ul>";
+              content += '<li class="item-content">';
+              content += '<div class="item-media">';
+              content +=
+                '<img src="assets/img/driver-m.png" loading="lazy" height="50" width="50" class="shape-circle" alt="" />';
+              content += "</div>";
+              content += '<div class="item-inner">';
+              content += '<div class="item-title-row">';
+              content += ' <div class="item-title">';
+              content +=
+                '<h4 class="block-title-medium">Réservation #00' +
+                booking[i]["id"] +
+                ": " +
+                booking[i]["passengerName"] +
+                "</h4>";
+              content +=
+                "<h5>" +
+                booking[i]["departureName"] +
+                "," +
+                booking[i]["departureLocation"] +
+                " --> " +
+                booking[i]["destinationName"] +
+                "," +
+                booking[i]["destinationLocation"] +
+                "</h5>";
+              content +=
+                "  <h6>Nb. passagers : " +
+                booking[i]["numberofSeats"] +
+                "</h6>";
+              content += "  </div>";
+              content += " </div>";
+              content += " </div>";
+              content += " </li>";
+              content += "  </ul>";
+              content += " </div>";
+              content += " </div>";
+              content += ' <div class="card-footer">';
+              content += " <span>" + booking[i]["bookingDate"] + "</span>";
+              content += '<span class="display-flex">';
+              if (booking[i]["status"] == 2) {
+                content +=
+                  '<a href="/confirm-booking/' +
+                  booking[i]["bookrideId"] +
+                  "/" +
+                  booking[i]["passenger"] +
+                  '/0/" class="button button-fill color-red margin-right-half">Rejeter</a>';
+                content +=
+                  '<a href="/confirm-booking/' +
+                  booking[i]["bookrideId"] +
+                  "/" +
+                  booking[i]["passenger"] +
+                  '/1/" class="button button-fill color-green"> Accepter</a>';
+              } else if (booking[i]["status"] == 1) {
+                content += '<div class="chip color-green">';
+                content += '<div class="chip-label">validé</div>';
+                content += "</div>";
+              } else {
+                content += '<div class="chip color-red">';
+                content += '<div class="chip-label">rejeté</div>';
+                content += "</div>";
+              }
+              content += "</span>";
+              content += "</div>";
+              content += "</div>";
+            }
+          }
+
+          $(".bookinglist").append(content);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     };
 
     $onMounted(() => {

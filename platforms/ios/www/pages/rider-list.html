@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                   <td class="label-cell">Nb. passagers</td>
-                  <td class="numeric-cell nomberofseat"></td>
+                  <td class="numeric-cell numberofseat"></td>
                 </tr>
               </tbody>
             </table>
@@ -43,192 +43,6 @@
         class="list cards-list margin-vertical-half no-chevron no-hairlines no-hairlines-between"
       >
         <ul class="row align-items-stretch riderList"></ul>
-      </div>
-    </div>
-    <div class="popup demo-popup">
-      <div class="page">
-        <div class="navbar">
-          <div class="navbar-bg"></div>
-          <div class="navbar-inner">
-            <div class="title">Finaliser votre réservation</div>
-            <div class="right">
-              <a class="link popup-close" href="#"
-                ><i class="icon material-icons font-size-18">close</i></a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="page-content">
-          <div class="block">
-            <form
-              name="requestBooking"
-              action="#"
-              method="POST"
-              id="requestBooking"
-              enctype="multipart/form-data"
-            >
-              <div class="title">
-                Vos informations sont précieuses, veuillez remplir le formulaire
-                ci-dessous pour valider votre réservation
-              </div>
-              <div class="list list-strong-ios list-dividers-ios inset-ios">
-                <ul>
-                  <li class="item-content item-input">
-                    <div class="item-inner">
-                      <div class="item-input-wrap">
-                        <input
-                          type="text"
-                          placeholder="Votre nom"
-                          name="fullname"
-                          id="fullname"
-                          required
-                        />
-                        <span class="input-clear-button"></span>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li class="item-content item-input">
-                    <div class="item-inner">
-                      <div class="item-input-wrap">
-                        <input
-                          type="tel"
-                          placeholder="Votre numéro de téléphone"
-                          name="phone"
-                          id="phone"
-                          required
-                        />
-                        <span class="input-clear-button"></span>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li class="item-content item-input">
-                    <div class="item-inner">
-                      <div class="item-title item-label">
-                        Téléchargez votre CNI
-                      </div>
-                      <div class="item-input-wrap">
-                        <input
-                          type="file"
-                          placeholder="Téléchargez votre CNI"
-                          id="idcard"
-                          accept="image/*"
-                          capture="camera"
-                          class=""
-                          required
-                        />
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="content-block">
-                <a
-                  class="button button-big button-block button-fill button-round color-black"
-                  @click="${paymentMethod}"
-                  tkey="POST"
-                  >Suivant</a
-                >
-              </div>
-            </form>
-
-            <form
-              name="requestPayment"
-              action="#"
-              method="POST"
-              id="requestPayment"
-              enctype="multipart/form-data"
-              style="display: none"
-            >
-              <p style="display: none">
-                <input
-                  type="text"
-                  placeholder="Montant"
-                  name="amount"
-                  id="amount"
-                  value="4000"
-                />
-              </p>
-              <h3 class="title">Finalisez votre réservation : 4 000 FCFA</h3>
-              <div class="block block-strong-ios block-outline-ios">
-                <p>Choisissez le moyen de paiement</p>
-                <p class="grid grid-cols-2 grid-gap">
-                  <a href="#tab-1" class="tab-link tab-link-active"
-                    ><img
-                      src="assets/img/om.png"
-                      alt="om"
-                      width="80"
-                      height="80"
-                  /></a>
-                  <a href="#tab-2" class="tab-link"
-                    ><img
-                      src="assets/img/momo.png"
-                      alt="om"
-                      width="80"
-                      height="80"
-                  /></a>
-                </p>
-                <div class="tabs">
-                  <div id="tab-1" class="page-content tab tab-active">
-                    <div
-                      class="list list-strong-ios list-dividers-ios inset-ios"
-                    >
-                      <ul>
-                        <li class="item-content item-input">
-                          <div class="item-inner">
-                            <div class="item-input-wrap">
-                              <input
-                                type="text"
-                                placeholder=" Votre compte Orange Money"
-                                name="omphone"
-                                id="omphone"
-                                required
-                                validate
-                              />
-                              <span class="input-clear-button"></span>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div id="tab-2" class="page-content tab">
-                    <div
-                      class="list list-strong-ios list-dividers-ios inset-ios"
-                    >
-                      <ul>
-                        <li class="item-content item-input">
-                          <div class="item-inner">
-                            <div class="item-input-wrap">
-                              <input
-                                type="text"
-                                placeholder="Votre compte MTN Mobile Money"
-                                name="momophone"
-                                id="momophone"
-                                required
-                                validate
-                              />
-                              <span class="input-clear-button"></span>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="content-block">
-                <a
-                  class="button button-big button-block button-fill button-round color-black"
-                  @click="${requestPayment}"
-                  tkey="POST"
-                  >Valider</a
-                >
-              </div>
-            </form>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -919,174 +733,276 @@
   ) => {
     let popup;
     let popupSwipe;
-    let notificationFull;
 
     $on("pageInit", () => {
-      const departure = localStorage.getItem("departure");
-      const destination = localStorage.getItem("destination");
+      const departure = localStorage.getItem("departureName");
+      const destination = localStorage.getItem("destinationName");
       const departureDate = localStorage.getItem("departureDate");
       const numberofSeats = localStorage.getItem("numberofSeats");
+      const userId = localStorage.getItem("userId");
+
+      if (userId == "" || userId == null || userId == "undefined") {
+        $("#requestBooking").show();
+        $("#requestPayment").hide();
+      } else {
+        $("#requestBooking").hide();
+        $("#requestPayment").show();
+      }
 
       $(".departure").html(departure);
       $(".destination").html(destination);
       $(".departureDate").html(departureDate);
       $(".numberofseat").html(numberofSeats);
+      searchReseult();
     });
 
-    // Specify the API endpoint for user data
-    const departure = localStorage.getItem("departure");
-    const destination = localStorage.getItem("destination");
-    const departureDate = localStorage.getItem("departureDate");
+    const searchReseult = () => {
+      // Specify the API endpoint for user data
+      const departure = localStorage.getItem("departure");
+      const destination = localStorage.getItem("destination");
+      const departureDate = localStorage.getItem("departureDate");
+      const userId = localStorage.getItem("userId");
 
-    const apiUrl =
-      "https://matoua.com/api/search?departure=" +
-      departure +
-      "&destination=" +
-      destination +
-      "&departureDate=" +
-      departureDate +
-      "";
-    let content = "";
+      const apiUrl =
+        "https://matoua.com/api/search?departure=" +
+        departure +
+        "&destination=" +
+        destination +
+        "&departureDate=" +
+        departureDate +
+        "";
+      let content = "";
 
-    // Make a GET request using the Fetch API
-    fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((bookride) => {
-        // Process the retrieved user data
-        console.log("bookride", bookride);
-        var content = "";
-
-        var maxRow = bookride.length;
-
-        var i = "";
-        if (maxRow == 0) {
-          $f7.dialog.alert(
-            "Désolé! Aucun résultat ne correspond à vos critères de recherche",
-            function () {
-              $f7.popup.close();
-              var mainView = app.view.main;
-              mainView.router.navigate("/find-a-ride/");
-            }
-          );
-        } else {
-          for (i = 0; i < maxRow; i++) {
-            content +=
-              '<li class="col-100 medium-50 large-100 xlarge-50 overflow-hidden width-100">';
-            content += '<div class="item-content height-100 no-padding">';
-            content +=
-              '<div class="item-inner item-cell height-100 no-padding">';
-            content += '<div class="item-row">';
-            content +=
-              '<div class="item-cell flex-shrink-0 width-auto padding-left">';
-            content +=
-              '<img src="assets/img/driver-m.png" loading="lazy" height="50" width="50" class="shape-circle" alt=""/>';
-            content += "<p>";
-            content +=
-              '<i class="icon material-icons font-size-12 color-yellow">star</i>';
-            content +=
-              '<i class="icon material-icons font-size-12 color-yellow">star</i>';
-            content +=
-              '<i class="icon material-icons font-size-12 color-yellow">star</i>';
-            content += "</p>";
-            content += "</div>";
-            content +=
-              '<div class="item-cell display-flex flex-direction-column align-self-stretch margin-horizontal-half padding-vertical-half">';
-            content += '<div class="single-line-text">';
-            content +=
-              '<a href="#" class="badge color-amber font-weight-bold link text-color-black">' +
-              bookride[i]["passenger"] +
-              " sièges disponibles</a>";
-            content +=
-              '<a href="#" class="color-green font-size-16 font-weight-bold link">' +
-              bookride[i]["amount"] +
-              " FCFA</a>";
-            content += "</div>";
-            content +=
-              '<a class="flex-direction-column height-100 text-color-gray">';
-            content +=
-              '<div class="font-size-16 font-weight-bold multi-line-text lines-2 text-color-body padding-left-half">';
-            content +=
-              '<span class="rider-name"> ' +
-              bookride[i]["driverName"] +
-              " </span>";
-            content +=
-              '<span class="color-green"><i class="icon material-icons font-size-12 color-green">check_box</i></span>';
-            content += "</div>";
-            content +=
-              '<div class="font-size-12 margin-top-auto padding-top-half">';
-            content +=
-              '<span class="margin-horizontal-half">Départ : ' +
-              bookride[i]["departureDate"] +
-              "</span>";
-            content += "<span>•</span>";
-            content +=
-              '<span class="margin-horizontal-half"> Voiture : ' +
-              bookride[i]["car"] +
-              "</span>";
-            content +=
-              '<a href="#"class="margin-horizontal-half request-btn popup-open" data-popup=".demo-popup">Reserver<i class="icon material-icons font-size-18">trending_flat</i></a>';
-            content += "</div>";
-            content += "</a>";
-            content += "</div>";
-            content += "</div>";
-            content += "</div>";
-            content += "</div>";
-            content += "</li>";
+      // Make a GET request using the Fetch API
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
           }
+          return response.json();
+        })
+        .then((bookride) => {
+          // Process the retrieved user data
+          console.log("bookride", bookride);
+          var content = "";
 
-          $(".riderList").append(content);
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+          var maxRow = bookride.length;
+
+          var i = "";
+          if (maxRow == 0) {
+            $f7.dialog.alert(
+              "Désolé! Aucun résultat ne correspond à vos critères de recherche",
+              function () {
+                $f7.popup.close();
+                var mainView = app.view.main;
+                mainView.router.navigate("/find-a-ride/");
+              }
+            );
+          } else {
+            for (i = 0; i < maxRow; i++) {
+              content +=
+                '<li class="col-100 medium-50 large-100 xlarge-50 overflow-hidden width-100">';
+              content += '<div class="item-content height-100 no-padding">';
+              content +=
+                '<div class="item-inner item-cell height-100 no-padding">';
+              content += '<div class="item-row">';
+              content +=
+                '<div class="item-cell flex-shrink-0 width-auto padding-left">';
+              content +=
+                '<img src="assets/img/driver-m.png" loading="lazy" height="50" width="50" class="shape-circle" alt=""/>';
+              content += "<p>";
+              content +=
+                '<i class="icon material-icons font-size-12 color-yellow">star</i>';
+              content +=
+                '<i class="icon material-icons font-size-12 color-yellow">star</i>';
+              content +=
+                '<i class="icon material-icons font-size-12 color-yellow">star</i>';
+              content += "</p>";
+              content += "</div>";
+              content +=
+                '<div class="item-cell display-flex flex-direction-column align-self-stretch margin-horizontal-half padding-vertical-half">';
+              content += '<div class="single-line-text">';
+              content +=
+                '<a href="#" class="badge color-amber font-weight-bold link text-color-black">' +
+                bookride[i]["passenger"] +
+                " sièges disponibles</a>";
+              content +=
+                '<a href="#" class="color-green font-size-16 font-weight-bold link">' +
+                bookride[i]["amount"] +
+                " FCFA</a>";
+              content += "</div>";
+              content +=
+                '<div class="flex-direction-column height-100 text-color-gray">';
+              content +=
+                '<div class="font-size-16 font-weight-bold multi-line-text lines-2 text-color-body padding-left-half">';
+              content +=
+                '<span class="rider-name"> ' +
+                bookride[i]["driverName"] +
+                " </span>";
+              content +=
+                '<span class="color-green"><i class="icon material-icons font-size-12 color-green">check_box</i></span>';
+              content += "</div>";
+              content +=
+                '<div class="font-size-12 margin-top-auto padding-top-half">';
+              content +=
+                '<span class="margin-horizontal-half">Départ : ' +
+                bookride[i]["departureDate"] +
+                "</span>";
+              content += "<span>•</span>";
+              content +=
+                '<span class="margin-horizontal-half"> Voiture : ' +
+                bookride[i]["car"] +
+                "</span>";
+              content +=
+                '<a href="/rider-payment/' +
+                bookride[i]["id"] +
+                '/" class="margin-horizontal-half request-btn">Reserver<i class="icon material-icons font-size-18">trending_flat</i></a>';
+
+              content += "</div>";
+              content += "</div>";
+              content += "</div>";
+              content += "</div>";
+              content += "</div>";
+              content += "</div>";
+              content += "</li>";
+            }
+
+            $(".riderList").append(content);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    };
 
     const paymentMethod = () => {
-      let fullname = $("input#fullname").val();
-      let phone = $("input#phone").val();
+      $f7.dialog.preloader("Un instant svp...");
+      let fullname = $("#user-fullname-2").val();
+      let email = $("#user-email-2").val();
+      let phone = $("#user-phone-2").val();
+      let password = $("#user-password-3").val();
 
-      $f7.dialog.alert(
-        "Votre nom est: " + fullname + "<br />Votre téléphone est: " + phone,
-        function () {
-          $("#requestBooking").hide();
-          $("#requestPayment").show();
+      if (fullname == "" || password == "" || phone == "" || email == "") {
+        $f7.dialog.close();
+        app.dialog.alert(
+          "Veuillez renseigner tous les champs avec une étoile en rouge SVP !"
+        );
+      } else {
+        const image = document.getElementById("idcard-2");
+        if (image.files.length > 0) {
+          const file = image.files[0];
+          const formData = new FormData();
+
+          formData.append("image", file);
+
+          fetch("https://matoua.com/api/upload", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Image uploaded successfully:", data);
+              // API endpoint for creating a new user
+              const apiUrl = "https://matoua.com/api/register";
+
+              // Form data to be sent in the request body
+              const formData = {
+                fullname: fullname,
+                email: email,
+                phone: phone,
+                password: password,
+                password_confirmation: password,
+                cni: data.url,
+              };
+
+              // Make a POST request using the Fetch API
+              fetch(apiUrl, {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+              })
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                    app.dialog.alert(
+                      "Ooups! Une erreur s'est produite ressayez svp !"
+                    );
+                  }
+                  return response.json();
+                })
+                .then((newUserData) => {
+                  // Process the newly created user data
+                  localStorage.setItem("userId", newUserData.user.id);
+                  localStorage.setItem("fullname", newUserData.user.fullname);
+                  localStorage.setItem("phone", newUserData.user.phone);
+                  localStorage.setItem("email", newUserData.user.email);
+                  localStorage.setItem("token", newUserData.accessToken);
+
+                  $("#requestBooking").hide();
+                  $("#requestPayment").show();
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                });
+              // Handle the response as needed
+            })
+            .catch((error) => {
+              console.error("Error uploading image:", error);
+              // Handle the error as needed
+            });
+        } else {
+          console.error("No file selected.");
+          // API endpoint for creating a new user
+          const apiUrl = "https://matoua.com/api/register";
+
+          // Form data to be sent in the request body
+          const formData = {
+            fullname: fullname,
+            email: email,
+            phone: phone,
+            password: password,
+            password_confirmation: password,
+            cni: "",
+          };
+
+          // Make a POST request using the Fetch API
+          fetch(apiUrl, {
+            method: "POST",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+                app.dialog.alert(
+                  "Ooups! Une erreur s'est produite ressayez svp !"
+                );
+              }
+              return response.json();
+            })
+            .then((newUserData) => {
+              // Process the newly created user data
+              localStorage.setItem("userId", newUserData.user.id);
+              localStorage.setItem("fullname", newUserData.user.fullname);
+              localStorage.setItem("phone", newUserData.user.phone);
+              localStorage.setItem("email", newUserData.user.email);
+              localStorage.setItem("token", newUserData.accessToken);
+
+              $("#requestBooking").hide();
+              $("#requestPayment").show();
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
         }
-      );
-    };
-
-    const requestPayment = () => {
-      let amount = $("input#amount").val();
-      $f7.dialog.alert(
-        "Votre paiement de " + amount + " FCFA a bien été effectué !",
-        function () {
-          $f7.popup.close();
-          var mainView = app.view.main;
-          mainView.router.navigate("/ride-history/");
-          showNotificationFull();
-        }
-      );
-    };
-
-    function showNotificationFull() {
-      // Create notification
-      if (!notificationFull) {
-        notificationFull = $f7.notification.create({
-          icon: '<i class="icon icon-f7"></i>',
-          title: "CAR-DI-GO",
-          titleRightText: "now",
-          subtitle: "Notification de paiement",
-          text: "Votre réservation a bien été pris en compte ! Vous serez contacter par le chauffeur.",
-          closeTimeout: 5000,
-        });
       }
-      // Open it
-      notificationFull.open();
-    }
+    };
 
     $onMounted(() => {
       popupSwipe = $f7.popup.create({

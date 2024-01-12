@@ -1,0 +1,578 @@
+<template>
+  <div class="page login-screen-page">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back">
+            <i class="icon icon-back"></i>
+          </a>
+        </div>
+        <div class="title">Publier un trajet</div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="block block-strong-ios block-outline-ios">
+        <div class="card">
+          <div class="card-content">
+            <div class="data-table">
+              <table>
+                <tbody>
+                  <tr>
+                    <td class="label-cell">Départ</td>
+                    <td class="numeric-cell departure"></td>
+                  </tr>
+                  <tr>
+                    <td class="label-cell">Destination</td>
+                    <td class="numeric-cell destination"></td>
+                  </tr>
+                  <tr>
+                    <td class="label-cell">Date de départ</td>
+                    <td class="numeric-cell departureDate"></td>
+                  </tr>
+                  <tr>
+                    <td class="label-cell">Nb. sièges disponibles</td>
+                    <td class="numeric-cell numberofseat"></td>
+                  </tr>
+                  <tr>
+                    <td class="label-cell">Lieu de départ</td>
+                    <td class="numeric-cell departureLocation"></td>
+                  </tr>
+                  <tr>
+                    <td class="label-cell">Lieu d'arrivée</td>
+                    <td class="numeric-cell destinationLocation"></td>
+                  </tr>
+                  <tr>
+                    <td class="label-cell">Modèle de voiture</td>
+                    <td class="numeric-cell car"></td>
+                  </tr>
+                  <tr>
+                    <td class="label-cell">Montant</td>
+                    <td class="numeric-cell">
+                      <span class="amount"></span> FCFA
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="list">
+        <h3 class="card-header">
+          Vous êtes à un clic de finaliser votre annonce, connectez-vous ou
+          inscrivez-vous !
+        </h3>
+      </div>
+      <div class="block">
+        <a
+          class="button button-raised button-large button-fill color-black popup-open margin-bottom-half"
+          data-popup=".login-popup-swipe-handler"
+          >Se connecter</a
+        >
+        <a
+          class="button button-raised button-large button-fill popup-open"
+          data-popup=".register-popup-swipe-handler"
+          >Créer un compte</a
+        >
+      </div>
+    </div>
+    <div class="popup demo-popup-swipe-handler login-popup-swipe-handler">
+      <div class="page">
+        <div class="navbar">
+          <div class="navbar-bg"></div>
+          <div class="navbar-inner">
+            <div class="title">Connexion</div>
+            <div class="right"><a class="link popup-close">Fermer</a></div>
+          </div>
+        </div>
+        <div class="swipe-handler"></div>
+        <div class="page-content">
+          <div class="block block-strong-ios block-outline-ios">
+            <form>
+              <div class="list">
+                <ul>
+                  <li class="item-content item-input">
+                    <div class="item-inner">
+                      <div class="item-title item-label">E-mail/Téléphone</div>
+                      <div class="item-input-wrap">
+                        <input
+                          type="text"
+                          placeholder="Votre adresse mail ou téléphone"
+                          id="username-1"
+                          name="email"
+                          class="input-with-value"
+                        />
+                        <span class="input-clear-button"></span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content item-input">
+                    <div class="item-inner">
+                      <div class="item-title item-label">Mot de passe</div>
+                      <div class="item-input-wrap">
+                        <input
+                          type="password"
+                          placeholder="Votre mot de passe"
+                          id="userpassword-1"
+                          name="password"
+                          class=""
+                        />
+                        <span class="input-clear-button"></span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="list inset">
+                <ul>
+                  <li>
+                    <a class="list-button" @click="${signIn}">Connexion</a>
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup demo-popup-swipe-handler register-popup-swipe-handler">
+      <div class="page">
+        <div class="navbar">
+          <div class="navbar-bg"></div>
+          <div class="navbar-inner">
+            <div class="title">Inscription</div>
+            <div class="right"><a class="link popup-close">Fermer</a></div>
+          </div>
+        </div>
+        <div class="swipe-handler"></div>
+        <div class="page-content">
+          <div class="block block-strong-ios block-outline-ios">
+            <form>
+              <div class="list">
+                <ul>
+                  <li class="item-content item-input">
+                    <div class="item-inner">
+                      <div class="item-title item-label">
+                        Nom(s) <span class="color-red">*</span>
+                      </div>
+                      <div class="item-input-wrap">
+                        <input
+                          type="text"
+                          placeholder="Votre nom"
+                          id="user-fullname-1"
+                          class="input-with-value"
+                        />
+                        <span class="input-clear-button"></span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content item-input">
+                    <div class="item-inner">
+                      <div class="item-title item-label">
+                        Téléphone <span class="color-red">*</span>
+                      </div>
+                      <div class="item-input-wrap">
+                        <input
+                          type="text"
+                          placeholder="Votre numéro de téléphone"
+                          id="user-phone-1"
+                          class="input-with-value"
+                        />
+                        <span class="input-clear-button"></span>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li class="item-content item-input">
+                    <div class="item-inner">
+                      <div class="item-title item-label">
+                        E-mail <span class="color-red">*</span>
+                      </div>
+                      <div class="item-input-wrap">
+                        <input
+                          type="email"
+                          placeholder="Votre adresse mail"
+                          id="user-email-1"
+                          class="input-with-value"
+                        />
+                        <span class="input-clear-button"></span>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content item-input">
+                    <div class="item-inner">
+                      <div class="item-title item-label">
+                        Mot de passe <span class="color-red">*</span>
+                      </div>
+                      <div class="item-input-wrap">
+                        <input
+                          type="password"
+                          placeholder="Votre mot de passe"
+                          id="user-password-2"
+                          class=""
+                        />
+                      </div>
+                    </div>
+                  </li>
+                  <li class="item-content item-input">
+                    <div class="item-inner">
+                      <div class="item-title item-label">
+                        Téléchargez votre CNI
+                        <span class="color-gray">(optionnel)</span>
+                      </div>
+                      <div class="item-input-wrap">
+                        <input
+                          type="file"
+                          placeholder="Téléchargez votre CNI"
+                          id="idcard-1"
+                          accept="image/*"
+                          capture="camera"
+                          class=""
+                        />
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="list inset">
+                <ul>
+                  <li>
+                    <a class="list-button" @click="${signUp}">S'inscrire</a>
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<style>
+  .img-responsive {
+    margin: 0 auto;
+    display: block;
+    max-width: 200px;
+  }
+
+  .login-screen-page .navbar-inner .title,
+  .login-screen-page .navbar-inner .link .icon,
+  .login-screen-page .title {
+    color: #fff;
+  }
+  .color-red {
+    color: #c0000a;
+  }
+  .color-gray {
+    color: #dbe2f9;
+  }
+</style>
+<script>
+  export default (
+    props,
+    { $, $f7, $f7router, $on, $onMounted, $onBeforeUnmount }
+  ) => {
+    let popupSwipeHandler;
+
+    $onMounted(() => {
+      popupSwipeHandler = $f7.popup.create({
+        el: ".demo-popup-swipe-handler",
+        swipeToClose: "to-bottom",
+        swipeHandler: ".swipe-handler",
+      });
+    });
+
+    $on("pageInit", () => {
+      const departure = localStorage.getItem("departureName");
+      const destination = localStorage.getItem("destinationName");
+      const departureDate = localStorage.getItem("departureDate");
+      const numberofSeats = localStorage.getItem("passenger");
+      const departureLocation = localStorage.getItem("departureLocation");
+      const destinationLocation = localStorage.getItem("destinationLocation");
+      const car = localStorage.getItem("car");
+      const amount = localStorage.getItem("amount");
+
+      $(".departure").html(departure);
+      $(".destination").html(destination);
+      $(".departureDate").html(departureDate);
+      $(".numberofseat").html(numberofSeats);
+      $(".departureLocation").html(departureLocation);
+      $(".destinationLocation").html(destinationLocation);
+      $(".car").html(car);
+      $(".amount").html(amount);
+    });
+
+    const signIn = () => {
+      $f7.dialog.preloader("Un instant svp...");
+      let email = $("#username-1").val();
+      let password = $("#userpassword-1").val();
+
+      if (email == "" || password == "") {
+        $f7.dialog.close();
+        app.dialog.alert("Veuillez renseigner tous les champs SVP !");
+      } else {
+        // API endpoint for creating a new user
+        const apiUrl = "https://matoua.com/api/login";
+
+        // Form data to be sent in the request body
+        const formData = {
+          email: email,
+          password: password,
+        };
+
+        // Make a POST request using the Fetch API
+        fetch(apiUrl, {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              if (response.status == 401) {
+                app.dialog.alert(
+                  "Ooups! E-mail ou mot de passe incorrect ressayez svp !"
+                );
+              } else {
+                throw new Error("Network response was not ok");
+              }
+            }
+            return response.json();
+          })
+          .then((newUserData) => {
+            // Process the newly created user data
+
+            localStorage.setItem("userId", newUserData.user.id);
+            localStorage.setItem("fullname", newUserData.user.fullname);
+            localStorage.setItem("phone", newUserData.user.phone);
+            localStorage.setItem("email", newUserData.user.email);
+            localStorage.setItem("token", newUserData.accessToken);
+
+            publishRide();
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    };
+
+    const signUp = () => {
+      $f7.dialog.preloader("Un instant svp...");
+      let fullname = $("#user-fullname-1").val();
+      let email = $("#user-email-1").val();
+      let phone = $("#user-phone-1").val();
+      let password = $("#user-password-2").val();
+
+      if (fullname == "" || password == "" || phone == "" || email == "") {
+        $f7.dialog.close();
+        app.dialog.alert(
+          "Veuillez renseigner tous les champs avec une étoile en rouge SVP !"
+        );
+      } else {
+        const image = document.getElementById("idcard-1");
+        if (image.files.length > 0) {
+          const file = image.files[0];
+          const formData = new FormData();
+
+          formData.append("image", file);
+
+          fetch("https://matoua.com/api/upload", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Image uploaded successfully:", data);
+              // API endpoint for creating a new user
+              const apiUrl = "https://matoua.com/api/register";
+
+              // Form data to be sent in the request body
+              const formData = {
+                fullname: fullname,
+                email: email,
+                phone: phone,
+                password: password,
+                password_confirmation: password,
+                cni: data.url,
+              };
+
+              // Make a POST request using the Fetch API
+              fetch(apiUrl, {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+              })
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                    app.dialog.alert(
+                      "Ooups! Une erreur s'est produite ressayez svp !"
+                    );
+                  }
+                  return response.json();
+                })
+                .then((newUserData) => {
+                  // Process the newly created user data
+                  localStorage.setItem("userId", newUserData.user.id);
+                  localStorage.setItem("fullname", newUserData.user.fullname);
+                  localStorage.setItem("phone", newUserData.user.phone);
+                  localStorage.setItem("email", newUserData.user.email);
+                  localStorage.setItem("token", newUserData.accessToken);
+
+                  publishRide();
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                });
+              // Handle the response as needed
+            })
+            .catch((error) => {
+              console.error("Error uploading image:", error);
+              // Handle the error as needed
+            });
+        } else {
+          console.error("No file selected.");
+          // API endpoint for creating a new user
+          const apiUrl = "https://matoua.com/api/register";
+
+          // Form data to be sent in the request body
+          const formData = {
+            fullname: fullname,
+            email: email,
+            phone: phone,
+            password: password,
+            password_confirmation: password,
+            cni: "",
+          };
+
+          // Make a POST request using the Fetch API
+          fetch(apiUrl, {
+            method: "POST",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+                app.dialog.alert(
+                  "Ooups! Une erreur s'est produite ressayez svp !"
+                );
+              }
+              return response.json();
+            })
+            .then((newUserData) => {
+              // Process the newly created user data
+              localStorage.setItem("userId", newUserData.user.id);
+              localStorage.setItem("fullname", newUserData.user.fullname);
+              localStorage.setItem("phone", newUserData.user.phone);
+              localStorage.setItem("email", newUserData.user.email);
+              localStorage.setItem("token", newUserData.accessToken);
+
+              publishRide();
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        }
+      }
+    };
+
+    const publishRide = () => {
+      // API endpoint for creating a new user
+      const apiUrl2 = "https://matoua.com/api/bookride";
+
+      const departure = localStorage.getItem("departure");
+      const destination = localStorage.getItem("destination");
+      const departureDate = localStorage.getItem("departureDate");
+      const passenger = localStorage.getItem("passenger");
+      const departureLocation = localStorage.getItem("departureLocation");
+      const destinationLocation = localStorage.getItem("destinationLocation");
+      const car = localStorage.getItem("car");
+      const amount = localStorage.getItem("amount");
+      const userId = localStorage.getItem("userId");
+
+      // Form data to be sent in the request body
+      const formData = {
+        departure: departure,
+        destination: destination,
+        departureDate: departureDate,
+        passenger: passenger,
+        amount: amount,
+        departureLocation: departureLocation,
+        destinationLocation: destinationLocation,
+        driver: userId,
+        car: car,
+      };
+
+      // Make a POST request using the Fetch API
+      fetch(apiUrl2, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            if (response.status == 401) {
+              app.dialog.alert(
+                "Cette annonce existe déjà ! Veuillez essayer à nouveau SVP !"
+              );
+            } else {
+              throw new Error("Network response was not ok");
+              app.dialog.alert(
+                "Ooups! Une erreur s'est produite ressayez svp !"
+              );
+            }
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Process the newly created user data
+          //console.log("New Data:", data);
+
+          $f7.dialog.close();
+
+          $f7.dialog.alert(
+            "Votre publication du trajet a été enregistrée avec succès !",
+            function () {
+              $f7.popup.close();
+              localStorage.removeItem("departure");
+              localStorage.removeItem("departureName");
+              localStorage.removeItem("destination");
+              localStorage.removeItem("destinationName");
+              localStorage.removeItem("departureDate");
+              localStorage.removeItem("amount");
+              localStorage.removeItem("passenger");
+              localStorage.removeItem("departureLocation");
+              localStorage.removeItem("destinationLocation");
+              localStorage.removeItem("car");
+              var mainView = app.view.main;
+              mainView.router.navigate("/my-ride/");
+            }
+          );
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    };
+
+    $onBeforeUnmount(() => {
+      // Destroy popup when page removed
+      if (popupSwipeHandler) popupSwipeHandler.destroy();
+    });
+
+    return $render;
+  };
+</script>

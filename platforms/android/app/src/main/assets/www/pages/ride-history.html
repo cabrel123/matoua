@@ -11,143 +11,55 @@
         <div class="title">Historique des réservations</div>
       </div>
     </div>
-    <div class="page-content">
-      <div class="card">
-        <div class="card-content">
-          <div class="list media-list no-safe-areas">
-            <ul>
-              <li class="item-content">
-                <div class="item-media">
-                  <img
-                    src="assets/img/driver-m.png"
-                    loading="lazy"
-                    height="50"
-                    width="50"
-                    class="shape-circle"
-                    alt=""
-                  />
-                </div>
-                <div class="item-inner">
-                  <div class="item-title-row">
-                    <div class="item-title">
-                      <h4 class="block-title-medium">
-                        Réservation #001: Wakama Alain
-                      </h4>
-                      <div class="chip color-orange">
-                        <div class="chip-label">en cours</div>
-                      </div>
-                      <h5>Bonaberi,Douala - Mvan,Yaoundé</h5>
-                      <h5>Montant : 4 000 FCFA</h5>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-footer">
-          <span>January 20, 2015 05h00</span
-          ><span
-            ><button
-              class="button button-fill color-green popup-open"
-              data-popup=".demo-popup"
-            >
-              Valider
-            </button></span
-          >
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-content">
-          <div class="list media-list no-safe-areas">
-            <ul>
-              <li class="item-content">
-                <div class="item-media">
-                  <img
-                    src="assets/img/driver-m.png"
-                    loading="lazy"
-                    height="50"
-                    width="50"
-                    class="shape-circle"
-                    alt=""
-                  />
-                </div>
-                <div class="item-inner">
-                  <div class="item-title-row">
-                    <div class="item-title">
-                      <h4 class="block-title-medium">
-                        Réservation #001: Wakama Alain
-                      </h4>
-                      <div class="chip color-green">
-                        <div class="chip-label">validé</div>
-                      </div>
-                      <h5>Bonaberi,Douala - Mvan,Yaoundé</h5>
-                      <h5>Montant : 4 000 FCFA</h5>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-footer">
-          <span>January 20, 2015 à 10h00</span><span></span>
-        </div>
-      </div>
-    </div>
-    <div class="popup demo-popup">
-      <div class="page">
-        <div class="navbar">
-          <div class="navbar-bg"></div>
-          <div class="navbar-inner">
-            <div class="title">Confirmation de paiement</div>
-            <div class="right">
-              <a class="link popup-close" href="#"
-                ><i class="icon material-icons font-size-18">close</i></a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="page-content">
-          <div class="block">
-            <form
-              name="confirmPayment"
-              action="#"
-              method="POST"
-              id="confirmPayment"
-              enctype="multipart/form-data"
-            >
-              <p style="display: none">
-                <input
-                  type="text"
-                  placeholder="Montant"
-                  name="bookingId"
-                  id="boookingId"
-                  value="1"
-                />
-              </p>
-              <h3 class="title">
-                Vous confirmez que vous etes arrivé à destination et procéder à
-                la validation du paiement
-              </h3>
-
-              <div class="content-block">
-                <a
-                  class="button button-big button-block button-fill button-round color-black"
-                  @click="${confirmPayment}"
-                  tkey="POST"
-                  >Je confirme</a
-                >
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="page-content bookinglist"></div>
   </div>
 </template>
 <style>
+  .color-red {
+    --f7-theme-color: #ff3b30;
+    --f7-theme-color-rgb: 255, 59, 48;
+    --f7-theme-color-shade: #ff1407;
+    --f7-theme-color-tint: #ff6259;
+  }
+  .color-pink {
+    --f7-theme-color: #ff2d55;
+    --f7-theme-color-rgb: 255, 45, 85;
+    --f7-theme-color-shade: #ff0434;
+    --f7-theme-color-tint: #ff5676;
+  }
+  .color-gray {
+    --f7-theme-color: #8e8e93;
+    --f7-theme-color-rgb: 142, 142, 147;
+    --f7-theme-color-shade: #79797f;
+    --f7-theme-color-tint: #a3a3a7;
+  }
+  .text-color-gray {
+    --f7-theme-color-text-color: #8e8e93;
+  }
+  .color-white {
+    --f7-theme-color: #ffffff;
+    --f7-theme-color-rgb: 255, 255, 255;
+    --f7-theme-color-shade: #ebebeb;
+    --f7-theme-color-tint: #ffffff;
+  }
+  .color-green {
+    --f7-theme-color: #0fc874;
+    --f7-theme-color-rgb: 200, 250, 2227;
+    --f7-theme-color-shade: #7af5be;
+    --f7-theme-color-tint: rgb(200, 250, 227);
+  }
+  .color-yellow {
+    color: #efb943 !important;
+  }
+  .md .color-green,
+  .md.color-green,
+  .md .dark .color-green,
+  .md .dark.color-green {
+    --f7-theme-color: #0fc874;
+    --f7-theme-color-rgb: var(--f7-md-primary-rgb);
+    --f7-theme-color-shade: var(--f7-md-primary-shade);
+    --f7-theme-color-tint: var(--f7-md-primary-tint);
+  }
   .color-green {
     --f7-theme-color: #0fc874;
     --f7-theme-color-rgb: 200, 250, 2227;
@@ -195,21 +107,244 @@
   h5 {
     margin: 5px 0 5px 0;
   }
+  .aurora .button {
+    transition-duration: 0.1s;
+    transform: translate3d(0, 0, 0);
+  }
+  .aurora.device-desktop .button:not(.active-state):not(.no-hover):hover {
+    background-color: var(
+      --f7-button-hover-bg-color,
+      rgba(var(--f7-theme-color-rgb), 0.07)
+    );
+  }
+  .aurora .button-fill {
+    --f7-button-pressed-bg-color: var(
+      --f7-button-fill-pressed-bg-color,
+      var(--f7-theme-color-shade)
+    );
+  }
+  .aurora .button-fill {
+    --f7-button-hover-bg-color: var(
+      --f7-button-fill-hover-bg-color,
+      var(--f7-theme-color-tint)
+    );
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    --f7-cols-per-row: 1;
+  }
+  .row > [class*="col-"] {
+    box-sizing: border-box;
+    width: calc(
+      (100% - var(--f7-grid-gap) * (var(--f7-cols-per-row) - 1)) /
+        var(--f7-cols-per-row)
+    );
+  }
+  .row .col-100 {
+    --f7-cols-per-row: 1;
+  }
+  @media (min-width: 768px) {
+    .row .medium-50 {
+      --f7-cols-per-row: 2;
+    }
+  }
+  @media (min-width: 1024px) {
+    .row .large-100 {
+      --f7-cols-per-row: 1;
+    }
+  }
+  @media (min-width: 1200px) {
+    .row .xlarge-50 {
+      --f7-cols-per-row: 2;
+    }
+  }
+  .color-red {
+    --swiper-theme-color: #ff3b30;
+  }
+  .color-pink {
+    --swiper-theme-color: #ff2d55;
+  }
+  .color-gray {
+    --swiper-theme-color: #8e8e93;
+  }
+  .color-white {
+    --swiper-theme-color: #ffffff;
+  }
+  .display-flex {
+    display: flex !important;
+  }
+  .flex-shrink-0 {
+    flex-shrink: 0 !important;
+  }
+  .flex-direction-column {
+    flex-direction: column !important;
+  }
+  .align-items-stretch {
+    align-items: stretch !important;
+  }
+  .align-self-stretch {
+    align-self: stretch !important;
+  }
+  .vertical-align-middle {
+    vertical-align: middle !important;
+  }
+  .no-padding {
+    padding: 0 !important;
+  }
+  .width-auto {
+    width: auto !important;
+  }
+  .padding-top-half {
+    padding-top: calc(var(--f7-typography-padding) / 2) !important;
+  }
+  .padding-bottom {
+    padding-bottom: var(--f7-typography-padding) !important;
+  }
+  .padding-vertical-half {
+    padding-top: calc(var(--f7-typography-padding) / 2) !important;
+    padding-bottom: calc(var(--f7-typography-padding) / 2) !important;
+  }
+  .margin-half {
+    margin: calc(var(--f7-typography-margin) / 2) !important;
+  }
+  .margin-vertical-half {
+    margin-top: calc(var(--f7-typography-margin) / 2) !important;
+    margin-bottom: calc(var(--f7-typography-margin) / 2) !important;
+  }
+  .margin-horizontal-half {
+    margin-left: calc(var(--f7-typography-margin) / 2) !important;
+    margin-right: calc(var(--f7-typography-margin) / 2) !important;
+  }
+  [class*="text-color-"] {
+    color: var(--f7-theme-color-text-color) !important;
+  }
+  /*! CSS Used from: https://nectar.website/demo/assets/vendor/material-icons/material-icons.css */
+  .material-icons {
+    font-family: "Material Icons";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+  }
 </style>
 <script>
-  export default (props, { $f7, $f7router, $onMounted, $onBeforeUnmount }) => {
+  export default (
+    props,
+    { $f7, $f7router, $onMounted, $onBeforeUnmount, $on }
+  ) => {
     let popup;
     let popupSwipe;
     let notificationFull;
 
-    const confirmPayment = () => {
-      let amount = $("input#bookingId").val();
-      $f7.dialog.alert(
-        "Merci pour votre réservation et bonne route ! à très bientot sur cardigo !",
-        function () {
-          $f7.popup.close();
-        }
-      );
+    $on("pageInit", () => {
+      getMyBooking();
+    });
+
+    const getMyBooking = () => {
+      const userId = localStorage.getItem("userId");
+      // Specify the API endpoint for user data
+      const apiUrl = "https://matoua.com/api/passenger/" + userId;
+      let content = "";
+
+      // Make a GET request using the Fetch API
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((booking) => {
+          // Process the retrieved user data
+          console.log("booking", booking);
+          var content = "";
+
+          var maxRow = booking.length;
+
+          var i = "";
+          if (maxRow == 0) {
+            content += '<div class="card card-outline margin-top">';
+            content +=
+              '<div class="card-content card-content-padding">Vous n\'avez aucune réservation pour le moment !</div>';
+            content += "</div>";
+          } else {
+            for (i = 0; i < maxRow; i++) {
+              content += '<div class="card">';
+              content += ' <div class="card-content">';
+              content += '<div class="list media-list no-safe-areas">';
+              content += " <ul>";
+              content += ' <li class="item-content">';
+              content += ' <div class="item-media">';
+              content +=
+                ' <img src="assets/img/driver-m.png"  loading="lazy"  height="50"  width="50"  class="shape-circle"  alt=""/>';
+              content += "</div>";
+              content += '<div class="item-inner">';
+              content += '<div class="item-title-row">';
+              content += '<div class="item-title">';
+              content +=
+                '<h4 class="block-title-medium">Réservation #00' +
+                booking[i]["id"] +
+                ": " +
+                booking[i]["driverName"] +
+                "</h4>";
+              if (booking[i]["status"] == 2) {
+                content += '<div class="chip color-orange">';
+                content += '<div class="chip-label">en attente</div>';
+                content += "</div>";
+              } else if (booking[i]["status"] == 1) {
+                content += '<div class="chip color-green">';
+                content += '<div class="chip-label">validé</div>';
+                content += "</div>";
+              } else {
+                content += '<div class="chip color-red">';
+                content += '<div class="chip-label">rejeté</div>';
+                content += "</div>";
+              }
+
+              content +=
+                "<h5>" +
+                booking[i]["departureName"] +
+                "," +
+                booking[i]["departureLocation"] +
+                " --> " +
+                booking[i]["destinationName"] +
+                "," +
+                booking[i]["destinationLocation"] +
+                "</h5>";
+              content += "<h5>Montant : " + booking[i]["amount"] + " FCFA</h5>";
+              content +=
+                "<h5> Date de départ" + booking[i]["departureDate"] + "</h5>";
+              content +=
+                "<h5> Date de réservation" +
+                booking[i]["bookingDate"] +
+                "</h5>";
+              content += " </div>";
+              content += " </div>";
+              content += " </div>";
+              content += " </li>";
+              content += "</ul>";
+              content += "</div>";
+              content += " </div>";
+              content += "</div>";
+            }
+          }
+
+          $(".bookinglist").append(content);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     };
 
     $onMounted(() => {

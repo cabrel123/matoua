@@ -1,0 +1,133 @@
+<template>
+  <div class="page no-toolbar login-screen-page">
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a href="#" class="link back">
+            <i class="icon icon-back"></i>
+            <span class="if-not-md">Back</span>
+          </a>
+        </div>
+        <div class="title">Confirmation</div>
+      </div>
+    </div>
+    <div class="page-content login-screen-content">
+      <h2
+        class="title text-align-center"
+        id="accept-booking"
+        style="display: none"
+      >
+        Vous confirmez accepter le trajet du passager et ses conditions.
+        Voulez-vous continuer ?
+      </h2>
+
+      <h2
+        class="title text-align-center"
+        id="reject-booking"
+        style="display: none"
+      >
+        Vous confirmez ne pas accepter la réservation. Voulez-vous continuer ?
+      </h2>
+
+      <div class="content-block" id="button-confirm">
+        <a
+          class="button button-big button-block button-fill button-round color-black"
+          @click="${confirmBooking}"
+          tkey="POST"
+          >Je confirme</a
+        >
+      </div>
+    </div>
+  </div>
+</template>
+<style>
+  .img-responsive {
+    margin: 0 auto;
+    display: block;
+    max-width: 200px;
+  }
+  .login-screen-page .page-content {
+    padding-top: 10px;
+  }
+  .login-screen-page .navbar-inner .title,
+  .login-screen-page .navbar-inner .link .icon,
+  .login-screen-page .title {
+    color: black;
+  }
+</style>
+<script>
+  export default (props, { $, $f7, $f7router, $on }) => {
+    $on("pageInit", () => {
+      let status = props.status;
+
+      if (status == 0) {
+        $("#reject-booking").show();
+        $("#accept-booking").hide();
+      } else if (status == 1) {
+        $("#reject-booking").hide();
+        $("#accept-booking").show();
+      } else {
+        $("#button-confirm").hide();
+      }
+    });
+
+    const confirmBooking = () => {
+      $f7.dialog.preloader("Un instant svp...");
+      let bookrideId = props.bookrideId;
+      let passenger = props.passenger;
+      let status = props.status;
+      if (bookrideId == "" || passenger == "" || status == "") {
+        $f7.dialog.alert("Veuillez sélectionner une réservation SVP !");
+      } else {
+        // API endpoint for creating a new user
+        const apiUrl3 = "https://matoua.com/api/validate";
+
+        // Form data to be sent in the request body
+        const formData = {
+          bookrideId: bookrideId,
+          passenger: passenger,
+          status: status,
+        };
+
+        fetch(apiUrl3, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+              app.dialog.alert(
+                "Ooups! Une erreur s'est produite ressayez svp !"
+              );
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // Process the newly created user data
+            $f7.dialog.close();
+            localStorage.removeItem("departure");
+            localStorage.removeItem("numberofSeats");
+            localStorage.removeItem("destination");
+            localStorage.removeItem("departureDate");
+
+            $f7.dialog.alert(
+              "Merci pour la confirmation de la réservation et bonne route ! à très bientot sur MATOUA !",
+              function () {
+                $f7.popup.close();
+                var mainView = app.view.main;
+                mainView.router.navigate("/my-ride/");
+              }
+            );
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    };
+
+    return $render;
+  };
+</script>

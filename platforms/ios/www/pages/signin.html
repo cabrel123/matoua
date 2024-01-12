@@ -1,5 +1,16 @@
 <template>
-  <div class="page no-toolbar no-navbar no-swipeback login-screen-page">
+  <div class="page no-toolbar login-screen-page">
+    <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="if-not-md">Back</span>
+        </a>
+      </div>
+      <div class="title">Connexion</div>
+    </div>
+  </div>
     <div class="page-content login-screen-content">
       <div class="login-screen-title">
         <img
@@ -13,12 +24,12 @@
           <ul>
             <li class="item-content item-input item-input-with-value">
               <div class="item-inner">
-                <div class="item-title item-label">E-mail</div>
+                <div class="item-title item-label">E-mail/Téléphone</div>
                 <div class="item-input-wrap">
                   <input
                     type="text"
-                    placeholder="Votre adresse mail"
-                    id="email"
+                    placeholder="Votre adresse mail ou téléphone"
+                    id="username"
                     name="email"
                     class="input-with-value"
                   />
@@ -33,7 +44,7 @@
                   <input
                     type="password"
                     placeholder="Votre mot de passe"
-                    id="password"
+                    id="userpassword"
                     name="password"
                     class=""
                   />
@@ -74,18 +85,23 @@
   .login-screen-page .page-content {
     padding-top: 10px;
   }
+  .login-screen-page .navbar-inner .title, .login-screen-page .navbar-inner .link .icon, .login-screen-page .title {
+    color: black;
+}
+
 </style>
 <script>
   export default (props, { $, $f7, $f7router }) => {
     const signIn = () => {
-      let email = $("input#email").val();
-      let password = $("input#password").val();
+      $f7.dialog.preloader("Un instant svp...");
+      let email = $("#username").val();
+      let password = $("#userpassword").val();
 
       if (email == "" || password == "") {
         app.dialog.alert("Veuillez renseigner tous les champs SVP !");
       } else {
         // API endpoint for creating a new user
-        const apiUrl = "http://matoua.com/api/login";
+        const apiUrl = "https://matoua.com/api/login";
 
         // Form data to be sent in the request body
         const formData = {

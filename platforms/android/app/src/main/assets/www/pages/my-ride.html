@@ -117,11 +117,17 @@
   }
 </style>
 <script>
-  export default (props, { $f7, $f7router, $onMounted, $onBeforeUnmount }) => {
+  export default (
+    props,
+    { $f7, $f7router, $onMounted, $onBeforeUnmount, $on }
+  ) => {
     let popup;
     let popupSwipe;
     let notificationFull;
     const userId = localStorage.getItem("userId");
+    $on("pageInit", () => {
+      $f7.dialog.close();
+    });
 
     // Specify the API endpoint for user data
     const apiUrl = "https://matoua.com/api/driver/" + userId;
@@ -144,50 +150,57 @@
 
         var i = "";
 
-        for (i = 0; i < maxRow; i++) {
-          content += '<div class="card">';
-          content += '<div class="card-content">';
-          content += '<div class="list media-list no-safe-areas">';
-          content += "<ul>";
-          content += '<li class="item-content">';
-          content += '<div class="item-inner">';
-          content += '<div class="item-title-row">';
-          content += '<div class="item-title">';
+        if (maxRow == 0) {
+          content += '<div class="card card-outline margin-top">';
           content +=
-            '<h4 class="block-title-medium">Réservation #00' +
-            bookride[i]["id"] +
-            "</h4>";
-          content +=
-            "<h5>" +
-            bookride[i]["departureName"] +
-            "," +
-            bookride[i]["departureLocation"] +
-            " - " +
-            bookride[i]["destinationName"] +
-            "," +
-            bookride[i]["destinationLocation"] +
-            "</h5>";
-          content += "<h5>Montant : " + bookride[i]["amount"] + " FCFA</h5>";
-          content +=
-            "<h6>Nb. passagers : " + bookride[i]["passenger"] + "</h6>";
-          content +=
-            "<h6>Date de départ : " + bookride[i]["departureDate"] + "</h6>";
+            '<div class="card-content card-content-padding">Vous n\'avez publier aucun trajet pour le moment !</div>';
           content += "</div>";
-          content += "</div>";
-          content += "</div>";
-          content += "</li>";
-          content += "</ul>";
-          content += "</div>";
-          content += "</div>";
-          content += '<div class="card-footer">';
-          content += '<span class="display-flex">';
-          content +=
-            '<a class="button button-fill color-green" href="/passenger-history/' +
-            bookride[i]["id"] +
-            '/"> Voir les réservations</a>';
-          content += "</span>";
-          content += "</div>";
-          content += " </div>";
+        } else {
+          for (i = 0; i < maxRow; i++) {
+            content += '<div class="card">';
+            content += '<div class="card-content">';
+            content += '<div class="list media-list no-safe-areas">';
+            content += "<ul>";
+            content += '<li class="item-content">';
+            content += '<div class="item-inner">';
+            content += '<div class="item-title-row">';
+            content += '<div class="item-title">';
+            content +=
+              '<h4 class="block-title-medium">Réservation #00' +
+              bookride[i]["id"] +
+              "</h4>";
+            content +=
+              "<h5>" +
+              bookride[i]["departureName"] +
+              "," +
+              bookride[i]["departureLocation"] +
+              " - " +
+              bookride[i]["destinationName"] +
+              "," +
+              bookride[i]["destinationLocation"] +
+              "</h5>";
+            content += "<h5>Montant : " + bookride[i]["amount"] + " FCFA</h5>";
+            content +=
+              "<h6>Nb. passagers : " + bookride[i]["passenger"] + "</h6>";
+            content +=
+              "<h6>Date de départ : " + bookride[i]["departureDate"] + "</h6>";
+            content += "</div>";
+            content += "</div>";
+            content += "</div>";
+            content += "</li>";
+            content += "</ul>";
+            content += "</div>";
+            content += "</div>";
+            content += '<div class="card-footer">';
+            content += '<span class="display-flex">';
+            content +=
+              '<a class="button button-fill color-green" href="/passenger-history/' +
+              bookride[i]["id"] +
+              '/"> Voir les réservations</a>';
+            content += "</span>";
+            content += "</div>";
+            content += " </div>";
+          }
         }
 
         $(".myRide").append(content);

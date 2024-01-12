@@ -1,8 +1,8 @@
 {
-  "name": "cardigos",
+  "name": "matoua",
   "private": true,
   "version": "1.0.0",
-  "description": "cardigos",
+  "description": "Application de covoiturage",
   "repository": "",
   "license": "UNLICENSED",
   "scripts": {
@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "cordova-plugin-device": "^2.1.0",
+    "cordova-plugin-push-notification": "^2.5.2",
     "cordova-plugin-splashscreen": "^6.0.2",
     "dom7": "^4.0.6",
     "framework7": "^8.3.0",
@@ -30,18 +31,30 @@
     "cordova-android": "^12.0.1",
     "cordova-browser": "^7.0.0",
     "cordova-ios": "^7.0.1",
+    "cordova-plugin-fcm-ng": "^10.0.3",
+    "cordova-plugin-fcm-with-dependecy-updated": "^7.8.0",
     "cordova-plugin-whitelist": "1",
+    "cordova-support-android-plugin": "~2.0.4",
     "cpy-cli": "^5.0.0",
     "http-server": "^14.1.1"
   },
   "cordova": {
     "platforms": [
-      "ios",
       "browser",
+      "ios",
       "android"
     ],
     "plugins": {
-      "cordova-plugin-whitelist": {}
+      "cordova-plugin-whitelist": {},
+      "cordova-support-android-plugin": {},
+      "cordova-plugin-fcm-with-dependecy-updated": {
+        "ANDROID_GRADLE_TOOLS_VERSION": "7.4.2",
+        "ANDROID_DEFAULT_NOTIFICATION_ICON": "@mipmap/ic_launcher",
+        "ANDROID_FCM_VERSION": "21.0.0",
+        "ANDROID_FIREBASE_BOM_VERSION": "26.0.0",
+        "ANDROID_GOOGLE_SERVICES_VERSION": "4.3.4",
+        "IOS_FIREBASE_MESSAGING_VERSION": "~> 7.4.0"
+      }
     }
   }
 }

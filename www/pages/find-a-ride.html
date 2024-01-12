@@ -34,7 +34,9 @@
                               class="townList"
                               required
                             >
-                              <option value="">Départ <span class="color-red">*</span></option>
+                              <option value="">
+                                Départ <span class="color-red">*</span>
+                              </option>
                             </select>
                             <span class="input-clear-button"></span>
                           </div>
@@ -57,7 +59,9 @@
                               class="townList2"
                               required
                             >
-                              <option value="">Destination <span class="color-red">*</span></option>
+                              <option value="">
+                                Destination <span class="color-red">*</span>
+                              </option>
                             </select>
                             <span class="input-clear-button"></span>
                           </div>
@@ -73,7 +77,9 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Date de départ <span class="color-red">*</span></div>
+                  <div class="item-title item-label">
+                    Date de départ <span class="color-red">*</span>
+                  </div>
                   <div class="item-input-wrap">
                     <input
                       type="text"
@@ -92,7 +98,9 @@
             <div class="card-content">
               <li class="item-content item-input">
                 <div class="item-inner">
-                  <div class="item-title item-label">Nb. de passagers <span class="color-red">*</span></div>
+                  <div class="item-title item-label">
+                    Nb. de passagers <span class="color-red">*</span>
+                  </div>
                   <div class="item-input-wrap input-dropdown-wrap">
                     <select
                       name="numberofSeats"
@@ -141,8 +149,12 @@
   .timeline-item-content {
     width: 100%;
   }
-    .color-red{color:#c0000a}
-.color-gray{color:#dbe2f9}
+  .color-red {
+    color: #c0000a;
+  }
+  .color-gray {
+    color: #dbe2f9;
+  }
 </style>
 <script>
   export default (props, { $f7, $, $on }) => {
@@ -187,7 +199,12 @@
         content2 += "Destination";
         content2 += "</option>";
         for (i = 0; i < maxRow; i++) {
-          content += '<option value="' + town[i]["town_id"] + '">';
+          content +=
+            '<option value="' +
+            town[i]["town_id"] +
+            "-" +
+            town[i]["town_name"] +
+            '">';
           content += "" + town[i]["town_name"] + "";
           content += "</option>";
           content += "<br/>";
@@ -201,8 +218,10 @@
       });
 
     const findRide = () => {
-      let departure = $("#find-departure").val();
-      let destination = $("#find-destination").val();
+      let departure = $("#find-departure").val().split("-")[0];
+      let departureName = $("#find-departure").val().split("-")[1];
+      let destination = $("#find-destination").val().split("-")[0];
+      let destinationName = $("#find-destination").val().split("-")[1];
       let departureDate = $("#find-departureDate").val();
       let numberofSeats = $("#numberofSeats").val();
 
@@ -216,7 +235,9 @@
       } else {
         $f7.dialog.preloader("Un instant svp...");
         localStorage.setItem("departure", departure);
+        localStorage.setItem("departureName", departureName);
         localStorage.setItem("destination", destination);
+        localStorage.setItem("destinationName", destinationName);
         localStorage.setItem("departureDate", departureDate);
         localStorage.setItem("numberofSeats", numberofSeats);
         setTimeout(function () {

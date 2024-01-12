@@ -5,7 +5,7 @@ var routes = [
   },
   {
     path: "/about/",
-    url: "./pages/about.html",
+    componentUrl: "./pages/about.html",
   },
   {
     path: "/form/",
@@ -55,6 +55,18 @@ var routes = [
   {
     path: "/my-ride/",
     componentUrl: "./pages/my-ride.html",
+  },
+  {
+    path: "/finalize-publish-ride/",
+    componentUrl: "./pages/finalize-publish-ride.html",
+  },
+  {
+    path: "/rider-payment/:bookrideId/",
+    componentUrl: "./pages/rider-payment.html",
+  },
+  {
+    path: "/confirm-booking/:bookrideId/:passenger/:status",
+    componentUrl: "./pages/confirm-booking.html",
   },
   {
     path: "/dynamic-route/blog/:blogId/post/:postId/",

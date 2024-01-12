@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "197738883250",
+    "project_id": "matoua-b27a8",
+    "storage_bucket": "matoua-b27a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197738883250:android:1ff93067b1b599e39d01ab",
+        "android_client_info": {
+          "package_name": "com.matoua.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwOTh3nZdb1PZZP-Rw91puoPU_Prrh0ic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

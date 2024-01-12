@@ -1,10 +1,10 @@
 <template>
-  <div class="page">
+  <div class="page page-profile">
     <div class="navbar">
       <div class="navbar-bg"></div>
       <div class="navbar-inner sliding">
         <div class="left">
-          <a class="link back">
+          <a class="link" href="/home/">
             <i class="icon icon-back"></i>
           </a>
         </div>
@@ -45,53 +45,65 @@
               <div class="card-content-inner">
                 <div class="list-block no-hairlines no-hairlines-between">
                   <ul>
-                    <li>
+                    <li class="padding-bottom-half">
                       <div class="item-content">
-                        <div class="item-inner">
+                        <div class="item-inner display-flex">
                           <div class="item-title">
-                            <i class="material-icons">person_outline</i>
+                            <i class="material-icons">person_outline</i> Nom(s)
+                            :
                           </div>
-                          <div class="item-after fullname"></div>
+                          <div
+                            class="item-after padding-top-half padding-left-half fullname"
+                          ></div>
                         </div>
                       </div>
                     </li>
-                    <li>
+                    <li class="padding-bottom-half">
                       <div class="item-content">
-                        <div class="item-inner">
+                        <div class="item-inner display-flex">
                           <div class="item-title">
-                            <i class="material-icons">cake</i>
+                            <i class="material-icons">cake</i> Date
+                            d'anniverssaire :
                           </div>
-                          <div class="item-after dateofbirth"></div>
+                          <div
+                            class="item-after padding-top-half padding-left-half dateofbirth"
+                          ></div>
                         </div>
                       </div>
                     </li>
-                    <li>
+                    <li class="padding-bottom-half">
                       <div class="item-content">
-                        <div class="item-inner">
+                        <div class="item-inner display-flex">
                           <div class="item-title">
-                            <i class="material-icons">place</i>
+                            <i class="material-icons">place</i> Adresse :
                           </div>
-                          <div class="item-after address"></div>
+                          <div
+                            class="item-after padding-top-half padding-left-half address"
+                          ></div>
                         </div>
                       </div>
                     </li>
-                    <li>
+                    <li class="padding-bottom-half">
                       <div class="item-content">
-                        <div class="item-inner">
+                        <div class="item-inner display-flex">
                           <div class="item-title">
-                            <i class="material-icons">call</i>
+                            <i class="material-icons">call</i> Téléphone :
                           </div>
-                          <div class="item-after phone"></div>
+                          <div
+                            class="item-after padding-top-half padding-left-half phone"
+                          ></div>
                         </div>
                       </div>
                     </li>
-                    <li>
+                    <li class="padding-bottom-half">
                       <div class="item-content">
-                        <div class="item-inner">
+                        <div class="item-inner display-flex">
                           <div class="item-title">
-                            <i class="material-icons">mail_outline</i>
+                            <i class="material-icons">mail_outline</i> E-mail :
                           </div>
-                          <div class="item-after email"></div>
+                          <div
+                            class="item-after padding-top-half padding-left-half email"
+                          ></div>
                         </div>
                       </div>
                     </li>
@@ -177,9 +189,11 @@
   </div>
 </template>
 <style>
-  .tabs .tab.active {
-    display: block;
+  .page-profile ul {
+    list-style: none;
+    padding-left: 0;
   }
+
   .profile-header {
     align-items: center;
     background-color: #2e2b33;
@@ -275,7 +289,8 @@
 <script>
   export default (props, { $f7, $on }) => {
     $on("pageInit", (e, page) => {
-      console.log("pageInit", page);
+      $(".active").show();
+
       const fullname = localStorage.getItem("fullname");
       const email = localStorage.getItem("email");
       const phone = localStorage.getItem("phone");
@@ -284,14 +299,19 @@
       const address = localStorage.getItem("address");
       const cni = localStorage.getItem("cni");
 
-      $("#fullname").html(fullname);
+      $(".fullname").html(fullname);
+      $(".email").html(email);
+      $(".phone").html(phone);
+      $(".dateofbirth").html(dateofbirth);
+      $(".gender").html(gender);
+      $(".address").html(address);
     });
 
     const signOut = () => {
       const token = localStorage.getItem("token");
 
       // API endpoint for creating a new user
-      const apiUrl = "http://matoua.com/api/logout";
+      const apiUrl = "https://matoua.com/api/logout";
 
       // Make a POST request using the Fetch API
       fetch(apiUrl, {

@@ -1,17 +1,16 @@
 <template>
-    <div class="page no-toolbar login-screen-page">
+  <div class="page no-toolbar login-screen-page">
     <div class="navbar">
-    <div class="navbar-bg"></div>
-    <div class="navbar-inner sliding">
-      <div class="left">
-        <a href="#" class="link back">
-          <i class="icon icon-back"></i>
-          <span class="if-not-md">Back</span>
-        </a>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a href="#" class="link back">
+            <i class="icon icon-back"></i>
+            <span class="if-not-md">Back</span>
+          </a>
+        </div>
+        <div class="title">Inscription</div>
       </div>
-      <div class="title">Inscription</div>
     </div>
-  </div>
     <div class="page-content login-screen-content">
       <div class="login-screen-title">
         <img
@@ -25,7 +24,9 @@
           <ul>
             <li class="item-content item-input item-input-with-value">
               <div class="item-inner">
-                <div class="item-title item-label">Nom(s) <span class="color-red">*</span></div>
+                <div class="item-title item-label">
+                  Nom(s) <span class="color-red">*</span>
+                </div>
                 <div class="item-input-wrap">
                   <input
                     type="text"
@@ -39,7 +40,9 @@
             </li>
             <li class="item-content item-input item-input-with-value">
               <div class="item-inner">
-                <div class="item-title item-label">Téléphone <span class="color-red">*</span></div>
+                <div class="item-title item-label">
+                  Téléphone <span class="color-red">*</span>
+                </div>
                 <div class="item-input-wrap">
                   <input
                     type="text"
@@ -53,7 +56,9 @@
             </li>
             <li class="item-content item-input item-input-with-value">
               <div class="item-inner">
-                <div class="item-title item-label">E-mail <span class="color-red">*</span></div>
+                <div class="item-title item-label">
+                  E-mail <span class="color-red">*</span>
+                </div>
                 <div class="item-input-wrap">
                   <input
                     type="email"
@@ -67,7 +72,9 @@
             </li>
             <li class="item-content item-input">
               <div class="item-inner">
-                <div class="item-title item-label">Mot de passe <span class="color-red">*</span></div>
+                <div class="item-title item-label">
+                  Mot de passe <span class="color-red">*</span>
+                </div>
                 <div class="item-input-wrap">
                   <input
                     type="password"
@@ -80,7 +87,10 @@
             </li>
             <li class="item-content item-input">
               <div class="item-inner">
-                <div class="item-title item-label">Téléchargez votre CNI  <span class="color-gray">(optionnel)</span></div>
+                <div class="item-title item-label">
+                  Téléchargez votre CNI
+                  <span class="color-gray">(optionnel)</span>
+                </div>
                 <div class="item-input-wrap">
                   <input
                     type="file"
@@ -124,11 +134,17 @@
   .login-screen-page .page-content {
     padding-top: 10px;
   }
-    .login-screen-page .navbar-inner .title, .login-screen-page .navbar-inner .link .icon, .login-screen-page .title {
+  .login-screen-page .navbar-inner .title,
+  .login-screen-page .navbar-inner .link .icon,
+  .login-screen-page .title {
     color: black;
-}
-.color-red{color:#c0000a}
-.color-gray{color:#dbe2f9}
+  }
+  .color-red {
+    color: #c0000a;
+  }
+  .color-gray {
+    color: #dbe2f9;
+  }
 </style>
 <script>
   export default (props, { $, $f7, $f7router }) => {
@@ -142,50 +158,119 @@
       if (fullname == "" || password == "" || phone == "") {
         app.dialog.alert("Veuillez renseigner tous les champs SVP !");
       } else {
-        // API endpoint for creating a new user
-        const apiUrl = "https://matoua.com/api/register";
+        const image = document.getElementById("idcard");
+        if (image.files.length > 0) {
+          const file = image.files[0];
+          const formData = new FormData();
 
-        // Form data to be sent in the request body
-        const formData = {
-          fullname: fullname,
-          email: email,
-          phone: phone,
-          password: password,
-          password_confirmation: password,
-        };
+          formData.append("image", file);
 
-        // Make a POST request using the Fetch API
-        fetch(apiUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Network response was not ok");
-              app.dialog.alert(
-                "Ooups! Une erreur s'est produite ressayez svp !"
-              );
-            }
-            return response.json();
+          fetch("https://matoua.com/api/upload", {
+            method: "POST",
+            body: formData,
           })
-          .then((newUserData) => {
-            // Process the newly created user data
-            console.log("New User Data:", newUserData);
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Image uploaded successfully:", data);
+              // API endpoint for creating a new user
+              const apiUrl = "https://matoua.com/api/register";
 
-            localStorage.setItem("userId", newUserData.user.id);
-            localStorage.setItem("fullname", newUserData.user.fullname);
-            localStorage.setItem("phone", newUserData.user.phone);
-            localStorage.setItem("email", newUserData.user.email);
-            localStorage.setItem("token", newUserData.accessToken);
+              // Form data to be sent in the request body
+              const formData = {
+                fullname: fullname,
+                email: email,
+                phone: phone,
+                password: password,
+                password_confirmation: password,
+                cni: data.url,
+              };
 
-            app.views.main.router.navigate("/home/");
+              // Make a POST request using the Fetch API
+              fetch(apiUrl, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+              })
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                    app.dialog.alert(
+                      "Ooups! Une erreur s'est produite ressayez svp !"
+                    );
+                  }
+                  return response.json();
+                })
+                .then((newUserData) => {
+                  // Process the newly created user data
+                  console.log("New User Data:", newUserData);
+
+                  localStorage.setItem("userId", newUserData.user.id);
+                  localStorage.setItem("fullname", newUserData.user.fullname);
+                  localStorage.setItem("phone", newUserData.user.phone);
+                  localStorage.setItem("email", newUserData.user.email);
+                  localStorage.setItem("token", newUserData.accessToken);
+
+                  app.views.main.router.navigate("/home/");
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                });
+              // Handle the response as needed
+            })
+            .catch((error) => {
+              console.error("Error uploading image:", error);
+              // Handle the error as needed
+            });
+        } else {
+          console.error("No file selected.");
+          // API endpoint for creating a new user
+          const apiUrl = "https://matoua.com/api/register";
+
+          // Form data to be sent in the request body
+          const formData = {
+            fullname: fullname,
+            email: email,
+            phone: phone,
+            password: password,
+            password_confirmation: password,
+            cni: "",
+          };
+
+          // Make a POST request using the Fetch API
+          fetch(apiUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
           })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Network response was not ok");
+                app.dialog.alert(
+                  "Ooups! Une erreur s'est produite ressayez svp !"
+                );
+              }
+              return response.json();
+            })
+            .then((newUserData) => {
+              // Process the newly created user data
+              console.log("New User Data:", newUserData);
+
+              localStorage.setItem("userId", newUserData.user.id);
+              localStorage.setItem("fullname", newUserData.user.fullname);
+              localStorage.setItem("phone", newUserData.user.phone);
+              localStorage.setItem("email", newUserData.user.email);
+              localStorage.setItem("token", newUserData.accessToken);
+
+              app.views.main.router.navigate("/home/");
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        }
       }
     };
 
