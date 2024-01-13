@@ -119,6 +119,7 @@
         })
           .then((response) => {
             if (!response.ok) {
+			$f7.dialog.close();
               if (response.status == 401) {
                 app.dialog.alert(
                   "Ooups! E-mail ou mot de passe incorrect ressayez svp !"

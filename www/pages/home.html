@@ -10,7 +10,9 @@
           </a>
         </div>
         <div class="center">
-          <span class="title">MAT<span class="green">OUA</span></span>
+          <span class="title logo-name">MAT<span class="green">OUA</span></span>
+		  <br/>
+		  <span class="text-center welcome" style="display:none">Bienvenue, <span class="user-fullname"></span></span>
         </div>
         <div class="right">
           <a class="link icon-only searchbar-enable" href="/find-a-ride/">
@@ -23,9 +25,9 @@
     <div class="page-content">
       <div class="list-strong inset list-dividers-ios searchbar-hide-on-search">
         <h1 class="text-center searchbar-found padding">
-          Un vaste choix de trajets à petits prix
+          Un vaste choix de trajets à <span class="green">petits prix !</span>
         </h1>
-        <div
+        <!-- <div
           class="list list-strong-ios list-outline-ios list-dividers-ios form-store-data"
           id="demo-form"
         >
@@ -128,89 +130,26 @@
               Rechercher</a
             >
           </div>
-        </div>
-        <div
-          class="bg-green list list-strong list-outline-ios list-dividers-ios inset-md accordion-list"
-        >
-          <h1 class="text-center searchbar-found">
-            Comment fonctionne MATOUA ?
-          </h1>
-          <ul>
-            <li class="accordion-item">
-              <a class="item-link item-content">
-                <div class="item-inner">
-                  <div class="item-title">Pour commencer</div>
-                </div>
-              </a>
-              <div class="accordion-item-content">
-                <div class="block">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aenean elementum id neque nec commodo. Sed vel justo at
-                    turpis laoreet pellentesque quis sed lorem. Integer semper
-                    arcu nibh, non mollis arcu tempor vel. Sed pharetra tortor
-                    vitae est rhoncus, vel congue dui sollicitudin. Donec eu
-                    arcu dignissim felis viverra blandit suscipit eget ipsum.
-                  </p>
-                </div>
-              </div>
-            </li>
-            <li class="accordion-item">
-              <a class="item-link item-content">
-                <div class="item-inner">
-                  <div class="item-title">
-                    À propos des frais de service de covoiturage
-                  </div>
-                </div>
-              </a>
-              <div class="accordion-item-content">
-                <div class="block">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aenean elementum id neque nec commodo. Sed vel justo at
-                    turpis laoreet pellentesque quis sed lorem. Integer semper
-                    arcu nibh, non mollis arcu tempor vel. Sed pharetra tortor
-                    vitae est rhoncus, vel congue dui sollicitudin. Donec eu
-                    arcu dignissim felis viverra blandit suscipit eget ipsum.
-                  </p>
-                </div>
-              </div>
-            </li>
-            <li class="accordion-item">
-              <a class="item-link item-content">
-                <div class="item-inner">
-                  <div class="item-title">
-                    Comment fonctionne le covoiturage ?
-                  </div>
-                </div>
-              </a>
-              <div class="accordion-item-content">
-                <div class="block">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aenean elementum id neque nec commodo. Sed vel justo at
-                    turpis laoreet pellentesque quis sed lorem. Integer semper
-                    arcu nibh, non mollis arcu tempor vel. Sed pharetra tortor
-                    vitae est rhoncus, vel congue dui sollicitudin. Donec eu
-                    arcu dignissim felis viverra blandit suscipit eget ipsum.
-                  </p>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <h1 class="text-center searchbar-found">N'attendez plus !</h1>
-        <div class="bg-color-green block-outline-ios block-strong padding">
-          <p class="grid grid-cols-2 grid-gap">
+        </div> -->
+        
+        <!-- <h1 class="text-center searchbar-found">N'attendez plus !</h1> -->
+        <div class="block-outline-ios block-strong padding">
+          <p class="row margin-30">
             <a
               href="/find-a-ride/"
-              class="button button-large button-round button-fill color-black"
-              >Trouver un trajet</a
+              class="button button-large button-round button-block button-fill color-black font-size-22"
+              ><i class="icon f7-icons if-not-md">search</i>
+            <i class="icon material-icons md-only">search</i> Trouver un trajet</a
             >
+            
+          </p>
+		  <p class="row margin-30">
+            
             <a
               href="/publish-ride/"
-              class="button button-active button-large button-raised button-round color-white"
-              >Publier un trajet</a
+              class="button button-active button-large button-raised button-block button-round color-white font-size-22"
+              ><i class="icon f7-icons if-not-md">location</i>
+            <i class="icon material-icons md-only">send</i> Publier un trajet</a
             >
           </p>
         </div>
@@ -224,6 +163,8 @@
     display: block;
     max-width: 200px;
   }
+  
+  .page-home{background:#fff}
 
   .page-home .navbar-inner .link .icon {
     color: var(
@@ -234,17 +175,28 @@
   .page-home .navbar.navbar-large-collapsed .icon {
     color: #ffffff !important;
   }
-  .page-home .page-content {
-    padding-top: 34px;
-  }
+
   .text-center {
     text-align: center;
   }
+  
+  .margin-30{
+  margin-top:30px;
+  margin-bottom:30px
+  }
+  
+  .font-size-22{font-size:22px}
 
   .page-home .title {
     font-size: 30px !important;
     font-weight: 600 !important;
     color: black !important;
+  }
+  .page-home .page-content h1{
+    font-size: 32px;
+  }
+  .page-home .page-content .block-strong{
+    background:#fff
   }
   .page-home .navbar-large-collapsed .title {
     color: #fff !important;
@@ -252,7 +204,7 @@
   .page-home .navbar-large .title {
     opacity: 1;
   }
-  .page-home .title .green {
+  .page-home .green {
     color: #0fc874;
   }
   .page-home .navbar-large-collapsed .title .green {
@@ -276,6 +228,7 @@
   .page-home .list ul {
     border-radius: 20px;
   }
+  .padding-left-25{padding-left:25px}
 </style>
 <script>
   export default (props, { $f7, $, $on }) => {
@@ -284,16 +237,28 @@
     $on("pageInit", () => {
       $f7.dialog.close();
       // Custom modal
-      calendarModal = $f7.calendar.create({
+     /* calendarModal = $f7.calendar.create({
         inputEl: "#find-departureDate-2",
         openIn: "customModal",
         header: true,
         footer: true,
-      });
+      });*/
+	  const token = localStorage.getItem("token");
+	  const fullname = localStorage.getItem("fullname");
+	  if(token == '' || token == null || token == 'undefined'){
+		$(".welcome").hide();
+		$(".logo-name").removeClass('padding-left-25');
+	  }else{
+	  $(".welcome").show();
+	  $(".logo-name").addClass('padding-left-25');
+	  $(".user-fullname").html(fullname);
+	  }
+
+      
     });
 
     // Specify the API endpoint for user data
-    const apiUrl = "https://matoua.com/api/town";
+/*     const apiUrl = "https://matoua.com/api/town";
     let content = "";
     let content2 = "";
     let data = [];
@@ -337,7 +302,7 @@
       })
       .catch((error) => {
         console.error("Error:", error);
-      });
+      }); */
 
     const findRide = () => {
       let departure = $("#find-departure-2").val().split("-")[0];
@@ -368,7 +333,7 @@
           mainView.router.navigate("/rider-list/");
         }, 2000);
       }
-    };
+    }; 
 
     $on("pageBeforeRemove", () => {
       calendarModal.destroy();

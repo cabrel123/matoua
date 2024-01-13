@@ -18,6 +18,7 @@ var app = new Framework7({
     pageInit: function () {
       const token = localStorage.getItem("token");
       const userId = localStorage.getItem("userId");
+	  const FCM_token = localStorage.getItem("FCM_token");
       if (token == null || token == undefined || token == "") {
         $(".without-login").show();
         $(".with-login").hide();
@@ -26,11 +27,12 @@ var app = new Framework7({
         $(".with-login").show();
       }
       //update user fcm token
-      // if (userId == null || userId == undefined || userId == "") {
-      //   //
-      // } else {
-      //   setFcmToken();
-      // }
+       if (userId == null || userId == undefined || userId == "" || FCM_token == null || FCM_token == '' || FCM_token == 'undefined') {
+         
+		 console.log('no user logged or no token generated');
+       } else {
+         setFcmToken();
+       }
       console.log("Page initialized");
     },
   },
