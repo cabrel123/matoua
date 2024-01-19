@@ -23,6 +23,9 @@
     },
     "cordova-plugin-network-information": {
       "PACKAGE_NAME": "com.matoua.app"
+    },
+    "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "com.matoua.app"
     }
   },
   "dependent_plugins": {}

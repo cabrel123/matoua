@@ -47,6 +47,10 @@
             {
               "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"Globalization\"><param name=\"android-package\" value=\"org.apache.cordova.globalization.Globalization\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -97,6 +101,9 @@
     },
     "cordova-plugin-network-information": {
       "PACKAGE_NAME": "com.matoua.app"
+    },
+    "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "com.matoua.app"
     }
   },
   "dependent_plugins": {},
@@ -132,12 +139,29 @@
       "clobbers": [
         "Connection"
       ]
+    },
+    {
+      "id": "cordova-plugin-globalization.GlobalizationError",
+      "file": "plugins/cordova-plugin-globalization/www/GlobalizationError.js",
+      "pluginId": "cordova-plugin-globalization",
+      "clobbers": [
+        "window.GlobalizationError"
+      ]
+    },
+    {
+      "id": "cordova-plugin-globalization.globalization",
+      "file": "plugins/cordova-plugin-globalization/www/globalization.js",
+      "pluginId": "cordova-plugin-globalization",
+      "clobbers": [
+        "navigator.globalization"
+      ]
     }
   ],
   "plugin_metadata": {
     "cordova-plugin-fcm-with-dependecy-updated": "7.8.0",
     "cordova-support-android-plugin": "2.0.4",
     "cordova-plugin-statusbar": "4.0.0",
-    "cordova-plugin-network-information": "3.0.0"
+    "cordova-plugin-network-information": "3.0.0",
+    "cordova-plugin-globalization": "1.11.0"
   }
 }

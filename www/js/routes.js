@@ -29,6 +29,10 @@ var routes = [
     componentUrl: "./pages/ride-history.html",
   },
   {
+    path: "/calendar/",
+    componentUrl: "./pages/calendar.html",
+  },
+  {
     path: "/publish-ride/",
     componentUrl: "./pages/publish-ride.html",
   },

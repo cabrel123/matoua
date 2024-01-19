@@ -27,6 +27,7 @@
 		5E22DAD273E644B2872B8C54 /* CDVReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDC78862B5B41B0805FAFDE /* CDVReachability.m */; };
 		4BB719BC2DCE43A78B1FCB09 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F376632D0254E6E82F0CA35 /* SystemConfiguration.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D1E335334D324B5D97BA3959 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5D160BF1F504BCDBAA783FC /* CoreTelephony.framework */; };
+		CD83F7B9A85F4302BE840564 /* CDVGlobalization.m in Sources */ = {isa = PBXBuildFile; fileRef = C5205742580D4815BFF385F2 /* CDVGlobalization.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,8 @@
 		4B02F66A922245CC9534F0AD /* CDVReachability.h */ = {isa = PBXFileReference; name = "CDVReachability.h"; path = "cordova-plugin-network-information/CDVReachability.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		2F376632D0254E6E82F0CA35 /* SystemConfiguration.framework */ = {isa = PBXFileReference; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		B5D160BF1F504BCDBAA783FC /* CoreTelephony.framework */ = {isa = PBXFileReference; name = "CoreTelephony.framework"; path = "System/Library/Frameworks/CoreTelephony.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		C5205742580D4815BFF385F2 /* CDVGlobalization.m */ = {isa = PBXFileReference; name = "CDVGlobalization.m"; path = "cordova-plugin-globalization/CDVGlobalization.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		EA2D46158FBE46529D13CFA1 /* CDVGlobalization.h */ = {isa = PBXFileReference; name = "CDVGlobalization.h"; path = "cordova-plugin-globalization/CDVGlobalization.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +225,8 @@
 				BDDC78862B5B41B0805FAFDE /* CDVReachability.m */,
 				05DDA184CAD0476884885D99 /* CDVConnection.h */,
 				4B02F66A922245CC9534F0AD /* CDVReachability.h */,
+				C5205742580D4815BFF385F2 /* CDVGlobalization.m */,
+				EA2D46158FBE46529D13CFA1 /* CDVGlobalization.h */,
 			);
 			name = Plugins;
 			path = "MATOUA/Plugins";
@@ -342,6 +347,7 @@
 				20F269F60AC34EBE907C56B3 /* CDVStatusBar.m in Sources */,
 				24243AD9EB554BAE9E0157B1 /* CDVConnection.m in Sources */,
 				5E22DAD273E644B2872B8C54 /* CDVReachability.m in Sources */,
+				CD83F7B9A85F4302BE840564 /* CDVGlobalization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

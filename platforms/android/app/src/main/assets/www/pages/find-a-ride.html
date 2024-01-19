@@ -247,6 +247,7 @@
 
     const searchReseult = (departure, destination, departureDate) => {
       const userId = localStorage.getItem("userId");
+      const lang = localStorage.getItem("lang");
 
       const apiUrl =
         "https://matoua.com/api/search?departure=" +
@@ -255,6 +256,8 @@
         destination +
         "&departureDate=" +
         departureDate +
+        "&lang=" +
+        lang +
         "";
       let content = "";
 

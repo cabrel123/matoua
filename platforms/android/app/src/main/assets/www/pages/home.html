@@ -253,10 +253,9 @@
 </style>
 <script>
   export default (props, { $f7, $, $on }) => {
-    let calendarModal;
-
     $on("pageInit", () => {
       $f7.dialog.close();
+
       const token = localStorage.getItem("token");
       const fullname = localStorage.getItem("fullname");
       if (token == "" || token == null || token == "undefined") {
@@ -350,10 +349,6 @@
         }, 2000);
       }
     };
-
-    $on("pageBeforeRemove", () => {
-      calendarModal.destroy();
-    });
 
     return $render;
   };

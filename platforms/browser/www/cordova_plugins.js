@@ -43,6 +43,34 @@ module.exports = [
         "id": "cordova-plugin-network-information.NetworkInfoProxy",
         "pluginId": "cordova-plugin-network-information",
         "runs": true
+    },
+    {
+        "file": "plugins/cordova-plugin-globalization/www/GlobalizationError.js",
+        "id": "cordova-plugin-globalization.GlobalizationError",
+        "pluginId": "cordova-plugin-globalization",
+        "clobbers": [
+            "window.GlobalizationError"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-globalization/www/globalization.js",
+        "id": "cordova-plugin-globalization.globalization",
+        "pluginId": "cordova-plugin-globalization",
+        "clobbers": [
+            "navigator.globalization"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-globalization/www/browser/moment.js",
+        "id": "cordova-plugin-globalization.moment",
+        "pluginId": "cordova-plugin-globalization",
+        "runs": true
+    },
+    {
+        "file": "plugins/cordova-plugin-globalization/src/browser/GlobalizationProxy.js",
+        "id": "cordova-plugin-globalization.GlobalizationProxy",
+        "pluginId": "cordova-plugin-globalization",
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -52,7 +80,8 @@ module.exports.metadata =
     "cordova-support-android-plugin": "2.0.4",
     "cordova-plugin-fcm-with-dependecy-updated": "7.8.0",
     "cordova-plugin-statusbar": "4.0.0",
-    "cordova-plugin-network-information": "3.0.0"
+    "cordova-plugin-network-information": "3.0.0",
+    "cordova-plugin-globalization": "1.11.0"
 }
 // BOTTOM OF METADATA
 });

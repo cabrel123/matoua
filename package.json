@@ -33,6 +33,7 @@
     "cordova-ios": "^7.0.1",
     "cordova-plugin-fcm-ng": "^10.0.3",
     "cordova-plugin-fcm-with-dependecy-updated": "^7.8.0",
+    "cordova-plugin-globalization": "^1.11.0",
     "cordova-plugin-network-information": "^3.0.0",
     "cordova-plugin-statusbar": "^4.0.0",
     "cordova-plugin-whitelist": "1",
@@ -58,7 +59,8 @@
         "IOS_FIREBASE_MESSAGING_VERSION": "~> 7.4.0"
       },
       "cordova-plugin-statusbar": {},
-      "cordova-plugin-network-information": {}
+      "cordova-plugin-network-information": {},
+      "cordova-plugin-globalization": {}
     }
   }
 }

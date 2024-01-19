@@ -41,6 +41,15 @@ var app = new Framework7({
       }
       document.addEventListener("offline", onOffline, false);
       document.addEventListener("online", onOnline, false);
+      navigator.globalization.getPreferredLanguage(
+        function (language) {
+          localStorage.setItem("lang", language.value);
+          console.log("language: " + language.value + "\n");
+        },
+        function () {
+          console.log("Error getting language\n");
+        }
+      );
       console.log("Page initialized");
     },
   },

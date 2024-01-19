@@ -31,12 +31,29 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "Connection"
       ]
+    },
+    {
+      "id": "cordova-plugin-globalization.GlobalizationError",
+      "file": "plugins/cordova-plugin-globalization/www/GlobalizationError.js",
+      "pluginId": "cordova-plugin-globalization",
+      "clobbers": [
+        "window.GlobalizationError"
+      ]
+    },
+    {
+      "id": "cordova-plugin-globalization.globalization",
+      "file": "plugins/cordova-plugin-globalization/www/globalization.js",
+      "pluginId": "cordova-plugin-globalization",
+      "clobbers": [
+        "navigator.globalization"
+      ]
     }
   ];
   module.exports.metadata = {
     "cordova-plugin-fcm-with-dependecy-updated": "7.8.0",
     "cordova-support-android-plugin": "2.0.4",
     "cordova-plugin-statusbar": "4.0.0",
-    "cordova-plugin-network-information": "3.0.0"
+    "cordova-plugin-network-information": "3.0.0",
+    "cordova-plugin-globalization": "1.11.0"
   };
 });
