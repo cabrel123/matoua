@@ -1,0 +1,313 @@
+<template>
+  <div class="page no-toolbar login-screen-page">
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a href="#" class="link back">
+            <i class="icon icon-back"></i>
+            <span class="if-not-md">Back</span>
+          </a>
+        </div>
+        <div class="title">Modifier votre profil</div>
+      </div>
+    </div>
+    <div class="page-content login-screen-content">
+      <form>
+        <div class="list">
+          <ul class="profileInfos"></ul>
+        </div>
+        <div class="block list inset">
+          <ul>
+            <li>
+              <a
+                class="button button-fill button-round color-black list-button"
+                @click="${Update}"
+                >Mettre à jour</a
+              >
+            </li>
+          </ul>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+<style>
+  .img-responsive {
+    margin: 0 auto;
+    display: block;
+    max-width: 200px;
+  }
+  .login-screen-page .page-content {
+    padding-top: 10px;
+  }
+  .login-screen-page .navbar-inner .title,
+  .login-screen-page .navbar-inner .link .icon,
+  .login-screen-page .title {
+    color: black;
+  }
+  .color-red {
+    color: #c0000a;
+  }
+  .color-gray {
+    color: #dbe2f9;
+  }
+</style>
+<script>
+  export default (props, { $, $f7, $f7router, $on }) => {
+    let calendarModal;
+    $on("pageInit", () => {
+      // Custom modal
+      calendarModal = $f7.calendar.create({
+        inputEl: "#find-departureDate",
+        openIn: "customModal",
+        header: true,
+        footer: true,
+      });
+      getUserInfos();
+    });
+
+    const getUserInfos = () => {
+      // Specify the API endpoint for user data
+      const userId = localStorage.getItem("userId");
+
+      const apiUrl = "https://matoua.com/api/infos/" + userId;
+
+      // Make a GET request using the Fetch API
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((user) => {
+          // Process the retrieved user data
+          console.log("user", user);
+          var content = "";
+
+          var maxRow = user.length;
+
+          var i = "";
+          if (maxRow == 0) {
+            $f7.dialog.alert("Désolé! Une erreur s'est produite", function () {
+              $f7.popup.close();
+              var mainView = app.view.main;
+              mainView.router.navigate("/user-profile/");
+            });
+          } else {
+            for (i = 0; i < maxRow; i++) {
+              content +=
+                '<li class="item-content item-input item-input-with-value">';
+              content += '<div class="item-inner">';
+              content += '<div class="item-title item-label"> Nom(s) </div>';
+              content += '<div class="item-input-wrap">';
+              content +=
+                '<input type="text" placeholder="Votre nom" id="user-fullname-4" class="input-with-value" value="' +
+                user[i]["fullname"] +
+                '" />';
+              content += '<span class="input-clear-button"></span>';
+              content += "</div>";
+              content += "</div>";
+              content += "</li>";
+              content +=
+                ' <li class="item-content item-input item-input-with-value">';
+              content += '<div class="item-inner">';
+              content += '<div class="item-title item-label">Téléphone </div>';
+              content += '<div class="item-input-wrap">';
+              content +=
+                '<input type="text" placeholder="Votre numéro de téléphone" id="user-phone-4" class="input-with-value" value="' +
+                user[i]["phone"] +
+                '" />';
+              content += '<span class="input-clear-button"></span>';
+              content += " </div>";
+              content += " </div>";
+              content += "</li>";
+              content +=
+                ' <li class="item-content item-input item-input-with-value">';
+              content += '<div class="item-inner">';
+              content += ' <div class="item-title item-label"> E-mail </div>';
+              content += '<div class="item-input-wrap">';
+              content +=
+                '<input type="email"  placeholder="Votre adresse mail" id="user-email-4" class="input-with-value" value="' +
+                user[i]["email"] +
+                '" />';
+              content += '<span class="input-clear-button"></span>';
+              content += " </div>";
+              content += "</div>";
+              content += "</li>";
+              content += '<li class="item-content item-input">';
+              content += '<div class="item-inner">';
+              content += '<div class="item-title item-label"> Adresse</div>';
+              content += '<div class="item-input-wrap">';
+              content +=
+                ' <input type="text" placeholder="Adresse" id="user-address" class="" value="' +
+                user[i]["address"] +
+                '" />';
+              content += " </div>";
+              content += "</div>";
+              content += "</li>";
+              content += '<li class="item-content item-input">';
+              content += ' <div class="item-inner">';
+              content += '<div class="item-title item-label"> Civilité </div>';
+              content += '<div class="item-input-wrap input-dropdown-wrap">';
+              content += ' <select name="gender" id="user-gender">';
+              content += ' <option value="' + user[i]["gender"] + '">';
+              if (user[i]["gender"] == 1) {
+                content += "Homme";
+              } else if (user[i]["gender"] == 2) {
+                content += "Femme";
+              } else {
+                content += "Non spécifié";
+              }
+
+              content += " </option>";
+              content += ' <option value="1">Homme</option>';
+              content += ' <option value="2">Femme</option>';
+              content += "</select>";
+              content += " </div>";
+              content += " </div>";
+              content += "</li>";
+              content += ' <li class="item-content item-input">';
+              content += '<div class="item-inner">';
+              content +=
+                '<div class="item-title item-label"> Date de naissance</div>';
+              content += ' <div class="item-input-wrap">';
+              content +=
+                '<input type="text" placeholder="" readonly="readonly" id="user-dateofbirth" name="departureDate" value="' +
+                user[i]["dateofbirth"] +
+                '" />';
+              content += "</div>";
+              content += "</div>";
+              content += " </li>";
+              content += ' <li class="item-content item-input">';
+              content += '<div class="item-inner">';
+              content +=
+                ' <div class="item-title item-label">Téléchargez votre CNI  </div>';
+              content += ' <div class="item-input-wrap">';
+              content +=
+                ' <input type="file" placeholder="Téléchargez votre CNI" id="idcard-3" accept="image/*" capture="camera" class="" />';
+              content += " </div>";
+              content += "</div>";
+              content += " </li>";
+              content += '<li class="item-content item-input">';
+              content += '<div class="item-inner">';
+              content +=
+                '<div class="item-title item-label">Téléchargez votre photo de profil </div>';
+              content += '<div class="item-input-wrap">';
+              content +=
+                '<input type="file" placeholder="Téléchargez votre CNI" id="idcard-4" accept="image/*" capture="camera" class="" />';
+              content += " </div>";
+              content += "</div>";
+              content += "</li>";
+            }
+
+            $(".profileInfos").append(content);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    };
+
+    const Update = () => {
+      $f7.dialog.preloader("Un instant svp...");
+      let fullname = $("#user-fullname-4").val();
+      let email = $("#user-email-4").val();
+      let phone = $("#user-phone-4").val();
+      let address = $("#user-address").val();
+      let gender = $("#user-gender").val();
+
+      if (fullname == "" || email == "" || phone == "") {
+        app.dialog.alert("Veuillez renseigner tous les champs SVP !");
+      } else {
+        const image = document.getElementById("idcard-3");
+        if (image.files.length > 0) {
+          const file = image.files[0];
+          const formData = new FormData();
+
+          formData.append("image", file);
+
+          fetch("https://matoua.com/api/upload", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Image uploaded successfully:", data);
+              updateProfile(data.url);
+            })
+            .catch((error) => {
+              console.error("Error uploading image:", error);
+              // Handle the error as needed
+            });
+        } else {
+          console.error("No file selected.");
+          const cni = "";
+          updateProfile(dcni);
+        }
+      }
+    };
+
+    const updateProfile = (cni) => {
+      const userId = localStorage.getItem("userId");
+      let fullname = $("#user-fullname-4").val();
+      let email = $("#user-email-4").val();
+      let phone = $("#user-phone-4").val();
+      let address = $("#user-address").val();
+      let gender = $("#user-gender").val();
+      let dateofbirth = $("#user-dateofbirth").val();
+      // API endpoint for creating a new user
+      const apiUrl3 = "https://matoua.com/api/update-profile";
+
+      // Form data to be sent in the request body
+      const formData = {
+        userId: userId,
+        fullname: fullname,
+        email: email,
+        phone: phone,
+        address: address,
+        gender: gender,
+        dateofbirth: dateofbirth,
+        cni: cni,
+      };
+
+      fetch(apiUrl3, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+            app.dialog.alert("Ooups! Une erreur s'est produite ressayez svp !");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Process the newly created user data
+          console.log("Data:", data);
+          $f7.dialog.close();
+
+          $f7.dialog.alert(
+            "Vos informations ont été mise à jour !",
+            function () {
+              $f7.popup.close();
+              var mainView = app.view.main;
+              mainView.router.navigate("/user-profile/");
+            }
+          );
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    };
+
+    $on("pageBeforeRemove", () => {
+      calendarModal.destroy();
+    });
+
+    return $render;
+  };
+</script>

@@ -17,6 +17,8 @@ var app = new Framework7({
     },
     pageInit: function () {
       const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("userId");
+	  const FCM_token = localStorage.getItem("FCM_token");
       if (token == null || token == undefined || token == "") {
         $(".without-login").show();
         $(".with-login").hide();
@@ -24,37 +26,226 @@ var app = new Framework7({
         $(".without-login").hide();
         $(".with-login").show();
       }
+      //update user fcm token
+       if (userId == null || userId == undefined || userId == "" || FCM_token == null || FCM_token == '' || FCM_token == 'undefined') {
+         
+		 console.log('no user logged or no token generated');
+       } else {
+         setFcmToken();
+       }
       console.log("Page initialized");
     },
   },
 });
 // Device ready
-document.addEventListener("deviceready", onDeviceReady, false);
+function formatNow() {
+  var now = new Date();
+  return (
+    now.getHours() +
+    ":" +
+    now.getMinutes() +
+    ":" +
+    now.getSeconds() +
+    "." +
+    now.getMilliseconds()
+  );
+}
 
-function onDeviceReady() {
-  console.log("device ready");
-  FCMPlugin.getToken(function (token) {
-    //this is the FCM token which can be used
-    //to send notification to specific device
-    console.log("George here is the token", token);
-    alert(token);
+function addToLog(log) {
+  console.log("log ", log);
+  // document.getElementById("notification-logs").innerHTML =
+  //   "<hr>" +
+  //   "<p>Received at " +
+  //   formatNow() +
+  //   "</p>" +
+  //   log +
+  //   document.getElementById("notification-logs").innerHTML;
+}
 
-    //FCMPlugin.onNotification( onNotificationCallback(data), successCallback(msg), errorCallback(err) )
-    //Here you define your application behaviour based on the notification data.
-    FCMPlugin.onNotification(function (data) {
-      console.log(data);
-      //data.wasTapped == true means in Background :  Notification was received on device tray and tapped by the user.
-      //data.wasTapped == false means in foreground :  Notification was received in foreground. Maybe the user needs to be notified.
-      if (data.wasTapped) {
-        //Notification was received on device tray and tapped by the user.
-        alert(JSON.stringify(data));
-      } else {
-        //Notification was received in foreground. Maybe the user needs to be notified.
-        alert(JSON.stringify(data));
-      }
+function trySomeTimes(asyncFunc, onSuccess, onFailure, customTries) {
+  var tries = typeof customTries === "undefined" ? 100 : customTries;
+  var interval = setTimeout(function () {
+    if (typeof asyncFunc !== "function") {
+      onSuccess("Unavailable");
+      return;
+    }
+    asyncFunc()
+      .then(function (result) {
+        if ((result !== null && result !== "") || tries < 0) {
+          onSuccess(result);
+        } else {
+          trySomeTimes(asyncFunc, onSuccess, onFailure, tries - 1);
+        }
+      })
+      .catch(function (e) {
+        clearInterval(interval);
+        onFailure(e);
+      });
+  }, 100);
+}
+
+function setupOnTokenRefresh() {
+  FCM.eventTarget.addEventListener(
+    "tokenRefresh",
+    function (data) {
+      addToLog("<p>FCM Token refreshed to " + data.detail + "</p>");
+    },
+    false
+  );
+}
+
+function setupOnNotification() {
+  FCM.eventTarget.addEventListener(
+    "notification",
+    function (data) {
+      app.dialog.alert(data.detail.body);
+      addToLog("<pre>" + JSON.stringify(data.detail, null, 2) + "</pre>");
+    },
+    false
+  );
+  FCM.getInitialPushPayload()
+    .then((payload) => {
+      addToLog(
+        "<p>Initial Payload</p><pre>" +
+          JSON.stringify(payload, null, 2) +
+          "</pre>"
+      );
+    })
+    .catch((error) => {
+      addToLog(
+        "<p>Initial Payload Error</p><pre>" +
+          JSON.stringify(error, null, 2) +
+          "</pre>"
+      );
     });
+}
+
+function logFCMToken() {
+  trySomeTimes(
+    FCM.getToken,
+    function (token) {
+      localStorage.setItem("FCM_token", token);
+      addToLog("<p>Started listening FCM as " + token + "</p>");
+    },
+    function (error) {
+      addToLog("<p>Error on listening for FCM token: " + error + "</p>");
+    }
+  );
+}
+
+function logAPNSToken() {
+  if (cordova.platformId !== "ios") {
+    return;
+  }
+  FCM.getAPNSToken(
+    function (token) {
+      addToLog("<p>Started listening APNS as " + token + "</p>");
+    },
+    function (error) {
+      addToLog("<p>Error on listening for APNS token: " + error + "</p>");
+    }
+  );
+}
+
+function setupClearAllNotificationsButton() {
+  document.getElementById("clear-all-notifications").addEventListener(
+    "click",
+    function () {
+      FCM.clearAllNotifications();
+    },
+    false
+  );
+}
+
+function setupClearAllNotificationsButton() {
+  document.getElementById("delete-instance-id").addEventListener(
+    "click",
+    function () {
+      FCM.deleteInstanceId().catch(function (error) {
+        alert(error);
+      });
+    },
+    false
+  );
+}
+
+function waitForPermission(callback) {
+  FCM.requestPushPermission()
+    .then(function (didIt) {
+      if (didIt) {
+        callback();
+      } else {
+        addToLog("<p>Push permission was not given to this application</p>");
+      }
+    })
+    .catch(function (error) {
+      addToLog("<p>Error on checking permission: " + error + "</p>");
+    });
+}
+
+function logHasPermissionOnStart() {
+  FCM.hasPermission().then(function (hasIt) {
+    addToLog("<p>Started with permission: " + JSON.stringify(hasIt) + "</p>");
   });
 }
+
+function setupListeners() {
+  console.log("device ready");
+  logHasPermissionOnStart();
+  waitForPermission(function () {
+    FCM.createNotificationChannel({
+      id: "sound_alert6",
+      name: "Sound Alert6",
+      // description: "Useless",
+      importance: "high",
+      // visibility: "public",
+      sound: "elet_mp3",
+      // lights: false,
+      // vibration: false,
+    });
+    logFCMToken();
+    logAPNSToken();
+    setupOnTokenRefresh();
+    setupOnNotification();
+    setupClearAllNotificationsButton();
+  });
+}
+
+function setFcmToken() {
+  const userId = localStorage.getItem("userId");
+  const fcm_token = localStorage.getItem("FCM_token");
+  // API endpoint for creating a new user
+  const apiUrl3 = "https://matoua.com/api/fcm";
+
+  // Form data to be sent in the request body
+  const formData = {
+    fcm_token: fcm_token,
+    userId: userId,
+  };
+
+  fetch(apiUrl3, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Process the newly created user data
+      console.log("fcm token updated !");
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+document.addEventListener("deviceready", setupListeners, false);
 
 var view = app.views.create(".view-main");
 const token = localStorage.getItem("token");

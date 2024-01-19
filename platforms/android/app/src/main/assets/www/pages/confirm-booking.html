@@ -12,30 +12,32 @@
       </div>
     </div>
     <div class="page-content login-screen-content">
-      <h2
-        class="title text-align-center"
-        id="accept-booking"
-        style="display: none"
-      >
-        Vous confirmez accepter le trajet du passager et ses conditions.
-        Voulez-vous continuer ?
-      </h2>
-
-      <h2
-        class="title text-align-center"
-        id="reject-booking"
-        style="display: none"
-      >
-        Vous confirmez ne pas accepter la réservation. Voulez-vous continuer ?
-      </h2>
-
-      <div class="content-block" id="button-confirm">
-        <a
-          class="button button-big button-block button-fill button-round color-black"
-          @click="${confirmBooking}"
-          tkey="POST"
-          >Je confirme</a
+      <div class="block block-strong-ios block-outline-ios">
+        <h2
+          class="title text-align-center"
+          id="accept-booking"
+          style="display: none"
         >
+          Vous confirmez accepter le trajet du passager et ses conditions.
+          Voulez-vous continuer ?
+        </h2>
+
+        <h2
+          class="title text-align-center"
+          id="reject-booking"
+          style="display: none"
+        >
+          Vous confirmez ne pas accepter la réservation. Voulez-vous continuer ?
+        </h2>
+
+        <div class="content-block" id="button-confirm">
+          <a
+            class="button button-big button-block button-fill button-round color-black"
+            @click="${confirmBooking}"
+            tkey="POST"
+            >Je confirme</a
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -107,6 +109,7 @@
           })
           .then((data) => {
             // Process the newly created user data
+            console.log("Data:", data);
             $f7.dialog.close();
             localStorage.removeItem("departure");
             localStorage.removeItem("numberofSeats");

@@ -15,6 +15,12 @@
     },
     "cordova-plugin-fcm-with-dependecy-updated": {
       "PACKAGE_NAME": "com.matoua.app"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.matoua.app"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.matoua.app"
     }
   },
   "dependent_plugins": {}

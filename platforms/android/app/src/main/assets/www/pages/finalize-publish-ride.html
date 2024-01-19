@@ -286,6 +286,7 @@
     });
 
     $on("pageInit", () => {
+	$f7.dialog.close();
       const departure = localStorage.getItem("departureName");
       const destination = localStorage.getItem("destinationName");
       const departureDate = localStorage.getItem("departureDate");
@@ -334,6 +335,7 @@
         })
           .then((response) => {
             if (!response.ok) {
+			$f7.dialog.close();
               if (response.status == 401) {
                 app.dialog.alert(
                   "Ooups! E-mail ou mot de passe incorrect ressayez svp !"
@@ -412,6 +414,7 @@
               })
                 .then((response) => {
                   if (!response.ok) {
+				  $f7.dialog.close();
                     throw new Error("Network response was not ok");
                     app.dialog.alert(
                       "Ooups! Une erreur s'est produite ressayez svp !"
@@ -464,6 +467,7 @@
           })
             .then((response) => {
               if (!response.ok) {
+			  $f7.dialog.close();
                 throw new Error("Network response was not ok");
                 app.dialog.alert(
                   "Ooups! Une erreur s'est produite ressayez svp !"
@@ -525,6 +529,7 @@
       })
         .then((response) => {
           if (!response.ok) {
+		  $f7.dialog.close();
             if (response.status == 401) {
               app.dialog.alert(
                 "Cette annonce existe déjà ! Veuillez essayer à nouveau SVP !"

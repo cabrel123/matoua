@@ -240,12 +240,53 @@
         localStorage.setItem("destinationName", destinationName);
         localStorage.setItem("departureDate", departureDate);
         localStorage.setItem("numberofSeats", numberofSeats);
-        setTimeout(function () {
-          $f7.dialog.close();
-          var mainView = app.view.main;
-          mainView.router.navigate("/rider-list/");
-        }, 2000);
+
+        searchReseult(departure, destination, departureDate);
       }
+    };
+
+    const searchReseult = (departure, destination, departureDate) => {
+      const userId = localStorage.getItem("userId");
+
+      const apiUrl =
+        "https://matoua.com/api/search?departure=" +
+        departure +
+        "&destination=" +
+        destination +
+        "&departureDate=" +
+        departureDate +
+        "";
+      let content = "";
+
+      // Make a GET request using the Fetch API
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((bookride) => {
+          // Process the retrieved user data
+          var content = "";
+          var maxRow = bookride.length;
+          var i = "";
+          if (maxRow == 0) {
+            $f7.dialog.close();
+            $f7.dialog.alert(
+              "Désolé! Aucun résultat ne correspond à vos critères de recherche"
+            );
+          } else {
+            setTimeout(function () {
+              $f7.dialog.close();
+              var mainView = app.view.main;
+              mainView.router.navigate("/rider-list/");
+            }, 2000);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     };
 
     $on("pageBeforeRemove", () => {
