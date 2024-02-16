@@ -153,7 +153,7 @@
     color: #c0000a;
   }
   .color-gray {
-    color: #dbe2f9;
+    color: #3b3b3b;
   }
 </style>
 <script>
@@ -241,11 +241,23 @@
         localStorage.setItem("departureDate", departureDate);
         localStorage.setItem("numberofSeats", numberofSeats);
 
-        searchReseult(departure, destination, departureDate);
+        searchReseult(
+          departure,
+          destination,
+          departureDate,
+          departureName,
+          destinationName
+        );
       }
     };
 
-    const searchReseult = (departure, destination, departureDate) => {
+    const searchReseult = (
+      departure,
+      destination,
+      departureDate,
+      departureName,
+      destinationName
+    ) => {
       const userId = localStorage.getItem("userId");
       const lang = localStorage.getItem("lang");
 
@@ -277,9 +289,47 @@
           var i = "";
           if (maxRow == 0) {
             $f7.dialog.close();
-            $f7.dialog.alert(
-              "Désolé! Aucun résultat ne correspond à vos critères de recherche"
-            );
+            $f7.dialog
+              .create({
+                text: "Désolé! Aucun résultat ne correspond à vos critères de recherche ! Voulez-voulez créer une alerte pour ce trajet ?",
+                buttons: [
+                  {
+                    text: "Modifier",
+                  },
+                  {
+                    text: "Publier ce trajet",
+                  },
+                ],
+                onClick: function (dialog, index) {
+                  if (index === 0) {
+                    //Button 1 clicked
+                    console.log("1");
+                  } else if (index === 1) {
+                    createNatification(
+                      departure,
+                      destination,
+                      departureDate,
+                      departureName,
+                      destinationName
+                    );
+                  }
+                },
+                verticalButtons: false,
+              })
+              .open();
+
+            // $f7.dialog.confirm(
+            //   "Désolé! Aucun résultat ne correspond à vos critères de recherche ! Voulez-voulez créer une alerte pour ce trajet ?",
+            //   function () {
+            //     createNatification(
+            //       departure,
+            //       destination,
+            //       departureDate,
+            //       departureName,
+            //       destinationName
+            //     );
+            //   }
+            // );
           } else {
             setTimeout(function () {
               $f7.dialog.close();
@@ -291,6 +341,80 @@
         .catch((error) => {
           console.error("Error:", error);
         });
+    };
+
+    const createNatification = (
+      departure,
+      destination,
+      departureDate,
+      departureName,
+      destinationName
+    ) => {
+      $f7.dialog.preloader("Un instant svp...");
+      const userId = localStorage.getItem("userId");
+      const lang = localStorage.getItem("lang");
+
+      if (userId == "" || userId == null || userId == undefined) {
+        localStorage.setItem("departure", departure);
+        localStorage.setItem("departureName", departureName);
+        localStorage.setItem("destination", destination);
+        localStorage.setItem("destinationName", destinationName);
+        localStorage.setItem("departureDate", departureDate);
+
+        var mainView = app.view.main;
+        mainView.router.navigate("/finalize-notifications-ride/");
+      } else {
+        // API endpoint for creating a new user
+        const apiUrl2 = "https://matoua.com/api/notifications";
+
+        // Form data to be sent in the request body
+        const formData = {
+          departure: departure,
+          destination: destination,
+          departureDate: departureDate,
+          publisher: userId,
+          lang: lang,
+        };
+
+        // Make a POST request using the Fetch API
+        fetch(apiUrl2, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              if (response.status == 401) {
+                app.dialog.alert(
+                  "Cette alerte existe déjà ! Veuillez essayer à nouveau SVP !"
+                );
+              } else {
+                throw new Error("Network response was not ok22");
+                app.dialog.alert(
+                  "Ooups! Une erreur s'est produite ressayez svp !"
+                );
+              }
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // Process the newly created user data
+            //console.log("New Data:", data);
+            $f7.dialog.close();
+            $f7.dialog.alert(
+              "Votre publication a été enregistrée avec succès !",
+              function () {
+                var mainView = app.view.main;
+                mainView.router.navigate("/notifications/");
+              }
+            );
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
     };
 
     $on("pageBeforeRemove", () => {

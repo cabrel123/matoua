@@ -1,0 +1,239 @@
+<template>
+  <div class="page page-confirm-ride">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a href="/notifications/" class="link">
+            <i class="icon icon-back"></i>
+            <span class="if-not-md">Back</span>
+          </a>
+        </div>
+        <div class="title">Confirmation</div>
+      </div>
+    </div>
+    <div class="page-content login-screen-content">
+      <div class="block block-strong-ios block-outline-ios">
+        <div class="card">
+          <div class="card-content">
+            <div class="data-table">
+              <table>
+                <tbody>
+                  <tr>
+                    <td class="label-cell">Départ</td>
+                    <td class="numeric-cell departure"></td>
+                  </tr>
+                  <tr>
+                    <td class="label-cell">Destination</td>
+                    <td class="numeric-cell destination"></td>
+                  </tr>
+                  <tr>
+                    <td class="label-cell">Date de départ</td>
+                    <td class="numeric-cell departureDate"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <form>
+          <div class="list">
+            <ul>
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">
+                    Montant <span class="color-red">*</span>
+                  </div>
+                  <div class="item-input-wrap">
+                    <input
+                      type="text"
+                      placeholder=""
+                      id="amounts"
+                      name="amount"
+                      required
+                    />
+                  </div>
+                </div>
+              </li>
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">
+                    Lieu de départ <span class="color-gray">(optionnel)</span>
+                  </div>
+                  <div class="item-input-wrap">
+                    <input
+                      type="text"
+                      placeholder=""
+                      id="departureLocations"
+                      name="departureLocation"
+                    />
+                  </div>
+                </div>
+              </li>
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">
+                    Lieu d'arrivée <span class="color-gray">(optionnel)</span>
+                  </div>
+                  <div class="item-input-wrap">
+                    <input
+                      type="text"
+                      placeholder=""
+                      id="destinationLocations"
+                      name="destinationLocation"
+                    />
+                  </div>
+                </div>
+              </li>
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">
+                    Nb. de passagers <span class="color-red">*</span>
+                  </div>
+                  <div class="item-input-wrap input-dropdown-wrap">
+                    <select
+                      name="passenger"
+                      placeholder="Please choose..."
+                      id="passengers"
+                      required
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                    </select>
+                  </div>
+                </div>
+              </li>
+              <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">
+                    Modèle de voiture
+                    <span class="color-gray">(optionnel)</span>
+                  </div>
+                  <div class="item-input-wrap">
+                    <input type="text" placeholder="" id="cars" name="car" />
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="list inset">
+            <ul>
+              <li>
+                <a
+                  class="list-button button button-fill button-round color-black"
+                  @click="${confirmBooking}"
+                  >Confirmer</a
+                >
+              </li>
+            </ul>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
+<style>
+  .img-responsive {
+    margin: 0 auto;
+    display: block;
+    max-width: 200px;
+  }
+
+  .page-confirm-ride .list .item-inner {
+    align-items: left;
+  }
+
+  .color-red {
+    color: #c0000a;
+  }
+  .color-gray {
+    color: #383737;
+  }
+</style>
+<script>
+  export default (props, { $, $f7, $f7router, $on }) => {
+    $on("pageInit", () => {
+      $(".departure").html(props.departureName);
+      $(".destination").html(props.destinationName);
+      $(".departureDate").html(props.departureDate);
+    });
+
+    const confirmBooking = () => {
+      $f7.dialog.preloader("Un instant svp...");
+      let departure = props.departure;
+      let destination = props.destination;
+      let departureDate = props.departureDate;
+      let notificationId = props.notificationId;
+      let publisher = props.publisher;
+      let amount = $("#amounts").val();
+      let departureLocation = $("#departureLocations").val();
+      let destinationLocation = $("#destinationLocations").val();
+      let car = $("#cars").val();
+      let passenger = $("#passengers").val();
+      const userId = localStorage.getItem("userId");
+      const lang = localStorage.getItem("lang");
+
+      // API endpoint for creating a new user
+      const apiUrl3 = "https://matoua.com/api/alerts";
+
+      // Form data to be sent in the request body
+      const formData = {
+        departure: departure,
+        destination: destination,
+        departureDate: departureDate,
+        passenger: passenger,
+        amount: amount,
+        departureLocation: departureLocation,
+        destinationLocation: destinationLocation,
+        driver: userId,
+        car: car,
+        lang: lang,
+        notificationId: notificationId,
+        publisher: publisher,
+      };
+
+      fetch(apiUrl3, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            $f7.dialog.close();
+            if (response.status == 401) {
+              app.dialog.alert(
+                "Cette alerte existe déjà ! Veuillez essayer à nouveau SVP !"
+              );
+            } else {
+              throw new Error("Network response was not ok22");
+              app.dialog.alert(
+                "Ooups! Une erreur s'est produite ressayez svp !"
+              );
+            }
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Process the newly created user data
+          $f7.dialog.close();
+          $f7.dialog.alert(
+            "Votre publication du trajet a été enregistrée avec succès !",
+            function () {
+              var mainView = app.view.main;
+              mainView.router.navigate("/my-ride/");
+            }
+          );
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    };
+
+    return $render;
+  };
+</script>

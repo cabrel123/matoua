@@ -82,7 +82,7 @@
         $f7.dialog.alert("Veuillez sélectionner une réservation SVP !");
       } else {
         // API endpoint for creating a new user
-        const apiUrl3 = "https://matoua.com/api/validate";
+        const apiUrl3 = "https://matoua.com/api/booking/validate";
 
         // Form data to be sent in the request body
         const formData = {
@@ -99,6 +99,7 @@
           body: JSON.stringify(formData),
         })
           .then((response) => {
+            $f7.dialog.close();
             if (!response.ok) {
               throw new Error("Network response was not ok");
               app.dialog.alert(

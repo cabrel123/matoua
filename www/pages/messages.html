@@ -1,0 +1,124 @@
+<template>
+  <div class="page page-messages">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a class="link back">
+            <i class="icon icon-back"></i>
+            <span class="if-not-md">Back</span>
+          </a>
+        </div>
+        <div class="title">Inbox</div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div
+        class="list media-list list-strong list-outline-ios list-dividers-ios inset-md"
+      >
+        <ul class="notificationslist"></ul>
+      </div>
+    </div>
+  </div>
+</template>
+<style>
+  .page-messages .list .item-inner {
+    min-height: 100px;
+    border-bottom: 1px solid #ddd;
+  }
+  .page-messages .list .item-text {
+    overflow: inherit;
+    -webkit-box-orient: inherit;
+  }
+</style>
+<script>
+  export default (props, { $f7, $on }) => {
+    var options = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    };
+    var opt_weekday = { weekday: "long" };
+    const mark = () => {
+      $f7.dialog.alert("Mark");
+    };
+
+    $on("pageInit", () => {
+      getMessages();
+    });
+
+    const getMessages = () => {
+      const userId = localStorage.getItem("userId");
+      // Specify the API endpoint for user data
+      const apiUrl = "https://matoua.com/api/fcm/user/" + userId;
+      let content = "";
+
+      // Make a GET request using the Fetch API
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((fcm) => {
+          // Process the retrieved user data
+
+          var content = "";
+
+          var maxRow = fcm.length;
+
+          var i = "";
+
+          if (maxRow == 0) {
+            content += '<div class="card card-outline margin-top">';
+            content +=
+              '<div class="card-content card-content-padding">Vous n\'avez aucun message pour le moment</div>';
+            content += "</div>";
+          } else {
+            for (i = 0; i < maxRow; i++) {
+              var today = new Date(fcm[i]["created_at"]);
+              var weekday = toTitleCase(
+                today.toLocaleDateString("fr-FR", opt_weekday)
+              );
+              var createDate =
+                weekday + ", " + today.toLocaleDateString("fr-FR", options);
+              content += '<li class="swipeout">';
+              content += ' <div class="swipeout-content">';
+              content += '<a class="item-link item-content">';
+              content += '<div class="item-inner">';
+              content += '<div class="item-title-row">';
+              content += '<div class="item-before">' + createDate + "</div>";
+              content += "</div>";
+              content += '<div class="item-text">';
+              content += "" + fcm[i]["message"] + "";
+              content += " </div>";
+              content += "</div>";
+              content += " </a>";
+              content += " </div>";
+              content += '<div class="swipeout-actions-right">';
+              content +=
+                '<a class="color-green swipeout-overswipe" @click="${mark}">Marquer comme lu</a>';
+              content += "</div>";
+              content += "</li>";
+            }
+          }
+
+          $(".notificationslist").append(content);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    };
+
+    const toTitleCase = (str) => {
+      return str.replace(/\w\S*/g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      });
+    };
+
+    return $render;
+  };
+</script>

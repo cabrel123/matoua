@@ -145,7 +145,7 @@
               <li class="item-content item-input">
                 <div class="item-inner">
                   <div class="item-title item-label">
-                    Lieu de départ <span class="color-red">*</span>
+                    Lieu de départ <span class="color-gray">(optionnel)</span>
                   </div>
                   <div class="item-input-wrap">
                     <input
@@ -217,7 +217,7 @@
     color: #c0000a;
   }
   .color-gray {
-    color: #dbe2f9;
+    color: #413f3f;
   }
 </style>
 <script>
@@ -302,14 +302,14 @@
       let destinationLocation = $("input#destinationLocation").val();
       let car = $("input#car").val();
       const userId = localStorage.getItem("userId");
+      const lang = localStorage.getItem("lang");
 
       if (
         departure == "" ||
         destination == "" ||
         departureDate == "" ||
         amount == "" ||
-        passenger == "" ||
-        departureLocation == ""
+        passenger == ""
       ) {
         $f7.dialog.close();
         app.dialog.alert("Veuillez renseigner tous les champs SVP !");
@@ -343,6 +343,7 @@
             destinationLocation: destinationLocation,
             driver: userId,
             car: car,
+            lang: lang,
           };
 
           // Make a POST request using the Fetch API

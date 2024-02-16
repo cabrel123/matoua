@@ -4,7 +4,7 @@
       <div class="navbar-bg"></div>
       <div class="navbar-inner sliding">
         <div class="left">
-          <a class="link back">
+          <a class="link" href="/home/">
             <i class="icon icon-back"></i>
           </a>
         </div>
@@ -324,11 +324,25 @@
                 "</h5>";
               content += "<h5>Montant : " + booking[i]["amount"] + " FCFA</h5>";
               content +=
-                "<h5> Date de départ" + booking[i]["departureDate"] + "</h5>";
+                "<h5> Date de départ : " +
+                booking[i]["departureDate"] +
+                "</h5>";
               content +=
-                "<h5> Date de réservation" +
+                "<h5> Date de réservation : " +
                 booking[i]["bookingDate"] +
                 "</h5>";
+              content += '<span class="display-flex">';
+              if (booking[i]["ifarrived"] == 0 && booking[i]["status"] == 1) {
+                content +=
+                  '<a href="/confirm-booking-payment/' +
+                  booking[i]["bookrideId"] +
+                  "/" +
+                  booking[i]["passenger"] +
+                  "/" +
+                  booking[i]["driver"] +
+                  '/" class="button button-fill color-green"> Confimer l\'arrivée</a>';
+              }
+              content += "</span>";
               content += " </div>";
               content += " </div>";
               content += " </div>";

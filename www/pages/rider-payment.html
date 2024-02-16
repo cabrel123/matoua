@@ -92,7 +92,7 @@
               type="text"
               placeholder="Montant"
               name="amount"
-              id="amount-1"
+              id="amounts-1"
               value="4000"
             />
           </p>
@@ -585,6 +585,15 @@
 
     const getBookrideDetail = (bookrideId) => {
       const numberofSeats = localStorage.getItem("numberofSeats");
+      if (
+        numberofSeats == "" ||
+        numberofSeats == null ||
+        numberofSeats == undefined
+      ) {
+        var nbPassenger = 1;
+      } else {
+        var nbPassenger = numberofSeats;
+      }
       // API endpoint for creating a new user
       const apiUrl2 = "https://matoua.com/api/detail/" + bookrideId;
 
@@ -608,11 +617,11 @@
           $(".departureLocation").html(data[0]["departureLocation"]);
           $(".destinationLocation").html(data[0]["destinationLocation"]);
           $(".car").html(data[0]["car"]);
-          $(".amount").html(data[0]["amount"] * numberofSeats);
-          $("#amount-1").val(data[0]["amount"] * numberofSeats);
+          $(".amount").html(data[0]["amount"] * nbPassenger);
+          $("#amounts-1").val(data[0]["amount"] * nbPassenger);
 
           // check if number of seat request is greatest than passenger authorize by driver
-          if (numberofSeats > data[0]["passenger"]) {
+          if (nbPassenger > data[0]["passenger"]) {
             app.dialog.alert(
               "Attention! Le nombre de siège que vous demandez est supérieur au nombre de place offert par le chauffeur !"
             );
@@ -624,9 +633,12 @@
     };
 
     const requestPayment = () => {
-      let amount = $("input#amount-1").val();
+      $f7.dialog.preloader("Un instant svp...");
+      let amount = $("input#amounts-1").val();
       let omphone = $("input#omphone").val();
       let momophone = $("input#momophone").val();
+      console.log("omphone", omphone);
+      console.log("momophone", momophone);
       if (
         amount == null ||
         amount == "" ||
@@ -635,64 +647,91 @@
       ) {
         $f7.dialog.alert("Le montant est incorrect");
       } else {
-        const bookrideId = props.bookrideId;
-        const userId = localStorage.getItem("userId");
-        const numberofSeats = localStorage.getItem("numberofSeats");
+        if (omphone == "" && momophone == "") {
+          $f7.dialog.close();
+          $f7.dialog.alert(
+            "Veuillez sélectionner le mode de paiement et renseigner votre numéro de compte SVP !"
+          );
+        } else {
+          const bookrideId = props.bookrideId;
+          const userId = localStorage.getItem("userId");
+          const numberofSeats = localStorage.getItem("numberofSeats");
+          if (
+            numberofSeats == "" ||
+            numberofSeats == null ||
+            numberofSeats == undefined
+          ) {
+            var nbPassenger = 1;
+          } else {
+            var nbPassenger = numberofSeats;
+          }
 
-        // API endpoint for creating a new user
-        const apiUrl3 = "https://matoua.com/api/booking";
+          if (momophone == "" && omphone != "") {
+            var transactionPhone = omphone;
+            var transactionType = 1;
+          } else {
+            var transactionPhone = momophone;
+            var transactionType = 2;
+          }
 
-        // Form data to be sent in the request body
-        const formData = {
-          bookrideId: bookrideId,
-          passenger: userId,
-          numberofSeats: numberofSeats,
-          status: 2,
-        };
+          // API endpoint for creating a new user
+          const apiUrl3 = "https://matoua.com/api/payment";
 
-        // Make a POST request using the Fetch API
-        fetch(apiUrl3, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        })
-          .then((response) => {
-            if (!response.ok) {
-              if (response.status == 401) {
-                app.dialog.alert(
-                  "Cette réservation existe déjà ! Veuillez essayer à nouveau SVP !"
-                );
-              } else {
-                throw new Error("Network response was not ok");
-                app.dialog.alert(
-                  "Ooups! Une erreur s'est produite ressayez svp !"
-                );
-              }
-            }
-            return response.json();
+          // Form data to be sent in the request body
+          const formData = {
+            bookrideId: bookrideId,
+            passenger: userId,
+            numberofSeats: nbPassenger,
+            status: 2,
+            phone: transactionPhone,
+            amount: amount,
+            transactionType: transactionType,
+          };
+
+          // Make a POST request using the Fetch API
+          fetch(apiUrl3, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
           })
-          .then((data) => {
-            // Process the newly created user data
-            //console.log("New Data:", data);
-            localStorage.removeItem("departure");
-            localStorage.removeItem("numberofSeats");
-            localStorage.removeItem("destination");
-            localStorage.removeItem("departureDate");
-
-            $f7.dialog.alert(
-              "Votre paiement de " + amount + " FCFA a bien été effectué !",
-              function () {
-                $f7.popup.close();
-                var mainView = app.view.main;
-                mainView.router.navigate("/ride-history/");
+            .then((response) => {
+              $f7.dialog.close();
+              if (!response.ok) {
+                if (response.status == 401) {
+                  app.dialog.alert(response.message);
+                } else {
+                  throw new Error("Network response was not ok");
+                  app.dialog.alert(
+                    "Ooups! Une erreur s'est produite ressayez svp !"
+                  );
+                }
               }
-            );
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
+              return response.json();
+            })
+            .then((data) => {
+              // Process the newly created user data
+              $f7.dialog.close();
+              localStorage.removeItem("departure");
+              localStorage.removeItem("numberofSeats");
+              localStorage.removeItem("destination");
+              localStorage.removeItem("departureDate");
+
+              $f7.dialog.alert(
+                "Votre paiement de " + amount + " FCFA a bien été effectué !",
+                function () {
+                  $f7.popup.close();
+                  var mainView = app.view.main;
+                  mainView.router.navigate("/ride-history/");
+                }
+              );
+            })
+            .catch((error) => {
+              $f7.dialog.close();
+              console.error("Error:", error);
+            });
+        }
       }
     };
 

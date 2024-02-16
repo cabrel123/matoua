@@ -143,7 +143,7 @@
     color: #c0000a;
   }
   .color-gray {
-    color: #dbe2f9;
+    color: #363636;
   }
 </style>
 <script>
@@ -195,7 +195,7 @@
               })
                 .then((response) => {
                   if (!response.ok) {
-				  $f7.dialog.close();
+                    $f7.dialog.close();
                     throw new Error("Network response was not ok");
                     app.dialog.alert(
                       "Ooups! Une erreur s'est produite ressayez svp !"

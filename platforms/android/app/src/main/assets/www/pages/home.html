@@ -10,9 +10,9 @@
           </a>
         </div>
         <div class="center">
-          <span class="title logo-name">MAT<span class="green">OUA</span></span>
-          <br />
-          <span class="text-center welcome" style="display: none"
+          <!-- <span class="title logo-name">MAT<span class="green">OUA</span></span>
+          <br /> -->
+          <span class="title text-center welcome" style="display: none"
             >Bienvenue, <span class="user-fullname"></span
           ></span>
         </div>
@@ -24,135 +24,66 @@
         </div>
       </div>
     </div>
-    <div class="toolbar toolbar-bottom" id="toolbar" style="display: none">
+    <div
+      class="toolbar toolbar-bottom tabbar tabbar-icons"
+      id="toolbar"
+      style="display: none"
+    >
       <div class="toolbar-inner">
-        <a href="/my-ride/" class="link"
-          ><i class="icon f7-icons if-not-md">car_fill</i>
-          <i class="icon material-icons md-only">drive_eta</i> Mes trajets</a
-        >
-        <a href="/ride-history/" class="link"
-          ><i class="icon f7-icons if-not-md">cart</i>
-          <i class="icon material-icons md-only">shopping_basket</i> Mes
-          réservations</a
-        >
+        <a href="/my-ride/" class="tab-link">
+          <i class="icon f7-icons if-not-md">car_fill</i>
+          <i class="icon material-icons md-only">drive_eta</i>
+          <span class="tabbar-label">Mes trajets</span>
+        </a>
+        <a href="/notifications/" class="tab-link">
+          <i class="icon f7-icons if-not-md"
+            >bell<span class="badge color-red white notif" style="display: none"
+              ><span class="totalnotif">0</span></span
+            ></i
+          >
+          <i class="icon material-icons md-only"
+            >notifications<span
+              class="badge color-red white notif"
+              style="display: none"
+              ><span class="totalnotif">0</span></span
+            ></i
+          >
+          <span class="tabbar-label">Alertes</span>
+        </a>
+        <a href="/messages/" class="tab-link">
+          <i class="icon f7-icons if-not-md"
+            >chat_bubble_text<span
+              class="badge color-red white msg"
+              style="display: none"
+              ><span class="totalmsg">0</span></span
+            ></i
+          >
+          <i class="icon material-icons md-only"
+            >chat<span class="badge color-red white msg" style="display: none"
+              ><span class="totalmsg">0</span></span
+            ></i
+          >
+          <span class="tabbar-label">Inbox</span>
+        </a>
+        <a href="/ride-history/" class="tab-link">
+          <i class="icon f7-icons if-not-md">cart</i>
+          <i class="icon material-icons md-only">shopping_basket</i>
+          <span class="tabbar-label">Mes réservations</span>
+        </a>
       </div>
     </div>
+
     <div class="page-content">
       <div class="list-strong inset list-dividers-ios searchbar-hide-on-search">
         <h1 class="text-center searchbar-found padding">
           Un vaste choix de trajets à <span class="green">petits prix !</span>
         </h1>
-        <!-- <div
-          class="list list-strong-ios list-outline-ios list-dividers-ios form-store-data"
-          id="demo-form"
-        >
-          <ul class="findrideList">
-            <div class="card">
-              <div class="card-content">
-                <li class="item-content item-input">
-                  <div class="item-inner">
-                    <div class="item-title item-label">
-                      Départ <span class="color-red">*</span>
-                    </div>
-                    <div class="item-input-wrap input-dropdown-wrap">
-                      <select
-                        name="departure"
-                        id="find-departure-2"
-                        type="text"
-                        class="townList"
-                        required
-                      >
-                        <option value="">Choisir</option>
-                      </select>
-                    </div>
-                  </div>
-                </li>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-content">
-                <li class="item-content item-input">
-                  <div class="item-inner">
-                    <div class="item-title item-label">
-                      Destination <span class="color-red">*</span>
-                    </div>
-                    <div class="item-input-wrap input-dropdown-wrap">
-                      <select
-                        name="destination"
-                        id="find-destination-2"
-                        type="text"
-                        class="townList2"
-                        required
-                      >
-                        <option value="">Choisir</option>
-                      </select>
-                    </div>
-                  </div>
-                </li>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-content">
-                <li class="item-content item-input">
-                  <div class="item-inner">
-                    <div class="item-title item-label">
-                      Date de départ <span class="color-red">*</span>
-                    </div>
-                    <div class="item-input-wrap">
-                      <input
-                        type="text"
-                        placeholder=""
-                        readonly="readonly"
-                        id="find-departureDate-2"
-                        name="departureDate"
-                        required
-                      />
-                    </div>
-                  </div>
-                </li>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-content">
-                <li class="item-content item-input">
-                  <div class="item-inner">
-                    <div class="item-title item-label">
-                      Nb. de passagers <span class="color-red">*</span>
-                    </div>
-                    <div class="item-input-wrap input-dropdown-wrap">
-                      <select
-                        name="numberofSeats"
-                        placeholder="Please choose..."
-                        id="numberofSeats-2"
-                        required
-                      >
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                      </select>
-                    </div>
-                  </div>
-                </li>
-              </div>
-            </div>
-          </ul>
-          <div class="block">
-            <a
-              class="button button-raised button-large button-fill findrideBtn button-round color-black"
-              @click="${findRide}"
-            >
-              Rechercher</a
-            >
-          </div>
-        </div> -->
 
-        <!-- <h1 class="text-center searchbar-found">N'attendez plus !</h1> -->
         <div class="block-outline-ios block-strong padding">
           <p class="row margin-30">
             <a
               href="/find-a-ride/"
-              class="button button-large button-round button-block button-fill color-black font-size-22"
+              class="button button-large button-round button-block button-fill color-black font-size-22 width-100"
               ><i class="icon f7-icons if-not-md">search</i>
               <i class="icon material-icons md-only">search</i> Trouver un
               trajet</a
@@ -161,7 +92,7 @@
           <p class="row margin-30">
             <a
               href="/publish-ride/"
-              class="button button-active button-large button-raised button-block button-round color-white font-size-22"
+              class="button button-active button-large button-raised button-block button-round color-white font-size-22 width-100"
               ><i class="icon f7-icons if-not-md">location</i>
               <i class="icon material-icons md-only">send</i> Publier un
               trajet</a
@@ -207,8 +138,7 @@
   }
 
   .page-home .title {
-    font-size: 30px !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
     color: black !important;
   }
   .page-home .page-content h1 {
@@ -250,6 +180,9 @@
   .padding-left-25 {
     padding-left: 25px;
   }
+  .white {
+    color: #fff;
+  }
 </style>
 <script>
   export default (props, { $f7, $, $on }) => {
@@ -258,6 +191,7 @@
 
       const token = localStorage.getItem("token");
       const fullname = localStorage.getItem("fullname");
+
       if (token == "" || token == null || token == "undefined") {
         $("#profile-btn").attr("href", "/signin/");
         $(".welcome").hide();
@@ -269,85 +203,42 @@
         $(".user-fullname").html(fullname);
         $("#profile-btn").attr("href", "/user-profile/");
         $("#toolbar").show();
+
+        getNotifications();
       }
     });
 
-    // Specify the API endpoint for user data
-    /*     const apiUrl = "https://matoua.com/api/town";
-    let content = "";
-    let content2 = "";
-    let data = [];
+    const getNotifications = () => {
+      const userId = localStorage.getItem("userId");
+      // Specify the API endpoint for user data
+      const apiUrl = "https://matoua.com/api/allnotification/";
 
-    // Make a GET request using the Fetch API
-    fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((town) => {
-        // Process the retrieved user data
-        //console.log("town Data:", town);
-        var content = "";
-        var content2 = "";
-        var maxRow = town.length;
-
-        var i = "";
-        content += '<option value="">';
-        content += "Départ";
-        content += "</option>";
-        content2 += '<option value="">';
-        content2 += "Destination";
-        content2 += "</option>";
-        for (i = 0; i < maxRow; i++) {
-          content +=
-            '<option value="' +
-            town[i]["town_id"] +
-            "-" +
-            town[i]["town_name"] +
-            '">';
-          content += "" + town[i]["town_name"] + "";
-          content += "</option>";
-          content += "<br/>";
-        }
-
-        $(".townList").append(content);
-        $(".townList2").append(content2 + content);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      }); */
-
-    const findRide = () => {
-      let departure = $("#find-departure-2").val().split("-")[0];
-      let departureName = $("#find-departure-2").val().split("-")[1];
-      let destination = $("#find-destination-2").val().split("-")[0];
-      let destinationName = $("#find-destination-2").val().split("-")[1];
-      let departureDate = $("#find-departureDate-2").val();
-      let numberofSeats = $("#numberofSeats-2").val();
-
-      if (
-        departure == "" ||
-        destination == "" ||
-        departureDate == "" ||
-        numberofSeats == ""
-      ) {
-        app.dialog.alert("Veuillez renseigner tous les champs SVP !");
-      } else {
-        $f7.dialog.preloader("Un instant svp...");
-        localStorage.setItem("departure", departure);
-        localStorage.setItem("departureName", departureName);
-        localStorage.setItem("destination", destination);
-        localStorage.setItem("destinationName", destinationName);
-        localStorage.setItem("departureDate", departureDate);
-        localStorage.setItem("numberofSeats", numberofSeats);
-        setTimeout(function () {
-          $f7.dialog.close();
-          var mainView = app.view.main;
-          mainView.router.navigate("/rider-list/");
-        }, 2000);
-      }
+      // Make a GET request using the Fetch API
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((notifications) => {
+          // Process the retrieved user data
+          var maxRow = notifications.length;
+          $(".totalnotif").html(maxRow);
+          let isViewNotification = localStorage.getItem("isViewNotification");
+          if (
+            isViewNotification == "" ||
+            isViewNotification == null ||
+            isViewNotification == "undefined"
+          ) {
+            $(".notif").show();
+          } else {
+            $(".notif").hide();
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     };
 
     return $render;

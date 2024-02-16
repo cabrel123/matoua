@@ -725,15 +725,21 @@
   .card-header {
     font-size: 14px;
   }
+  .color-green2 {
+    background: rgba(15, 200, 116, 0.29) !important;
+    color: #1b9a59 !important;
+  }
+
+  .shape-circle {
+    background: rgba(15, 200, 116, 0.22);
+    padding: 5px;
+  }
 </style>
 <script>
   export default (
     props,
     { $f7, $f7router, $onMounted, $onBeforeUnmount, $on }
   ) => {
-    let popup;
-    let popupSwipe;
-
     $on("pageInit", () => {
       const departure = localStorage.getItem("departureName");
       const destination = localStorage.getItem("destinationName");
@@ -763,6 +769,15 @@
       const departureDate = localStorage.getItem("departureDate");
       const userId = localStorage.getItem("userId");
       const lang = localStorage.getItem("lang");
+
+      var options = {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      };
+      var opt_weekday = { weekday: "long" };
 
       const apiUrl =
         "https://matoua.com/api/search?departure=" +
@@ -803,6 +818,21 @@
             );
           } else {
             for (i = 0; i < maxRow; i++) {
+              var today = new Date(bookride[i]["departureDate"]);
+              var weekday = toTitleCase(
+                today.toLocaleDateString("fr-FR", opt_weekday)
+              );
+              var departureDate =
+                weekday + ", " + today.toLocaleDateString("fr-FR", options);
+
+              const driverNameCount = bookride[i]["driverName"].length;
+              if (driverNameCount > 10) {
+                var driverName =
+                  bookride[i]["driverName"].substring(0, 9) + "..";
+              } else {
+                var driverName = bookride[i]["driverName"];
+              }
+
               content +=
                 '<li class="col-100 medium-50 large-100 xlarge-50 overflow-hidden width-100">';
               content += '<div class="item-content height-100 no-padding">';
@@ -810,10 +840,16 @@
                 '<div class="item-inner item-cell height-100 no-padding">';
               content += '<div class="item-row">';
               content +=
-                '<div class="item-cell flex-shrink-0 width-auto padding-left">';
+                '<div class="item-cell flex-shrink-0 width-auto padding-left text-align-center">';
               content +=
                 '<img src="assets/img/driver-m.png" loading="lazy" height="50" width="50" class="shape-circle" alt=""/>';
-              content += "<p>";
+              content +=
+                '<div class="font-size-16 font-weight-bold multi-line-text lines-2 text-color-body padding-left-half">';
+              content += '<span class="rider-name"> ' + driverName + " </span>";
+              content +=
+                '<span class="color-green"><i class="icon material-icons font-size-12 color-green">check_box</i></span>';
+              content += "</div>";
+              content += "<p class='no-margin'>";
               content +=
                 '<i class="icon material-icons font-size-12 color-yellow">star</i>';
               content +=
@@ -826,7 +862,7 @@
                 '<div class="item-cell display-flex flex-direction-column align-self-stretch margin-horizontal-half padding-vertical-half">';
               content += '<div class="single-line-text">';
               content +=
-                '<a href="#" class="badge color-amber font-weight-bold link text-color-black">' +
+                '<a href="#" class="badge color-green2 font-weight-bold link text-color-black">' +
                 bookride[i]["passenger"] +
                 " sièges disponibles</a>";
               content +=
@@ -836,15 +872,7 @@
               content += "</div>";
               content +=
                 '<div class="flex-direction-column height-100 text-color-gray">';
-              content +=
-                '<div class="font-size-16 font-weight-bold multi-line-text lines-2 text-color-body padding-left-half">';
-              content +=
-                '<span class="rider-name"> ' +
-                bookride[i]["driverName"] +
-                " </span>";
-              content +=
-                '<span class="color-green"><i class="icon material-icons font-size-12 color-green">check_box</i></span>';
-              content += "</div>";
+
               content +=
                 '<div class="font-size-12 margin-top-auto padding-top-half">';
               content +=
@@ -852,14 +880,23 @@
                 bookride[i]["departureDate"] +
                 "</span>";
               content += "<span>•</span>";
-              content +=
-                '<span class="margin-horizontal-half"> Voiture : ' +
-                bookride[i]["car"] +
-                "</span>";
+              if (
+                bookride[i]["car"] == null ||
+                bookride[i]["car"] == undefined ||
+                bookride[i]["car"] == ""
+              ) {
+                content += "";
+              } else {
+                content += "<br/>";
+                content +=
+                  '<span class="margin-horizontal-half"> Voiture : ' +
+                  bookride[i]["car"] +
+                  "</span>";
+              }
               content +=
                 '<a href="/rider-payment/' +
                 bookride[i]["id"] +
-                '/" class="margin-horizontal-half request-btn">Reserver<i class="icon material-icons font-size-18">trending_flat</i></a>';
+                '/" class="margin-horizontal-half request-btn color-green2">Reserver <i class="icon f7-icons if-not-md">arrow_down_right</i>  <i class="icon material-icons font-size-18">south_east</i></a>';
 
               content += "</div>";
               content += "</div>";
@@ -878,146 +915,11 @@
         });
     };
 
-    const paymentMethod = () => {
-      $f7.dialog.preloader("Un instant svp...");
-      let fullname = $("#user-fullname-2").val();
-      let email = $("#user-email-2").val();
-      let phone = $("#user-phone-2").val();
-      let password = $("#user-password-3").val();
-
-      if (fullname == "" || password == "" || phone == "" || email == "") {
-        $f7.dialog.close();
-        app.dialog.alert(
-          "Veuillez renseigner tous les champs avec une étoile en rouge SVP !"
-        );
-      } else {
-        const image = document.getElementById("idcard-2");
-        if (image.files.length > 0) {
-          const file = image.files[0];
-          const formData = new FormData();
-
-          formData.append("image", file);
-
-          fetch("https://matoua.com/api/upload", {
-            method: "POST",
-            body: formData,
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log("Image uploaded successfully:", data);
-              // API endpoint for creating a new user
-              const apiUrl = "https://matoua.com/api/register";
-
-              // Form data to be sent in the request body
-              const formData = {
-                fullname: fullname,
-                email: email,
-                phone: phone,
-                password: password,
-                password_confirmation: password,
-                cni: data.url,
-              };
-
-              // Make a POST request using the Fetch API
-              fetch(apiUrl, {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-              })
-                .then((response) => {
-                  if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                    app.dialog.alert(
-                      "Ooups! Une erreur s'est produite ressayez svp !"
-                    );
-                  }
-                  return response.json();
-                })
-                .then((newUserData) => {
-                  // Process the newly created user data
-                  localStorage.setItem("userId", newUserData.user.id);
-                  localStorage.setItem("fullname", newUserData.user.fullname);
-                  localStorage.setItem("phone", newUserData.user.phone);
-                  localStorage.setItem("email", newUserData.user.email);
-                  localStorage.setItem("token", newUserData.accessToken);
-
-                  $("#requestBooking").hide();
-                  $("#requestPayment").show();
-                })
-                .catch((error) => {
-                  console.error("Error:", error);
-                });
-              // Handle the response as needed
-            })
-            .catch((error) => {
-              console.error("Error uploading image:", error);
-              // Handle the error as needed
-            });
-        } else {
-          console.error("No file selected.");
-          // API endpoint for creating a new user
-          const apiUrl = "https://matoua.com/api/register";
-
-          // Form data to be sent in the request body
-          const formData = {
-            fullname: fullname,
-            email: email,
-            phone: phone,
-            password: password,
-            password_confirmation: password,
-            cni: "",
-          };
-
-          // Make a POST request using the Fetch API
-          fetch(apiUrl, {
-            method: "POST",
-            mode: "cors",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-          })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Network response was not ok");
-                app.dialog.alert(
-                  "Ooups! Une erreur s'est produite ressayez svp !"
-                );
-              }
-              return response.json();
-            })
-            .then((newUserData) => {
-              // Process the newly created user data
-              localStorage.setItem("userId", newUserData.user.id);
-              localStorage.setItem("fullname", newUserData.user.fullname);
-              localStorage.setItem("phone", newUserData.user.phone);
-              localStorage.setItem("email", newUserData.user.email);
-              localStorage.setItem("token", newUserData.accessToken);
-
-              $("#requestBooking").hide();
-              $("#requestPayment").show();
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-            });
-        }
-      }
-    };
-
-    $onMounted(() => {
-      popupSwipe = $f7.popup.create({
-        el: ".demo-popup",
-        swipeToClose: true,
+    const toTitleCase = (str) => {
+      return str.replace(/\w\S*/g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
       });
-    });
-
-    $onBeforeUnmount(() => {
-      // Destroy popup when page removed
-      if (popup) popup.destroy();
-    });
+    };
 
     return $render;
   };

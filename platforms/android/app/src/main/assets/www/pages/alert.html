@@ -4,7 +4,7 @@
       <div class="navbar-bg"></div>
       <div class="navbar-inner sliding">
         <div class="left">
-          <a class="link back">
+          <a href="/notifications/" class="link">
             <i class="icon icon-back"></i>
           </a>
         </div>
@@ -13,7 +13,7 @@
     </div>
     <div class="page-content">
       <div class="card">
-        <div class="card-header">Récapitulatif de la réservation</div>
+        <div class="card-header">Récapitulatif de votre alerte</div>
         <div class="card-content">
           <div class="data-table">
             <table>
@@ -29,10 +29,6 @@
                 <tr>
                   <td class="label-cell">Date de départ</td>
                   <td class="numeric-cell departureDate"></td>
-                </tr>
-                <tr>
-                  <td class="label-cell">Nb. passagers</td>
-                  <td class="numeric-cell numberofseat"></td>
                 </tr>
               </tbody>
             </table>
@@ -725,15 +721,6 @@
   .card-header {
     font-size: 14px;
   }
-  .color-green2 {
-    background: rgba(15, 200, 116, 0.29) !important;
-    color: #1b9a59 !important;
-  }
-
-  .shape-circle {
-    background: rgba(15, 200, 116, 0.22);
-    padding: 5px;
-  }
 </style>
 <script>
   export default (
@@ -741,10 +728,9 @@
     { $f7, $f7router, $onMounted, $onBeforeUnmount, $on }
   ) => {
     $on("pageInit", () => {
-      const departure = localStorage.getItem("departureName");
-      const destination = localStorage.getItem("destinationName");
-      const departureDate = localStorage.getItem("departureDate");
-      const numberofSeats = localStorage.getItem("numberofSeats");
+      $(".departure").html(props.departureName);
+      $(".destination").html(props.destinationName);
+      $(".departureDate").html(props.departureDate);
       const userId = localStorage.getItem("userId");
 
       if (userId == "" || userId == null || userId == "undefined") {
@@ -755,29 +741,16 @@
         $("#requestPayment").show();
       }
 
-      $(".departure").html(departure);
-      $(".destination").html(destination);
-      $(".departureDate").html(departureDate);
-      $(".numberofseat").html(numberofSeats);
       searchReseult();
     });
 
     const searchReseult = () => {
       // Specify the API endpoint for user data
-      const departure = localStorage.getItem("departure");
-      const destination = localStorage.getItem("destination");
-      const departureDate = localStorage.getItem("departureDate");
+      let departure = props.departure;
+      let destination = props.destination;
+      let departureDate = props.departureDate;
       const userId = localStorage.getItem("userId");
       const lang = localStorage.getItem("lang");
-
-      var options = {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-      };
-      var opt_weekday = { weekday: "long" };
 
       const apiUrl =
         "https://matoua.com/api/search?departure=" +
@@ -818,21 +791,6 @@
             );
           } else {
             for (i = 0; i < maxRow; i++) {
-              var today = new Date(bookride[i]["departureDate"]);
-              var weekday = toTitleCase(
-                today.toLocaleDateString("fr-FR", opt_weekday)
-              );
-              var departureDate =
-                weekday + ", " + today.toLocaleDateString("fr-FR", options);
-
-              const driverNameCount = bookride[i]["driverName"].length;
-              if (driverNameCount > 10) {
-                var driverName =
-                  bookride[i]["driverName"].substring(0, 9) + "..";
-              } else {
-                var driverName = bookride[i]["driverName"];
-              }
-
               content +=
                 '<li class="col-100 medium-50 large-100 xlarge-50 overflow-hidden width-100">';
               content += '<div class="item-content height-100 no-padding">';
@@ -840,16 +798,10 @@
                 '<div class="item-inner item-cell height-100 no-padding">';
               content += '<div class="item-row">';
               content +=
-                '<div class="item-cell flex-shrink-0 width-auto padding-left text-align-center">';
+                '<div class="item-cell flex-shrink-0 width-auto padding-left">';
               content +=
                 '<img src="assets/img/driver-m.png" loading="lazy" height="50" width="50" class="shape-circle" alt=""/>';
-              content +=
-                '<div class="font-size-16 font-weight-bold multi-line-text lines-2 text-color-body padding-left-half">';
-              content += '<span class="rider-name"> ' + driverName + " </span>";
-              content +=
-                '<span class="color-green"><i class="icon material-icons font-size-12 color-green">check_box</i></span>';
-              content += "</div>";
-              content += "<p class='no-margin'>";
+              content += "<p>";
               content +=
                 '<i class="icon material-icons font-size-12 color-yellow">star</i>';
               content +=
@@ -862,7 +814,7 @@
                 '<div class="item-cell display-flex flex-direction-column align-self-stretch margin-horizontal-half padding-vertical-half">';
               content += '<div class="single-line-text">';
               content +=
-                '<a href="#" class="badge color-green2 font-weight-bold link text-color-black">' +
+                '<a href="#" class="badge color-amber font-weight-bold link text-color-black">' +
                 bookride[i]["passenger"] +
                 " sièges disponibles</a>";
               content +=
@@ -872,7 +824,15 @@
               content += "</div>";
               content +=
                 '<div class="flex-direction-column height-100 text-color-gray">';
-
+              content +=
+                '<div class="font-size-16 font-weight-bold multi-line-text lines-2 text-color-body padding-left-half">';
+              content +=
+                '<span class="rider-name"> ' +
+                bookride[i]["driverName"] +
+                " </span>";
+              content +=
+                '<span class="color-green"><i class="icon material-icons font-size-12 color-green">check_box</i></span>';
+              content += "</div>";
               content +=
                 '<div class="font-size-12 margin-top-auto padding-top-half">';
               content +=
@@ -880,23 +840,14 @@
                 bookride[i]["departureDate"] +
                 "</span>";
               content += "<span>•</span>";
-              if (
-                bookride[i]["car"] == null ||
-                bookride[i]["car"] == undefined ||
-                bookride[i]["car"] == ""
-              ) {
-                content += "";
-              } else {
-                content += "<br/>";
-                content +=
-                  '<span class="margin-horizontal-half"> Voiture : ' +
-                  bookride[i]["car"] +
-                  "</span>";
-              }
+              content +=
+                '<span class="margin-horizontal-half"> Voiture : ' +
+                bookride[i]["car"] +
+                "</span>";
               content +=
                 '<a href="/rider-payment/' +
                 bookride[i]["id"] +
-                '/" class="margin-horizontal-half request-btn color-green2">Reserver <i class="icon f7-icons if-not-md">arrow_down_right</i>  <i class="icon material-icons font-size-18">south_east</i></a>';
+                '/" class="margin-horizontal-half request-btn">Reserver<i class="icon material-icons font-size-18">trending_flat</i></a>';
 
               content += "</div>";
               content += "</div>";
@@ -913,12 +864,6 @@
         .catch((error) => {
           console.error("Error:", error);
         });
-    };
-
-    const toTitleCase = (str) => {
-      return str.replace(/\w\S*/g, function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-      });
     };
 
     return $render;

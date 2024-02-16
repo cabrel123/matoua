@@ -6,7 +6,7 @@ var app = new Framework7({
   theme: "auto", // Automatic theme detection
 
   el: "#app", // App root element
-
+  buttonCancel: "Annuler",
   // App store
   store: store,
   // App routes
@@ -50,6 +50,7 @@ var app = new Framework7({
           console.log("Error getting language\n");
         }
       );
+
       console.log("Page initialized");
     },
   },
@@ -57,14 +58,46 @@ var app = new Framework7({
 
 function onOffline() {
   // Handle the offline event
-  app.dialog.alert("Nous détectons un problème de connexion internet !");
+  let toastTop = app.toast.create({
+    text: "Nous détectons un problème de connexion internet !",
+    position: "top",
+    closeTimeout: 2000,
+  });
+  // Open it
+  toastTop.open();
+  //app.dialog.alert("Nous détectons un problème de connexion internet !");
   var networkState = navigator.connection.type;
   if (networkState !== Connection.NONE) {
-    app.dialog.alert("Nous détectons un problème de connexion internet !");
+    let toastTop = app.toast.create({
+      text: "Nous détectons un problème de connexion internet !",
+      position: "top",
+      closeTimeout: 2000,
+    });
+    // Open it
+    toastTop.open();
   }
 }
 function onOnline() {
-  // Handle the online event
+  var networkState = navigator.connection.type;
+
+  var states = {};
+  states[Connection.UNKNOWN] = "Unknown connection";
+  states[Connection.ETHERNET] = "Ethernet connection";
+  states[Connection.WIFI] = "WiFi connection";
+  states[Connection.CELL_2G] = "Cell 2G connection";
+  states[Connection.CELL_3G] = "Cell 3G connection";
+  states[Connection.CELL_4G] = "Cell 4G connection";
+  states[Connection.CELL] = "Cell generic connection";
+  states[Connection.NONE] = "No network connection";
+
+  // Handle the online
+  let toastTop = app.toast.create({
+    text: "Votre connexion: " + states[networkState],
+    position: "top",
+    closeTimeout: 2000,
+  });
+  // Open it
+  toastTop.open();
 }
 
 // Device ready
@@ -239,6 +272,28 @@ function setupListeners() {
     setupOnNotification();
     setupClearAllNotificationsButton();
   });
+
+  document.addEventListener(
+    "backbutton",
+    function (e) {
+      let currentPage = app.views.main.router.currentRoute.path;
+      console.log("currentPage", currentPage);
+
+      if (currentPage == "/home/") {
+        e.preventDefault();
+        app.dialog.confirm(
+          "Voulez-vous vraiment quitter l'application ?",
+          function () {
+            navigator.app.exitApp();
+          }
+        );
+      } else {
+        history.go(-1);
+        navigator.app.backHistory();
+      }
+    },
+    false
+  );
 }
 
 function setFcmToken() {

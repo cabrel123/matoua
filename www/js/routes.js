@@ -65,16 +65,40 @@ var routes = [
     componentUrl: "./pages/finalize-publish-ride.html",
   },
   {
+    path: "/finalize-notifications-ride/",
+    componentUrl: "./pages/finalize-notifications-ride.html",
+  },
+  {
+    path: "/notifications/",
+    componentUrl: "./pages/notifications.html",
+  },
+  {
     path: "/rider-payment/:bookrideId/",
     componentUrl: "./pages/rider-payment.html",
   },
   {
-    path: "/confirm-booking/:bookrideId/:passenger/:status",
+    path: "/confirm-booking/:bookrideId/:passenger/:status/",
     componentUrl: "./pages/confirm-booking.html",
+  },
+  {
+    path: "/confirm-ride/:departure/:destination/:departureDate/:departureName/:destinationName/:notificationId/:publisher/",
+    componentUrl: "./pages/confirm-ride.html",
+  },
+  {
+    path: "/alert/:departure/:destination/:departureDate/:departureName/:destinationName/",
+    componentUrl: "./pages/alert.html",
+  },
+  {
+    path: "/messages/",
+    componentUrl: "./pages/messages.html",
   },
   {
     path: "/dynamic-route/blog/:blogId/post/:postId/",
     componentUrl: "./pages/dynamic-route.html",
+  },
+  {
+    path: "/rating/:passenger/:driver/",
+    componentUrl: "./pages/rating.html",
   },
   {
     path: "/request-and-load/user/:userId/",

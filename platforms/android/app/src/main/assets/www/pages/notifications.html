@@ -1,54 +1,78 @@
 <template>
-  <div class="page rider-list">
+  <div class="page">
     <div class="navbar">
       <div class="navbar-bg"></div>
       <div class="navbar-inner sliding">
         <div class="left">
-          <a class="link back">
+          <a class="link" href="/home/">
             <i class="icon icon-back"></i>
           </a>
         </div>
-        <div class="title">Rechercher un chauffeur</div>
+        <div class="title">Alertes</div>
+        <div class="right" style="display: none">
+          <a
+            class="link icon-only searchbar-enable"
+            data-searchbar=".searchbar-demo"
+          >
+            <i class="icon f7-icons if-not-md">search</i>
+            <i class="icon material-icons md-only">search</i>
+          </a>
+        </div>
+        <form
+          data-search-container=".search-list"
+          data-search-in=".item-title"
+          class="searchbar searchbar-expandable searchbar-demo searchbar-init"
+        >
+          <div class="searchbar-inner">
+            <div class="searchbar-input-wrap">
+              <input type="search" placeholder="Search" />
+              <i class="searchbar-icon"></i>
+              <span class="input-clear-button"></span>
+            </div>
+            <span class="searchbar-disable-button">Cancel</span>
+          </div>
+        </form>
       </div>
     </div>
-    <div class="page-content">
-      <div class="card">
-        <div class="card-header">Récapitulatif de la réservation</div>
-        <div class="card-content">
-          <div class="data-table">
-            <table>
-              <tbody>
-                <tr>
-                  <td class="label-cell">Départ</td>
-                  <td class="numeric-cell departure"></td>
-                </tr>
-                <tr>
-                  <td class="label-cell">Destination</td>
-                  <td class="numeric-cell destination"></td>
-                </tr>
-                <tr>
-                  <td class="label-cell">Date de départ</td>
-                  <td class="numeric-cell departureDate"></td>
-                </tr>
-                <tr>
-                  <td class="label-cell">Nb. passagers</td>
-                  <td class="numeric-cell numberofseat"></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <div class="toolbar toolbar-bottom tabbar">
+      <div class="toolbar-inner">
+        <a href="#tab-1" id="tab1" class="tab-link tab-link-active"
+          >Mes alertes</a
+        >
+        <a href="#tab-2" id="tab2" class="tab-link">Autres alertes</a>
+        <a href="#tab-3" id="tab3" class="tab-link">Derniers trajets</a>
+      </div>
+    </div>
+    <div class="tabs">
+      <div id="tab-1" class="page-content tab tab-active">
+        <div class="block no-padding mynotificationslist"></div>
+      </div>
+      <div id="tab-2" class="page-content tab">
+        <div class="block no-padding notificationslist"></div>
       </div>
       <div
-        class="list cards-list margin-vertical-half no-chevron no-hairlines no-hairlines-between"
+        id="tab-3"
+        class="page-content list cards-list margin-vertical-half tab"
       >
-        <ul class="row align-items-stretch riderList"></ul>
+        <div class="searchbar-backdrop"></div>
+        <div
+          class="list list-strong-ios list-outline-ios list-dividers-ios simple-list searchbar-not-found"
+        >
+          <ul>
+            <li>Nothing found</li>
+          </ul>
+        </div>
+        <div
+          class="list list-strong-ios list-outline-ios list-dividers-ios search-list searchbar-found"
+        >
+          <div class="searchbar-backdrop"></div>
+          <ul class="row block no-padding riderList"></ul>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <style>
-  /*! CSS Used from: https://nectar.website/demo/assets/vendor/framework7/framework7-bundle.min.css */
   .color-red {
     --f7-theme-color: #ff3b30;
     --f7-theme-color-rgb: 255, 59, 48;
@@ -259,9 +283,7 @@
     transform-origin: 50% 100%;
     transform: scaleY(calc(1 / var(--f7-device-pixel-ratio)));
   }
-  .tabs .tab-active {
-    padding-top: 10px;
-  }
+
   .list.inset {
     margin-left: calc(
       var(--f7-list-inset-side-margin) + var(--f7-safe-area-outer-left)
@@ -600,7 +622,8 @@
       --f7-tabbar-link-active-bg-color,
       var(--f7-theme-color)
     );
-    border: 1px solid #0cf834;
+    border: none;
+    border-top: 1px solid #0cf834;
   }
   .margin-top-auto {
     margin-top: auto !important;
@@ -725,70 +748,308 @@
   .card-header {
     font-size: 14px;
   }
+  .color-green {
+    --f7-theme-color: #0fc874;
+    --f7-theme-color-rgb: 200, 250, 2227;
+    --f7-theme-color-shade: #7af5be;
+    --f7-theme-color-tint: rgb(200, 250, 227);
+  }
+  .color-yellow {
+    color: #efb943 !important;
+  }
+  .block-title-medium {
+    color: #0fc874;
+  }
+  .md .color-green,
+  .md.color-green,
+  .md .dark .color-green,
+  .md .dark.color-green {
+    --f7-theme-color: #0fc874;
+    --f7-theme-color-rgb: var(--f7-md-primary-rgb);
+    --f7-theme-color-shade: var(--f7-md-primary-shade);
+    --f7-theme-color-tint: var(--f7-md-primary-tint);
+  }
+
+  .text-color-black {
+    --f7-theme-color-text-color: #000000;
+  }
+
+  .block .chip {
+    margin: 2px 4px 2px 0;
+  }
+  .card {
+    background: #fff;
+    margin: 0;
+    -webkit-box-shadow: 0px 1px 7px -1px rgba(0, 0, 0, 0.62);
+    -moz-box-shadow: 0px 1px 7px -1px rgba(0, 0, 0, 0.62);
+    box-shadow: 0px 1px 7px -1px rgba(0, 0, 0, 0.62);
+    border-radius: 0%;
+  }
+  .card-footer {
+    padding: 5px 5px 5px 82px;
+  }
+  .shape-circle {
+    border-radius: 50%;
+  }
+  h4,
+  h5,
+  h6 {
+    margin: 5px 0 5px 0;
+  }
+  .font-size-14 {
+    font-size: 14px;
+  }
   .color-green2 {
     background: rgba(15, 200, 116, 0.29) !important;
     color: #1b9a59 !important;
   }
-
+  .card {
+    -webkit-box-shadow: 0px 1px 7px -1px rgba(105, 105, 105, 0.62) !important;
+    -moz-box-shadow: 0px 1px 7px -1px rgba(105, 105, 105, 0.62) !important;
+    box-shadow: 0px 1px 7px -1px rgba(105, 105, 105, 0.62) !important;
+  }
   .shape-circle {
     background: rgba(15, 200, 116, 0.22);
     padding: 5px;
   }
+  .block .card-footer {
+    padding: 5px 5px 5px 20px;
+  }
 </style>
 <script>
-  export default (
-    props,
-    { $f7, $f7router, $onMounted, $onBeforeUnmount, $on }
-  ) => {
+  export default (props, { $f7, $f7router, $on }) => {
+    var options = { year: "numeric", month: "short", day: "numeric" };
+    var options2 = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    };
+    var opt_weekday = { weekday: "long" };
+
     $on("pageInit", () => {
-      const departure = localStorage.getItem("departureName");
-      const destination = localStorage.getItem("destinationName");
-      const departureDate = localStorage.getItem("departureDate");
-      const numberofSeats = localStorage.getItem("numberofSeats");
-      const userId = localStorage.getItem("userId");
-
-      if (userId == "" || userId == null || userId == "undefined") {
-        $("#requestBooking").show();
-        $("#requestPayment").hide();
-      } else {
-        $("#requestBooking").hide();
-        $("#requestPayment").show();
-      }
-
-      $(".departure").html(departure);
-      $(".destination").html(destination);
-      $(".departureDate").html(departureDate);
-      $(".numberofseat").html(numberofSeats);
-      searchReseult();
+      getMyNotifications();
+      getPassengerNotifications();
+      getRiderList();
+      $(".tab-link").click(function () {
+        var a = $(this).attr("id");
+        if (a == "tab3") {
+          $(".right").show();
+        } else {
+          $(".right").hide();
+        }
+      });
     });
 
-    const searchReseult = () => {
-      // Specify the API endpoint for user data
-      const departure = localStorage.getItem("departure");
-      const destination = localStorage.getItem("destination");
-      const departureDate = localStorage.getItem("departureDate");
+    const getMyNotifications = () => {
       const userId = localStorage.getItem("userId");
-      const lang = localStorage.getItem("lang");
+      // Specify the API endpoint for user data
+      const apiUrl = "https://matoua.com/api/notifications/me/" + userId;
+      let content = "";
 
-      var options = {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-      };
-      var opt_weekday = { weekday: "long" };
+      // Make a GET request using the Fetch API
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((notifications) => {
+          // Process the retrieved user data
 
-      const apiUrl =
-        "https://matoua.com/api/search?departure=" +
-        departure +
-        "&destination=" +
-        destination +
-        "&departureDate=" +
-        departureDate +
-        "&lang=" +
-        lang +
-        "";
+          var content = "";
+
+          var maxRow = notifications.length;
+
+          var i = "";
+
+          if (maxRow == 0) {
+            content += '<div class="card card-outline margin-top">';
+            content +=
+              '<div class="card-content card-content-padding">Vous n\'avez aucune alerte de trajet</div>';
+            content += "</div>";
+          } else {
+            localStorage.setItem("isViewNotification", maxRow);
+            for (i = 0; i < maxRow; i++) {
+              var today = new Date(notifications[i]["departureDate"]);
+              var weekday = toTitleCase(
+                today.toLocaleDateString("fr-FR", opt_weekday)
+              );
+              var departureDate =
+                weekday + ", " + today.toLocaleDateString("fr-FR", options);
+
+              content += '<div class="card margin-bottom-half">';
+              content += '<div class="card-content">';
+              content += '<div class="list media-list no-safe-areas">';
+              content += "<ul>";
+              content += '<li class="item-content">';
+              content += '<div class="item-media">';
+              content +=
+                '<img src="assets/img/car.png" loading="lazy" height="50" width="50" class="shape-circle" alt="" />';
+              content += "</div>";
+              content += '<div class="item-inner">';
+              content += '<div class="item-title-row">';
+              content += ' <div class="item-title">';
+              content +=
+                '<h4 class="block-title-medium">Notification #00' +
+                notifications[i]["id"] +
+                "</h4>";
+              content +=
+                "<h4 class='no-margin'>" +
+                notifications[i]["departureName"] +
+                "" +
+                " --> " +
+                notifications[i]["destinationName"] +
+                "" +
+                "</h4>";
+              content += "  </div>";
+              content += " </div>";
+              content += " </div>";
+              content += " </li>";
+              content += "  </ul>";
+              content += " </div>";
+              content += " </div>";
+              content += ' <div class="card-footer">';
+              content +=
+                " <span> Date de départ : " + departureDate + "</span>";
+              content += '<span class="display-flex">';
+
+              content +=
+                '<a href="/alert/' +
+                notifications[i]["departure"] +
+                "/" +
+                notifications[i]["destination"] +
+                "/" +
+                notifications[i]["departureDate"] +
+                "/" +
+                notifications[i]["departureName"] +
+                "/" +
+                notifications[i]["destinationName"] +
+                '/" class="button button-fill color-green2 margin-right-half"> <i class="icon f7-icons if-not-md font-size-16">eye</i> <i class="icon material-icons md-only font-size-16">visibility</i>  Voir les annonces</a>';
+
+              content += "</span>";
+              content += "</div>";
+              content += "</div>";
+            }
+          }
+
+          $(".mynotificationslist").append(content);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    };
+
+    const getPassengerNotifications = () => {
+      const userId = localStorage.getItem("userId");
+      // Specify the API endpoint for user data
+      const apiUrl = "https://matoua.com/api/notifications/all/" + userId;
+      let content = "";
+
+      // Make a GET request using the Fetch API
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((notifications) => {
+          // Process the retrieved user data
+
+          var content = "";
+
+          var maxRow = notifications.length;
+
+          var i = "";
+
+          if (maxRow == 0) {
+            content += '<div class="card card-outline margin-top">';
+            content +=
+              '<div class="card-content card-content-padding">Vous n\'avez aucune alerte de trajet</div>';
+            content += "</div>";
+          } else {
+            for (i = 0; i < maxRow; i++) {
+              var today = new Date(notifications[i]["departureDate"]);
+              var weekday = toTitleCase(
+                today.toLocaleDateString("fr-FR", opt_weekday)
+              );
+              var departureDate =
+                weekday + ", " + today.toLocaleDateString("fr-FR", options);
+
+              content += '<div class="card margin-bottom-half">';
+              content += '<div class="card-content">';
+              content += '<div class="list media-list no-safe-areas">';
+              content += "<ul>";
+              content += '<li class="item-content">';
+              content += '<div class="item-media">';
+              content +=
+                '<img src="assets/img/car.png" loading="lazy" height="50" width="50" class="shape-circle" alt="" />';
+              content += "</div>";
+              content += '<div class="item-inner">';
+              content += '<div class="item-title-row">';
+              content += ' <div class="item-title">';
+              content +=
+                '<h4 class="block-title-medium">Notification #00' +
+                notifications[i]["id"] +
+                "</h4>";
+              content +=
+                "<h4 class='no-margin'>" +
+                notifications[i]["departureName"] +
+                "" +
+                " --> " +
+                notifications[i]["destinationName"] +
+                "" +
+                "</h4>";
+              content += "  </div>";
+              content += " </div>";
+              content += " </div>";
+              content += " </li>";
+              content += "  </ul>";
+              content += " </div>";
+              content += " </div>";
+              content += ' <div class="card-footer">';
+              content +=
+                " <span> Date de départ : " + departureDate + "</span>";
+              content += '<span class="display-flex">';
+
+              content +=
+                '<a href="/confirm-ride/' +
+                notifications[i]["departure"] +
+                "/" +
+                notifications[i]["destination"] +
+                "/" +
+                notifications[i]["departureDate"] +
+                "/" +
+                notifications[i]["departureName"] +
+                "/" +
+                notifications[i]["destinationName"] +
+                "/" +
+                notifications[i]["id"] +
+                "/" +
+                notifications[i]["publisher"] +
+                '/" class="button button-fill color-green2"> <i class="icon f7-icons if-not-md font-size-16">hand_thumbsup_fill</i> <i class="icon material-icons md-only font-size-16">thumb_up</i> Accepter le trajet</a>';
+
+              content += "</span>";
+              content += "</div>";
+              content += "</div>";
+            }
+          }
+
+          $(".notificationslist").append(content);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    };
+
+    const getRiderList = () => {
+      // Specify the API endpoint for user data
+
+      const apiUrl = "https://matoua.com/api/list/";
+
       let content = "";
 
       // Make a GET request using the Fetch API
@@ -808,14 +1069,10 @@
 
           var i = "";
           if (maxRow == 0) {
-            $f7.dialog.alert(
-              "Désolé! Aucun résultat ne correspond à vos critères de recherche",
-              function () {
-                $f7.popup.close();
-                var mainView = app.view.main;
-                mainView.router.navigate("/find-a-ride/");
-              }
-            );
+            content += '<div class="card card-outline margin-top">';
+            content +=
+              '<div class="card-content card-content-padding">Aucun trajet disponible pour le moment !</div>';
+            content += "</div>";
           } else {
             for (i = 0; i < maxRow; i++) {
               var today = new Date(bookride[i]["departureDate"]);
@@ -823,7 +1080,7 @@
                 today.toLocaleDateString("fr-FR", opt_weekday)
               );
               var departureDate =
-                weekday + ", " + today.toLocaleDateString("fr-FR", options);
+                weekday + ", " + today.toLocaleDateString("fr-FR", options2);
 
               const driverNameCount = bookride[i]["driverName"].length;
               if (driverNameCount > 10) {
@@ -874,12 +1131,20 @@
                 '<div class="flex-direction-column height-100 text-color-gray">';
 
               content +=
+                "<h4 class='no-margin item-title'>" +
+                bookride[i]["departureName"] +
+                "" +
+                " --> " +
+                bookride[i]["destinationName"] +
+                "" +
+                "</h4>";
+              content +=
                 '<div class="font-size-12 margin-top-auto padding-top-half">';
               content +=
                 '<span class="margin-horizontal-half">Départ : ' +
-                bookride[i]["departureDate"] +
+                departureDate +
                 "</span>";
-              content += "<span>•</span>";
+
               if (
                 bookride[i]["car"] == null ||
                 bookride[i]["car"] == undefined ||
@@ -893,10 +1158,11 @@
                   bookride[i]["car"] +
                   "</span>";
               }
+
               content +=
                 '<a href="/rider-payment/' +
                 bookride[i]["id"] +
-                '/" class="margin-horizontal-half request-btn color-green2">Reserver <i class="icon f7-icons if-not-md">arrow_down_right</i>  <i class="icon material-icons font-size-18">south_east</i></a>';
+                '/" class="margin-horizontal-half request-btn color-green2">Reserver <i class="icon f7-icons if-not-md font-size-16">arrow_down_right</i>  <i class="icon material-icons font-size-18">south_east</i></a>';
 
               content += "</div>";
               content += "</div>";

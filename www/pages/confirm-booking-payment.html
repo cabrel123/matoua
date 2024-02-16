@@ -13,24 +13,12 @@
     </div>
     <div class="page-content login-screen-content">
       <div class="block block-strong-ios block-outline-ios">
-        <h2
-          class="title text-align-center"
-          id="accept-booking"
-          style="display: none"
-        >
-          Vous confirmez accepter le trajet du passager et ses conditions.
-          Voulez-vous continuer ?
+        <h2 class="title text-align-center">
+          En validant, vous confirmez être bien arrivé(e). Voulez-vous continuer
+          ?
         </h2>
 
-        <h2
-          class="title text-align-center"
-          id="reject-booking"
-          style="display: none"
-        >
-          Vous confirmez ne pas accepter la réservation. Voulez-vous continuer ?
-        </h2>
-
-        <div class="content-block" id="button-confirm">
+        <div class="content-block">
           <a
             class="button button-big button-block button-fill button-round color-black"
             @click="${confirmBooking}"
@@ -58,37 +46,23 @@
   }
 </style>
 <script>
-  export default (props, { $, $f7, $f7router, $on }) => {
-    $on("pageInit", () => {
-      let status = props.status;
-
-      if (status == 0) {
-        $("#reject-booking").show();
-        $("#accept-booking").hide();
-      } else if (status == 1) {
-        $("#reject-booking").hide();
-        $("#accept-booking").show();
-      } else {
-        $("#button-confirm").hide();
-      }
-    });
-
+  export default (props, { $, $f7, $f7router }) => {
     const confirmBooking = () => {
       $f7.dialog.preloader("Un instant svp...");
       let bookrideId = props.bookrideId;
       let passenger = props.passenger;
-      let status = props.status;
-      if (bookrideId == "" || passenger == "" || status == "") {
+      let driver = props.driver;
+      if (bookrideId == "" || passenger == "" || driver == "") {
         $f7.dialog.alert("Veuillez sélectionner une réservation SVP !");
       } else {
         // API endpoint for creating a new user
-        const apiUrl3 = "https://matoua.com/api/booking/validate";
+        const apiUrl3 = "https://matoua.com/api/booking/confirm";
 
         // Form data to be sent in the request body
         const formData = {
           bookrideId: bookrideId,
           passenger: passenger,
-          status: status,
+          driver: driver,
         };
 
         fetch(apiUrl3, {
@@ -99,8 +73,8 @@
           body: JSON.stringify(formData),
         })
           .then((response) => {
-            $f7.dialog.close();
             if (!response.ok) {
+              $f7.dialog.close();
               throw new Error("Network response was not ok");
               app.dialog.alert(
                 "Ooups! Une erreur s'est produite ressayez svp !"
@@ -110,7 +84,7 @@
           })
           .then((data) => {
             // Process the newly created user data
-            console.log("Data:", data);
+
             $f7.dialog.close();
             localStorage.removeItem("departure");
             localStorage.removeItem("numberofSeats");
@@ -118,11 +92,13 @@
             localStorage.removeItem("departureDate");
 
             $f7.dialog.alert(
-              "Merci pour la confirmation de la réservation et bonne route ! à très bientot sur MATOUA !",
+              "Merci d'avoir confirmé être bien arrivé(e) ! à très bientot sur MATOUA !",
               function () {
                 $f7.popup.close();
                 var mainView = app.view.main;
-                mainView.router.navigate("/my-ride/");
+                mainView.router.navigate(
+                  "/rating/" + passenger + "/" + driver + "/"
+                );
               }
             );
           })

@@ -1,5 +1,5 @@
 <template>
-  <div class="page login-screen-page">
+  <div class="page">
     <div class="navbar">
       <div class="navbar-bg"></div>
       <div class="navbar-inner sliding">
@@ -8,7 +8,7 @@
             <i class="icon icon-back"></i>
           </a>
         </div>
-        <div class="title">Publier un trajet</div>
+        <div class="title">Créer une alerte un trajet</div>
       </div>
     </div>
     <div class="page-content">
@@ -30,28 +30,6 @@
                     <td class="label-cell">Date de départ</td>
                     <td class="numeric-cell departureDate"></td>
                   </tr>
-                  <tr>
-                    <td class="label-cell">Nb. sièges disponibles</td>
-                    <td class="numeric-cell numberofseat"></td>
-                  </tr>
-                  <tr>
-                    <td class="label-cell">Lieu de départ</td>
-                    <td class="numeric-cell departureLocation"></td>
-                  </tr>
-                  <tr>
-                    <td class="label-cell">Lieu d'arrivée</td>
-                    <td class="numeric-cell destinationLocation"></td>
-                  </tr>
-                  <tr>
-                    <td class="label-cell">Modèle de voiture</td>
-                    <td class="numeric-cell car"></td>
-                  </tr>
-                  <tr>
-                    <td class="label-cell">Montant</td>
-                    <td class="numeric-cell">
-                      <span class="amount"></span> FCFA
-                    </td>
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -61,7 +39,7 @@
 
       <div class="list">
         <h3 class="card-header">
-          Vous êtes à un clic de finaliser votre annonce, connectez-vous ou
+          Vous êtes à un clic de finaliser votre alerte, connectez-vous ou
           inscrivez-vous !
         </h3>
       </div>
@@ -100,7 +78,7 @@
                         <input
                           type="text"
                           placeholder="Votre adresse mail ou téléphone"
-                          id="username-1"
+                          id="username-4"
                           name="email"
                           class="input-with-value"
                         />
@@ -115,7 +93,7 @@
                         <input
                           type="password"
                           placeholder="Votre mot de passe"
-                          id="userpassword-1"
+                          id="userpassword-4"
                           name="password"
                           class=""
                         />
@@ -162,7 +140,7 @@
                         <input
                           type="text"
                           placeholder="Votre nom"
-                          id="user-fullname-1"
+                          id="user-fullname-4"
                           class="input-with-value"
                         />
                         <span class="input-clear-button"></span>
@@ -178,7 +156,7 @@
                         <input
                           type="text"
                           placeholder="Votre numéro de téléphone"
-                          id="user-phone-1"
+                          id="user-phone-4"
                           class="input-with-value"
                         />
                         <span class="input-clear-button"></span>
@@ -195,7 +173,7 @@
                         <input
                           type="email"
                           placeholder="Votre adresse mail"
-                          id="user-email-1"
+                          id="user-email-4"
                           class="input-with-value"
                         />
                         <span class="input-clear-button"></span>
@@ -211,7 +189,7 @@
                         <input
                           type="password"
                           placeholder="Votre mot de passe"
-                          id="user-password-2"
+                          id="user-password-4"
                           class=""
                         />
                       </div>
@@ -227,7 +205,7 @@
                         <input
                           type="file"
                           placeholder="Téléchargez votre CNI"
-                          id="idcard-1"
+                          id="idcard-4"
                           accept="image/*"
                           capture="camera"
                           class=""
@@ -267,7 +245,7 @@
     color: #c0000a;
   }
   .color-gray {
-    color: #363636;
+    color: #313131;
   }
 </style>
 <script>
@@ -290,26 +268,16 @@
       const departure = localStorage.getItem("departureName");
       const destination = localStorage.getItem("destinationName");
       const departureDate = localStorage.getItem("departureDate");
-      const numberofSeats = localStorage.getItem("passenger");
-      const departureLocation = localStorage.getItem("departureLocation");
-      const destinationLocation = localStorage.getItem("destinationLocation");
-      const car = localStorage.getItem("car");
-      const amount = localStorage.getItem("amount");
 
       $(".departure").html(departure);
       $(".destination").html(destination);
       $(".departureDate").html(departureDate);
-      $(".numberofseat").html(numberofSeats);
-      $(".departureLocation").html(departureLocation);
-      $(".destinationLocation").html(destinationLocation);
-      $(".car").html(car);
-      $(".amount").html(amount);
     });
 
     const signIn = () => {
       $f7.dialog.preloader("Un instant svp...");
-      let email = $("#username-1").val();
-      let password = $("#userpassword-1").val();
+      let email = $("#username-4").val();
+      let password = $("#userpassword-4").val();
 
       if (email == "" || password == "") {
         $f7.dialog.close();
@@ -355,7 +323,7 @@
             localStorage.setItem("email", newUserData.user.email);
             localStorage.setItem("token", newUserData.accessToken);
 
-            publishRide();
+            createNotification();
           })
           .catch((error) => {
             console.error("Error:", error);
@@ -365,10 +333,10 @@
 
     const signUp = () => {
       $f7.dialog.preloader("Un instant svp...");
-      let fullname = $("#user-fullname-1").val();
-      let email = $("#user-email-1").val();
-      let phone = $("#user-phone-1").val();
-      let password = $("#user-password-2").val();
+      let fullname = $("#user-fullname-4").val();
+      let email = $("#user-email-4").val();
+      let phone = $("#user-phone-4").val();
+      let password = $("#user-password-4").val();
 
       if (fullname == "" || password == "" || phone == "" || email == "") {
         $f7.dialog.close();
@@ -376,7 +344,7 @@
           "Veuillez renseigner tous les champs avec une étoile en rouge SVP !"
         );
       } else {
-        const image = document.getElementById("idcard-1");
+        const image = document.getElementById("idcard-4");
         if (image.files.length > 0) {
           const file = image.files[0];
           const formData = new FormData();
@@ -430,7 +398,7 @@
                   localStorage.setItem("email", newUserData.user.email);
                   localStorage.setItem("token", newUserData.accessToken);
 
-                  publishRide();
+                  createNotification();
                 })
                 .catch((error) => {
                   console.error("Error:", error);
@@ -483,7 +451,7 @@
               localStorage.setItem("email", newUserData.user.email);
               localStorage.setItem("token", newUserData.accessToken);
 
-              publishRide();
+              createNotification();
             })
             .catch((error) => {
               console.error("Error:", error);
@@ -492,18 +460,13 @@
       }
     };
 
-    const publishRide = () => {
+    const createNotification = () => {
       // API endpoint for creating a new user
-      const apiUrl2 = "https://matoua.com/api/bookride";
+      const apiUrl2 = "https://matoua.com/api/notifications";
 
       const departure = localStorage.getItem("departure");
       const destination = localStorage.getItem("destination");
       const departureDate = localStorage.getItem("departureDate");
-      const passenger = localStorage.getItem("passenger");
-      const departureLocation = localStorage.getItem("departureLocation");
-      const destinationLocation = localStorage.getItem("destinationLocation");
-      const car = localStorage.getItem("car");
-      const amount = localStorage.getItem("amount");
       const userId = localStorage.getItem("userId");
       const lang = localStorage.getItem("lang");
 
@@ -512,12 +475,7 @@
         departure: departure,
         destination: destination,
         departureDate: departureDate,
-        passenger: passenger,
-        amount: amount,
-        departureLocation: departureLocation,
-        destinationLocation: destinationLocation,
-        driver: userId,
-        car: car,
+        publisher: userId,
         lang: lang,
       };
 
@@ -534,7 +492,7 @@
             $f7.dialog.close();
             if (response.status == 401) {
               app.dialog.alert(
-                "Cette annonce existe déjà ! Veuillez essayer à nouveau SVP !"
+                "Cette alerte existe déjà ! Veuillez essayer à nouveau SVP !"
               );
             } else {
               throw new Error("Network response was not ok");
@@ -560,13 +518,8 @@
               localStorage.removeItem("destination");
               localStorage.removeItem("destinationName");
               localStorage.removeItem("departureDate");
-              localStorage.removeItem("amount");
-              localStorage.removeItem("passenger");
-              localStorage.removeItem("departureLocation");
-              localStorage.removeItem("destinationLocation");
-              localStorage.removeItem("car");
               var mainView = app.view.main;
-              mainView.router.navigate("/my-ride/");
+              mainView.router.navigate("/notifications/");
             }
           );
         })
